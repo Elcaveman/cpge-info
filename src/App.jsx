@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect } from "react";
 import {TodoPage} from "./pages/TodoPage.jsx";
 import {ResourcesPage} from "./pages/ResourcesPage.jsx";
 import {COURSES, ALL_ITEMS} from "./data/data";
+import Stats from "./pages/Stats.jsx";
 
 // ─── ROOT APP ────────────────────────────────────────────────────────────────
 export default function App() {
@@ -29,8 +30,9 @@ export default function App() {
   const donePct = Math.round((ALL_ITEMS.filter(i => checked[i.id]).length / ALL_ITEMS.length) * 100);
 
   const NAV_ITEMS = [
-    { id: "todo", label: "Checklist", icon: "✓" },
+    { id: "todo", label: "Checklist", icon: "✅" },
     { id: "resources", label: "Ressources", icon: "📚" },
+    { id: "stats", label: "Statistiques", icon: "📊" },
   ];
 
   return (
@@ -83,6 +85,12 @@ export default function App() {
               <>
                 <div className="page-title">Ressources de cours</div>
                 <ResourcesPage />
+              </>
+            )}
+            {page === "stats" && (
+              <>
+                <div className="page-title">Statistiques des concours</div>
+                <Stats />
               </>
             )}
           </div>
