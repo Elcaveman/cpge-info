@@ -1,7 +1,7 @@
 {
   "name": "my-cpge-app",
   "private": true,
-  "homepage": "https://elcaveman.github.io/cpge-info/",
+  "homepage": "https://cpge-info.02-oudaoud.workers.dev/cpge-info",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -9,8 +9,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "predeploy": "npm run build"
   },
   "dependencies": {
     "react": "^19.2.0",
