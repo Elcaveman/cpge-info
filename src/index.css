@@ -236,3 +236,89 @@ button:focus-visible {
 
     /* ── Page title ── */
     .page-title { font-size: 22px; font-weight: 800; color: #f1f5f9; letter-spacing: -0.3px; margin-bottom: 24px; }
+
+    /* ── File Viewer Modal ── */
+.fv-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.fv-modal {
+  background: #12121c;
+  border: 1px solid #1e1e2e;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 960px;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.fv-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid #1e1e2e;
+  gap: 12px;
+}
+
+.fv-title {
+  font-size: 14px;
+  color: #e2e8f0;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fv-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.fv-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  border: none;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.fv-btn--download {
+  background: #1e1e2e;
+  color: #94a3b8;
+  border: 1px solid #2d2d45;
+}
+.fv-btn--download:hover { background: #2d2d45; color: #e2e8f0; }
+
+.fv-btn--close {
+  background: #2d1b1b;
+  color: #f87171;
+  border: 1px solid #5c2626;
+}
+.fv-btn--close:hover { background: #3d2020; }
+
+.fv-frame {
+  flex: 1;
+  width: 100%;
+  border: none;
+  background: #fff;
+}
+
+@media (max-width: 680px) {
+  .fv-modal { height: 92vh; border-radius: 8px; }
+}
