@@ -230,6 +230,8 @@ button:focus-visible {
     .res-link--pdf:hover { background: rgba(125,211,252,0.12); border-color: rgba(125,211,252,0.4); }
     .res-link--video { color: #f472b6; border-color: rgba(244,114,182,0.2); background: rgba(244,114,182,0.06); }
     .res-link--video:hover { background: rgba(244,114,182,0.12); border-color: rgba(244,114,182,0.4); }
+    .res-link--slides { color: #fb923c; border-color: rgba(251,146,60,0.2); background: rgba(251,146,60,0.06); }
+    .res-link--slides:hover { background: rgba(251,146,60,0.12); border-color: rgba(251,146,60,0.4); }
     .res-link-icon { font-size: 13px; }
 
     /* ── Page title ── */

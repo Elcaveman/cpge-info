@@ -44,6 +44,12 @@ export function ResourcesPage() {
                   {topic.pdf.label}
                 </a>
               )}
+              {topic.slides && (
+                <a href={topic.pdf.url} className="res-link res-link--slides" target="_blank" rel="noopener noreferrer">
+                  <span className="res-link-icon">📊</span>
+                  {topic.slides.label}
+                </a>
+              )}
               {topic.video && (
                 <a href={topic.video.url} className="res-link res-link--video" target="_blank" rel="noopener noreferrer">
                   <span className="res-link-icon">▶</span>
