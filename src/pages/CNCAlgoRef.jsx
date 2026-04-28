@@ -1,5 +1,5 @@
 import { useState, useMemo, useRef, useEffect } from "react";
-import "./CNCAlgoRef.css";
+import "../css/CNCAlgoRef.css";
 
 /* ─── THEME ───────────────────────────────────────────────── */
 const FONT    = "'JetBrains Mono','Fira Code',monospace";

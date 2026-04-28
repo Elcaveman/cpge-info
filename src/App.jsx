@@ -6,7 +6,7 @@ import Stats from "./pages/Stats.jsx";
 import SQLCheatSheet from "./pages/SQLCheatSheet.jsx";
 import PythonCheatSheet from "./pages/PythonCheatSheet.jsx";
 import CNCAlgoRef from "./pages/CNCAlgoRef.jsx";
-import "./pages/AppLayout.css";
+import "./css/AppLayout.css";
 
 // ─── ROOT APP ────────────────────────────────────────────────────────────────
 export default function App() {

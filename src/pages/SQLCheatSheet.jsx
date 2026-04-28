@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import "./SQLCheatSheet.css";
+import "../css/SQLCheatSheet.css";
 
 const CATS = [
   { id: "all",        label: "Toutes",       color: "#fff" },

@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from "recharts";
-import "./Stats.css";
+import "../css/Stats.css";
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 // Concours: CNC (Maroc MP/PSI), CCP/CCINP (France MP/PSI), X-ENS/Mines-Ponts (France MP), E3A/Polytech

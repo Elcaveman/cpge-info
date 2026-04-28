@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { COURSES } from "../data/data";
-import "./ResourcesPage.css";
+import "../css/ResourcesPage.css";
 
 // ─── FILE VIEWER MODAL ────────────────────────────────────────────────────────
 function FileViewer({ file, onClose }) {

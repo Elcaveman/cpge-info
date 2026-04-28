@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import "./PythonCheatSheet.css";
+import "../css/PythonCheatSheet.css";
 
 const FONT = "'JetBrains Mono', 'Fira Code', monospace";
 const HEADING = "'Rajdhani', 'Chakra Petch', sans-serif";
