@@ -334,42 +334,42 @@
 .sql-cheat .nav-dot.cat-basics,
 .sql-cheat .legend-dot.cat-basics,
 .sql-cheat .section-color-bar.cat-basics,
-.sql-cheat .kw.cat-basics { background: #4ade80; color: #4ade80; }
+.sql-cheat .kw.cat-basics { color: #4ade80; }
 
 .sql-cheat .nav-dot.cat-filtering,
 .sql-cheat .legend-dot.cat-filtering,
 .sql-cheat .section-color-bar.cat-filtering,
-.sql-cheat .kw.cat-filtering { background: #f472b6; color: #f472b6; }
+.sql-cheat .kw.cat-filtering { color: #f472b6; }
 
 .sql-cheat .nav-dot.cat-joins,
 .sql-cheat .legend-dot.cat-joins,
 .sql-cheat .section-color-bar.cat-joins,
-.sql-cheat .kw.cat-joins { background: #60a5fa; color: #60a5fa; }
+.sql-cheat .kw.cat-joins { color: #60a5fa; }
 
 .sql-cheat .nav-dot.cat-aggregation,
 .sql-cheat .legend-dot.cat-aggregation,
 .sql-cheat .section-color-bar.cat-aggregation,
-.sql-cheat .kw.cat-aggregation { background: #a78bfa; color: #a78bfa; }
+.sql-cheat .kw.cat-aggregation { color: #a78bfa; }
 
 .sql-cheat .nav-dot.cat-ddl,
 .sql-cheat .legend-dot.cat-ddl,
 .sql-cheat .section-color-bar.cat-ddl,
-.sql-cheat .kw.cat-ddl { background: #fb923c; color: #fb923c; }
+.sql-cheat .kw.cat-ddl { color: #fb923c; }
 
 .sql-cheat .nav-dot.cat-dml,
 .sql-cheat .legend-dot.cat-dml,
 .sql-cheat .section-color-bar.cat-dml,
-.sql-cheat .kw.cat-dml { background: #facc15; color: #facc15; }
+.sql-cheat .kw.cat-dml { color: #facc15; }
 
 .sql-cheat .nav-dot.cat-subqueries,
 .sql-cheat .legend-dot.cat-subqueries,
 .sql-cheat .section-color-bar.cat-subqueries,
-.sql-cheat .kw.cat-subqueries { background: #34d399; color: #34d399; }
+.sql-cheat .kw.cat-subqueries { color: #34d399; }
 
 .sql-cheat .nav-dot.cat-advanced,
 .sql-cheat .legend-dot.cat-advanced,
 .sql-cheat .section-color-bar.cat-advanced,
-.sql-cheat .kw.cat-advanced { background: #f87171; color: #f87171; }
+.sql-cheat .kw.cat-advanced { color: #f87171; }
 
 .sql-cheat .pill.active.cat-basics { background: #4ade80; }
 .sql-cheat .pill.active.cat-filtering { background: #f472b6; }
