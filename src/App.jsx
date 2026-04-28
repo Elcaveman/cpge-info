@@ -4,6 +4,8 @@ import {ResourcesPage} from "./pages/ResourcesPage.jsx";
 import {COURSES, ALL_ITEMS} from "./data/data";
 import Stats from "./pages/Stats.jsx";
 import SQLCheatSheet from "./pages/SQLCheatSheet.jsx";
+import PythonCheatSheet from "./pages/PythonCheatSheet.jsx";
+import CNCAlgoRef from "./pages/CNCAlgoRef.jsx";
 import "./pages/AppLayout.css";
 
 // ─── ROOT APP ────────────────────────────────────────────────────────────────
@@ -35,7 +37,9 @@ export default function App() {
     { id: "todo", label: "Checklist", icon: "✅" },
     { id: "resources", label: "Ressources", icon: "📚" },
     { id: "stats", label: "Statistiques", icon: "📊" },
-    { id: "sqlcheatsheet", label: "SQL Commands", icon: "💾" },
+    { id: "sqlcheatsheet", label: "SQL Ref", icon: "📋" },
+    { id: "python", label: "Python Ref", icon: "🐍" },
+    { id: "cnc", label: "Algo CNC", icon: "🧮" },
   ];
 
   return (
@@ -100,6 +104,8 @@ export default function App() {
                 <SQLCheatSheet />
               </>
             )}
+            {page === "python" && <PythonCheatSheet />}
+            {page === "cnc" && <CNCAlgoRef />}
           </div>
         </main>
       </div>

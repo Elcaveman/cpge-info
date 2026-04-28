@@ -1,0 +1,389 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap');
+
+/* ─── MAIN LAYOUT ───────────────────────────────────────────────────────────────────── */
+.python-cheat {
+  background: #0d0d0f;
+  color: #e2e8f0;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.python-cheat .layout {
+  display: flex;
+}
+
+.python-cheat .sidebar {
+  width: 200px;
+  min-width: 200px;
+  background: #111114;
+  border-right: 1px solid #1e1e26;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.python-cheat .sidebar-logo {
+  padding: 18px 18px 12px;
+  border-bottom: 1px solid #1e1e26;
+}
+
+.python-cheat .logo-title {
+  font-family: 'Rajdhani', 'Chakra Petch', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.python-cheat .logo-sub {
+  font-size: 9.5px;
+  color: #4b5563;
+  margin-top: 3px;
+  letter-spacing: 0.15em;
+}
+
+.python-cheat .sidebar-nav {
+  flex: 1;
+  padding: 12px 0;
+  overflow-y: auto;
+}
+
+.python-cheat .nav-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 16px;
+  font-size: 11.5px;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.15s;
+  border-left: 2px solid transparent;
+  user-select: none;
+}
+
+.python-cheat .nav-item:hover {
+  color: #e2e8f0;
+  background: #16161a;
+}
+
+.python-cheat .nav-item.active {
+  color: #fff;
+  background: #16161a;
+  border-left-color: var(--cat-color, #fff);
+}
+
+.python-cheat .nav-icon {
+  width: 16px;
+  text-align: center;
+  flex-shrink: 0;
+  font-size: 13px;
+}
+
+.python-cheat .nav-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-left: auto;
+  flex-shrink: 0;
+  background: var(--cat-color, #fff);
+}
+
+.python-cheat .sidebar-footer {
+  padding: 12px 16px;
+  border-top: 1px solid #1e1e26;
+  font-size: 10px;
+  color: #374151;
+  letter-spacing: 0.05em;
+}
+
+.python-cheat .progress-bar-bg {
+  height: 2px;
+  background: #1e1e26;
+  margin-top: 6px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.python-cheat .progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4ade80, #f472b6, #60a5fa, #facc15, #c084fc);
+  border-radius: 2px;
+  transition: width 0.5s;
+}
+
+/* ─── MAIN CONTENT ──────────────────────────────────────────────────────────────────── */
+.python-cheat .main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.python-cheat .topbar {
+  padding: 14px 32px;
+  border-bottom: 1px solid #1e1e26;
+  background: #111114;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.python-cheat .topbar-title {
+  font-family: 'Rajdhani', 'Chakra Petch', sans-serif;
+  font-size: 21px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+
+.python-cheat .search-input {
+  background: #1a1a20;
+  border: 1px solid #2a2a35;
+  border-radius: 6px;
+  color: #e2e8f0;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 12px;
+  padding: 7px 14px;
+  width: 230px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.python-cheat .search-input::placeholder {
+  color: #4b5563;
+}
+
+.python-cheat .search-input:focus {
+  border-color: #4b5563;
+}
+
+.python-cheat .content {
+  padding: 28px 32px;
+}
+
+.python-cheat .page-heading {
+  font-family: 'Rajdhani', 'Chakra Petch', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
+}
+
+.python-cheat .page-sub {
+  font-size: 10.5px;
+  color: #4b5563;
+  letter-spacing: 0.1em;
+  margin-bottom: 24px;
+}
+
+.python-cheat .page-sub span::after {
+  content: ' ·';
+  margin: 0 6px;
+  color: #2a2a35;
+}
+
+.python-cheat .page-sub span:last-child::after {
+  content: '';
+}
+
+/* ─── FILTER BAR ────────────────────────────────────────────────────────────────────── */
+.python-cheat .filter-bar {
+  background: #111114;
+  border: 1px solid #1e1e26;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.python-cheat .filter-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.python-cheat .filter-label {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: #4b5563;
+  width: 70px;
+  flex-shrink: 0;
+}
+
+.python-cheat .pill {
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid #2a2a35;
+  background: transparent;
+  color: #9ca3af;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  transition: all 0.15s;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.python-cheat .pill:hover {
+  border-color: #4b5563;
+  color: #e2e8f0;
+}
+
+.python-cheat .pill.active {
+  color: #0d0d0f;
+  border-color: transparent;
+  font-weight: 600;
+  background: var(--pill-color, #fff);
+}
+
+/* ─── LEGEND ────────────────────────────────────────────────────────────────────── */
+.python-cheat .legend {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.python-cheat .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10.5px;
+  color: #9ca3af;
+}
+
+.python-cheat .legend-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--legend-color, #fff);
+}
+
+/* ─── SECTIONS ──────────────────────────────────────────────────────────────────── */
+.python-cheat .section {
+  margin-top: 24px;
+}
+
+.python-cheat .section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.python-cheat .section-color-bar {
+  width: 3px;
+  height: 18px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  background: var(--section-color, #fff);
+}
+
+.python-cheat .section-title-text {
+  font-family: 'Rajdhani', 'Chakra Petch', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.python-cheat .section-count {
+  background: #1a1a20;
+  border: 1px solid #2a2a35;
+  border-radius: 10px;
+  padding: 2px 9px;
+  font-size: 10px;
+  color: #4b5563;
+  margin-left: auto;
+}
+
+.python-cheat .cmd-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.python-cheat .cmd-row {
+  border-bottom: 1px solid #1e1e26;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.python-cheat .cmd-row:hover {
+  background: #16161a;
+}
+
+.python-cheat .cmd-row.copied {
+  background: #0f2520;
+}
+
+.python-cheat .cmd-cell-code {
+  padding: 10px 12px;
+  text-align: left;
+  position: relative;
+  width: 45%;
+  font-size: 11px;
+  color: #e2e8f0;
+}
+
+.python-cheat .cmd-cell-desc {
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.python-cheat .copy-badge {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  font-size: 9px;
+  color: #4ade80;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+}
+
+.python-cheat .cmd-row.copied .copy-badge {
+  opacity: 1;
+}
+
+.python-cheat .no-results {
+  padding: 48px;
+  text-align: center;
+  color: #374151;
+  font-size: 13px;
+}
+
+/* ─── SYNTAX HIGHLIGHTING ──────────────────────────────────────────────────────────── */
+.python-cheat .kw,
+.python-cheat .py-kw  { color: #f472b6; font-weight: 600; }
+.python-cheat .fn,
+.python-cheat .py-fn  { color: #60a5fa; }
+.python-cheat .st,
+.python-cheat .py-str { color: #fbbf24; }
+.python-cheat .cm,
+.python-cheat .py-cm  { color: #4b5563; font-style: italic; }
+.python-cheat .nu,
+.python-cheat .py-num { color: #a78bfa; }
+.python-cheat .tp     { color: #34d399; }
+.python-cheat .py-mod { color: #34d399; font-weight: 600; }
+.python-cheat .py-op  { color: #f87171; }
+
+/* ─── SCROLLBAR ────────────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a2a35;
+  border-radius: 2px;
+}
