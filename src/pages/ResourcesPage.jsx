@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { COURSES } from "../data/data";
+import "./ResourcesPage.css";
 
 // ─── FILE VIEWER MODAL ────────────────────────────────────────────────────────
 function FileViewer({ file, onClose }) {
@@ -57,19 +58,11 @@ export function ResourcesPage() {
               key={c.sem}
               className={`res-nav-btn ${
                 activeSem === c.sem ? "res-nav-btn--active" : ""
-              }`}
-              style={
-                activeSem === c.sem
-                  ? { borderColor: c.color, color: c.color }
-                  : {}
-              }
+              } res-nav-btn--sem-${c.sem}`}
               onClick={() => setActiveSem(c.sem)}
             >
               <span
-                className="res-nav-dot"
-                style={{
-                  background: activeSem === c.sem ? c.color : "#2d2d45",
-                }}
+                className={`res-nav-dot res-nav-dot--sem-${c.sem} ${activeSem === c.sem ? "res-nav-dot--active" : ""}`}
               />
               {c.label}
             </button>
@@ -79,14 +72,7 @@ export function ResourcesPage() {
         {/* Topic cards */}
         <div className="res-cards">
           <div className="res-cards-header">
-            <div
-              className="res-sem-pill"
-              style={{
-                background: current.color + "18",
-                color: current.color,
-                borderColor: current.color + "33",
-              }}
-            >
+            <div className={`res-sem-pill res-sem-pill--sem-${current.sem}`}>
               {current.label}
             </div>
             <p className="res-cards-count">

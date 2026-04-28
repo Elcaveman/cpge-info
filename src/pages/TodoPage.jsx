@@ -1,9 +1,9 @@
-import { useState, useMemo, useEffect } from "react";
-import { ALL_ITEMS, PRIORITY_CONFIG} from "../data/data";
+import { useState, useMemo } from "react";
+import { ALL_ITEMS } from "../data/data";
+import "./TodoPage.css";
 
 
 const SEM_LABELS = { 0: "Annexe Python", 1: "Semestre 1", 2: "Semestre 2", 3: "Semestre 3", 4: "Semestre 4" };
-const SEM_COLORS = { 0: "#818cf8", 1: "#34d399", 2: "#60a5fa", 3: "#f472b6", 4: "#fb923c" };
 
 // ─── TODO PAGE ───────────────────────────────────────────────────────────────
 export function TodoPage({ checked, toggle, resetChecked }) {
@@ -63,17 +63,17 @@ export function TodoPage({ checked, toggle, resetChecked }) {
               <span className="progress-label">PROGRESSION GLOBALE</span>
               <span className="progress-label">{stats.done} / {stats.total} — {stats.pct}%</span>
             </div>
-            <div className="bar"><div className="bar-fill" style={{ width: `${stats.pct}%` }} /></div>
+            <progress className="todo-progress-meter" max={100} value={stats.pct} />
           </div>
           <div className="stats-row">
             {[
-              { num: stats.done, lbl: "VALIDÉS", color: "#34d399" },
-              { num: stats.total - stats.done, lbl: "RESTANTS", color: "#60a5fa" },
-              { num: stats.p0Done, lbl: "P0 VALIDÉS", color: "#ef4444" },
-              { num: stats.p0Total - stats.p0Done, lbl: "P0 RESTANTS", color: "#f97316" },
+              { num: stats.done, lbl: "VALIDÉS", tone: "done" },
+              { num: stats.total - stats.done, lbl: "RESTANTS", tone: "remaining" },
+              { num: stats.p0Done, lbl: "P0 VALIDÉS", tone: "p0-done" },
+              { num: stats.p0Total - stats.p0Done, lbl: "P0 RESTANTS", tone: "p0-remaining" },
             ].map(s => (
               <div key={s.lbl} className="stat-chip">
-                <div className="stat-num" style={{ color: s.color }}>{s.num}</div>
+                <div className={`stat-num stat-num--${s.tone}`}>{s.num}</div>
                 <div className="stat-lbl">{s.lbl}</div>
               </div>
             ))}
@@ -105,7 +105,7 @@ export function TodoPage({ checked, toggle, resetChecked }) {
               <option value="todo">À faire</option>
               <option value="done">Validés</option>
             </select>
-            <select value={filterSection} onChange={e => setFilterSection(e.target.value)} style={{ maxWidth: 200 }}>
+            <select className="filter-section-select" value={filterSection} onChange={e => setFilterSection(e.target.value)}>
               <option value="all">Toutes sections</option>
               {sections.map(s => <option key={s} value={s}>{s}</option>)}
             </select>
@@ -124,17 +124,15 @@ export function TodoPage({ checked, toggle, resetChecked }) {
         ) : (
           Object.entries(grouped).map(([section, items]) => {
             const semVal = items[0].sem;
-            const semColor = SEM_COLORS[semVal];
             const doneSec = items.filter(i => checked[i.id]).length;
             return (
               <div key={section} className="section-block">
                 <div className="section-header">
-                  <div style={{ width: 3, height: 14, background: semColor, borderRadius: 2 }} />
+                  <div className={`section-sem-bar sem-${semVal}`} />
                   <span className="section-title">{section}</span>
                   <span className="section-count">{doneSec}/{items.length}</span>
                 </div>
                 {items.map(item => {
-                  const pc = PRIORITY_CONFIG[item.priority];
                   const isExpanded = expandedItem === item.id;
                   const hasDetail = item.hook || item.pitfall;
                   return (
@@ -150,8 +148,8 @@ export function TodoPage({ checked, toggle, resetChecked }) {
                         <div className="item-body">
                           <div className={`item-text ${checked[item.id] ? "done" : ""}`}>{item.text}</div>
                           <div className="item-meta">
-                            <span className="priority-badge" style={{ background: pc.bg, color: pc.color }}>{item.priority}</span>
-                            <span className="sem-badge" style={{ color: semColor, borderColor: semColor + "33" }}>{SEM_LABELS[item.sem]}</span>
+                            <span className={`priority-badge priority-badge--${item.priority.toLowerCase()}`}>{item.priority}</span>
+                            <span className={`sem-badge sem-${item.sem}`}>{SEM_LABELS[item.sem]}</span>
                           </div>
                         </div>
                         {hasDetail && (

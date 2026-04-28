@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Legend } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from "recharts";
+import "./Stats.css";
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 // Concours: CNC (Maroc MP/PSI), CCP/CCINP (France MP/PSI), X-ENS/Mines-Ponts (France MP), E3A/Polytech
@@ -105,8 +106,17 @@ const CONCOURS_CONFIG = {
 };
 
 const TREND_ICON  = { hausse: "↑", stable: "→", baisse: "↓" };
-const TREND_COLOR = { hausse: "#34d399", stable: "#475569", baisse: "#ef4444" };
 const CATEGORIES  = ["Toutes", ...Object.keys(CAT_COLORS)];
+const CAT_CLASS = {
+  "Toutes": "all",
+  "Structures": "structures",
+  "Algorithmique": "algorithmique",
+  "Bases de données": "bdd",
+  "Méthodes": "methodes",
+  "IA & Jeux": "ia-jeux",
+  "Représentation": "representation",
+};
+const CMP_CLASS = { CNC: "cnc", CCP: "ccp", "X-Mines": "x-mines", E3A: "e3a" };
 
 // ─── TOOLTIP ─────────────────────────────────────────────────────────────────
 function CustomTooltip({ active, payload, concours, filiere }) {
@@ -115,11 +125,11 @@ function CustomTooltip({ active, payload, concours, filiere }) {
   const key = `${concours}_${filiere}`;
   const wKey = `weight_${concours}`;
   return (
-    <div style={{ background:"#1a1a2e", border:"1px solid #2d2d45", borderRadius:8, padding:"10px 14px", fontSize:12, fontFamily:"monospace", maxWidth:220 }}>
-      <div style={{ color:"#f1f5f9", fontWeight:700, marginBottom:4 }}>{d.topic}</div>
-      <div style={{ color:"#94a3b8" }}>Fréquence : {d[key]}/10 sessions</div>
-      <div style={{ color:"#94a3b8" }}>Poids moyen : ~{d[wKey]} pts</div>
-      <div style={{ color: TREND_COLOR[d.trend], marginTop:4 }}>{TREND_ICON[d.trend]} {d.trend}</div>
+    <div className="stats-tooltip">
+      <div className="stats-tooltip-title">{d.topic}</div>
+      <div className="stats-tooltip-line">Frequence : {d[key]}/10 sessions</div>
+      <div className="stats-tooltip-line">Poids moyen : ~{d[wKey]} pts</div>
+      <div className={`stats-tooltip-trend trend-${d.trend}`}>{TREND_ICON[d.trend]} {d.trend}</div>
     </div>
   );
 }
@@ -157,85 +167,6 @@ export default function Stats() {
         cat:   t.cat,
       }));
   }, [cat]);
-
-  const css = `
-    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
-    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-    body { background:#0a0a0f; }
-    ::-webkit-scrollbar { width:4px; } ::-webkit-scrollbar-track { background:#111; } ::-webkit-scrollbar-thumb { background:#333; border-radius:2px; }
-    .app { min-height:100vh; background:#0a0a0f; color:#e2e8f0; font-family:'Syne',sans-serif; padding:32px 20px 80px; }
-    .inner { max-width:980px; margin:0 auto; }
-
-    /* header */
-    .hdr { margin-bottom:24px; }
-    .title { font-size:24px; font-weight:800; color:#f1f5f9; letter-spacing:-0.5px; }
-    .subtitle { font-size:11px; color:#475569; font-family:'JetBrains Mono',monospace; margin-top:4px; }
-
-    /* chips row */
-    .chips { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:24px; }
-    .chip { background:#0e0e1a; border:1px solid #1a1a2e; border-radius:10px; padding:10px 14px; min-width:100px; }
-    .chip-num { font-size:20px; font-weight:800; line-height:1; }
-    .chip-lbl { font-size:9px; color:#64748b; font-family:'JetBrains Mono',monospace; margin-top:3px; letter-spacing:.06em; }
-
-    /* controls */
-    .controls { display:flex; flex-direction:column; gap:10px; margin-bottom:20px; background:#0e0e1a; border:1px solid #1a1a2e; border-radius:12px; padding:14px 16px; }
-    .ctrl-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
-    .ctrl-label { font-size:10px; color:#475569; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; min-width:76px; }
-    .btn { padding:5px 12px; border-radius:7px; border:1px solid #1e1e2e; background:none; color:#64748b; font-family:'Syne',sans-serif; font-size:12px; font-weight:600; cursor:pointer; transition:all .15s; white-space:nowrap; }
-    .btn:hover { border-color:#334155; color:#94a3b8; }
-    .btn--active { background:#12121c; color:#f1f5f9; border-color:#334155; }
-    .btn--concours.btn--active { background:#12121c; }
-    .btn--compare { border-color:#818cf8; color:#818cf8; }
-    .btn--compare.btn--active { background:rgba(129,140,248,.12); }
-    .ctrl-divider { width:100%; height:1px; background:#1a1a2e; }
-
-    /* legend */
-    .legend { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px; }
-    .legend-item { display:flex; align-items:center; gap:5px; font-size:10px; color:#64748b; font-family:'JetBrains Mono',monospace; }
-    .legend-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
-
-    /* chart */
-    .chart-wrap { background:#0e0e1a; border:1px solid #1a1a2e; border-radius:12px; padding:20px 6px 8px; margin-bottom:20px; }
-    .chart-title { font-size:11px; color:#475569; font-family:'JetBrains Mono',monospace; letter-spacing:.08em; padding:0 14px; margin-bottom:14px; }
-
-    /* table */
-    .table-wrap { background:#0e0e1a; border:1px solid #1a1a2e; border-radius:12px; overflow:hidden; margin-bottom:20px; }
-    .t-head { display:grid; grid-template-columns:1fr 70px 80px 70px 80px; gap:6px; padding:9px 14px; background:#12121c; border-bottom:1px solid #1a1a2e; }
-    .th { font-size:9px; color:#475569; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; }
-    .t-row { display:grid; grid-template-columns:1fr 70px 80px 70px 80px; gap:6px; padding:9px 14px; border-bottom:1px solid #12121c; align-items:center; transition:background .1s; }
-    .t-row:last-child { border-bottom:none; }
-    .t-row:hover { background:#12121c; }
-    .td { font-size:12px; color:#cbd5e1; }
-    .td-mono { font-size:11px; font-family:'JetBrains Mono',monospace; color:#94a3b8; }
-    .topic-name { display:flex; align-items:center; gap:7px; }
-    .cat-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
-    .mini-bar-wrap { flex:1; height:3px; background:#1e1e2e; border-radius:3px; }
-    .mini-bar { height:100%; border-radius:3px; }
-
-    /* timeline */
-    .tl-list { display:flex; flex-direction:column; gap:10px; }
-    .tl-row { background:#0e0e1a; border:1px solid #1a1a2e; border-radius:10px; padding:11px 14px; display:flex; align-items:flex-start; gap:14px; }
-    .tl-year { font-size:14px; font-weight:800; color:#f1f5f9; min-width:42px; font-family:'JetBrains Mono',monospace; }
-    .tl-tags { display:flex; gap:7px; flex-wrap:wrap; }
-    .tl-tag { font-size:10px; padding:3px 9px; border-radius:20px; background:#12121c; border:1px solid #2d2d45; color:#94a3b8; font-family:'JetBrains Mono',monospace; }
-
-    /* insights */
-    .insights { background:#0e0e1a; border:1px solid #1a1a2e; border-radius:12px; padding:16px 18px; }
-    .insights-title { font-size:10px; color:#475569; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; margin-bottom:12px; }
-    .insight { display:flex; gap:9px; margin-bottom:8px; font-size:12px; color:#94a3b8; line-height:1.55; }
-    .insight:last-child { margin-bottom:0; }
-    .ins-icon { font-size:13px; min-width:18px; }
-
-    /* compare legend */
-    .cmp-legend { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
-    .cmp-legend-item { display:flex; align-items:center; gap:5px; font-size:10px; font-family:'JetBrains Mono',monospace; color:#94a3b8; }
-    .cmp-dot { width:8px; height:8px; border-radius:2px; }
-
-    @media (max-width:640px) {
-      .t-head, .t-row { grid-template-columns:1fr 60px 60px; }
-      .hide-m { display:none; }
-    }
-  `;
 
   const INSIGHTS = {
     cnc: [
@@ -277,8 +208,7 @@ export default function Stats() {
   const CMP_COLORS = { CNC:"#f472b6", CCP:"#60a5fa", "X-Mines":"#34d399", E3A:"#fb923c" };
 
   return (
-    <>
-      <style>{css}</style>
+    <div className="stats-page">
       <div className="app">
         <div className="inner">
 
@@ -292,12 +222,11 @@ export default function Stats() {
             {/* Concours row */}
             <div className="ctrl-row">
               <span className="ctrl-label">CONCOURS</span>
-              {Object.entries(CONCOURS_CONFIG).map(([k, v]) => (
+              {Object.entries(CONCOURS_CONFIG).map(([k, cfgItem]) => (
                 <button key={k}
-                  className={`btn btn--concours ${concours===k&&!compare?"btn--active":""}`}
-                  style={concours===k&&!compare ? { borderColor:v.color, color:v.color } : {}}
+                  className={`btn btn--concours btn--concours-${k} ${concours===k&&!compare?"btn--active":""}`}
                   onClick={() => { setConcours(k); setCompare(false); }}>
-                  {v.label}
+                  {cfgItem.label}
                 </button>
               ))}
               <button className={`btn btn--compare ${compare?"btn--active":""}`}
@@ -315,12 +244,12 @@ export default function Stats() {
                     {f.toUpperCase()}
                   </button>
                 ))}
-                <div style={{ width:1, height:24, background:"#1e1e2e", margin:"0 4px" }} />
+                <div className="ctrl-vdiv" />
                 <span className="ctrl-label">VUE</span>
                 {[["bar","Barres"],["timeline","Timeline"]].map(([v,l]) => (
                   <button key={v} className={`btn ${view===v?"btn--active":""}`} onClick={() => setView(v)}>{l}</button>
                 ))}
-                <div style={{ width:1, height:24, background:"#1e1e2e", margin:"0 4px" }} />
+                <div className="ctrl-vdiv" />
                 <span className="ctrl-label">TRI</span>
                 {[["freq","Fréquence"],["weight","Poids"]].map(([v,l]) => (
                   <button key={v} className={`btn ${sort===v?"btn--active":""}`} onClick={() => setSort(v)}>{l}</button>
@@ -335,8 +264,7 @@ export default function Stats() {
               <span className="ctrl-label">CATÉGORIE</span>
               {CATEGORIES.map(c => (
                 <button key={c}
-                  className={`btn ${cat===c?"btn--active":""}`}
-                  style={cat===c && CAT_COLORS[c] ? { borderColor:CAT_COLORS[c], color:CAT_COLORS[c] } : {}}
+                  className={`btn btn--cat btn--cat-${CAT_CLASS[c]} ${cat===c?"btn--active":""}`}
                   onClick={() => setCat(c)}>
                   {c}
                 </button>
@@ -350,11 +278,11 @@ export default function Stats() {
               <div className="cmp-legend">
                 {Object.entries(CMP_COLORS).map(([k,c]) => (
                   <div key={k} className="cmp-legend-item">
-                    <div className="cmp-dot" style={{ background:c }} />
+                    <div className={`cmp-dot cmp-dot--${CMP_CLASS[k]}`} />
                     {k === "X-Mines" ? "X-ENS / Mines-Ponts" : k === "CCP" ? "CCP / CCINP" : k === "E3A" ? "E3A / Polytech" : "CNC Maroc"}
                   </div>
                 ))}
-                <span style={{ fontSize:10, color:"#334155", fontFamily:"monospace", marginLeft:4 }}>filière MP</span>
+                <span className="cmp-note">filiere MP</span>
               </div>
               <div className="chart-wrap">
                 <div className="chart-title">FRÉQUENCE PAR CONCOURS (MP) — nombre de sessions sur ~10</div>
@@ -362,8 +290,7 @@ export default function Stats() {
                   <BarChart data={compareData} layout="vertical" margin={{ left:10, right:30, top:0, bottom:0 }} barCategoryGap="25%">
                     <XAxis type="number" domain={[0,10]} tick={{ fill:"#475569", fontSize:10, fontFamily:"monospace" }} />
                     <YAxis type="category" dataKey="topic" width={190} tick={{ fill:"#94a3b8", fontSize:10, fontFamily:"monospace" }} />
-                    <Tooltip contentStyle={{ background:"#1a1a2e", border:"1px solid #2d2d45", borderRadius:8, fontFamily:"monospace", fontSize:11 }} />
-                    <Legend wrapperStyle={{ fontFamily:"monospace", fontSize:10, color:"#94a3b8" }} />
+                    <Tooltip />
                     {Object.entries(CMP_COLORS).map(([k,c]) => (
                       <Bar key={k} dataKey={k} fill={c} radius={[0,3,3,0]} maxBarSize={10} />
                     ))}
@@ -379,7 +306,7 @@ export default function Stats() {
               <div className="legend">
                 {Object.entries(CAT_COLORS).map(([c,col]) => (
                   <div key={c} className="legend-item">
-                    <div className="legend-dot" style={{ background:col }} />
+                    <div className={`legend-dot legend-dot--${CAT_CLASS[c]}`} />
                     {c}
                   </div>
                 ))}
@@ -411,18 +338,18 @@ export default function Stats() {
                 {filtered.map((t,i) => (
                   <div key={i} className="t-row">
                     <div className="topic-name td">
-                      <span className="cat-dot" style={{ background:CAT_COLORS[t.cat] }} />
-                      <span style={{ flex:1 }}>{t.topic}</span>
+                      <span className={`cat-dot cat-dot--${CAT_CLASS[t.cat]}`} />
+                      <span className="topic-text">{t.topic}</span>
                       <div className="mini-bar-wrap">
-                        <div className="mini-bar" style={{ width:`${t[barKey]/10*100}%`, background:CAT_COLORS[t.cat]+"88" }} />
+                        <div className={`mini-bar mini-bar--${CAT_CLASS[t.cat]} w-${Math.round((t[barKey] / 10) * 100)}`} />
                       </div>
                     </div>
                     <div className="td-mono">{t[barKey]}/10</div>
                     <div className="td-mono">~{t[wKey]} pts</div>
-                    <div className="hide-m" style={{ color:TREND_COLOR[t.trend], fontSize:11, fontFamily:"monospace", fontWeight:700 }}>
+                    <div className={`hide-m trend trend-${t.trend}`}>
                       {TREND_ICON[t.trend]} {t.trend}
                     </div>
-                    <div className="hide-m td-mono" style={{ color:CAT_COLORS[t.cat]+"cc" }}>{t.cat}</div>
+                    <div className={`hide-m td-mono cat-text cat-text--${CAT_CLASS[t.cat]}`}>{t.cat}</div>
                   </div>
                 ))}
               </div>
@@ -444,7 +371,7 @@ export default function Stats() {
           )}
 
           {/* ── Insights ── */}
-          <div className="insights" style={{ marginTop:20 }}>
+          <div className="insights insights--spaced">
             <div className="insights-title">
               {compare ? "INSIGHTS COMPARATIFS" : `INSIGHTS — ${cfg.label.toUpperCase()}`}
             </div>
@@ -478,6 +405,6 @@ export default function Stats() {
 
         </div>
       </div>
-    </>
+    </div>
   );
 }

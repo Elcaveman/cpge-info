@@ -3,6 +3,8 @@ import {TodoPage} from "./pages/TodoPage.jsx";
 import {ResourcesPage} from "./pages/ResourcesPage.jsx";
 import {COURSES, ALL_ITEMS} from "./data/data";
 import Stats from "./pages/Stats.jsx";
+import SQLCheatSheet from "./pages/SQLCheatSheet.jsx";
+import "./pages/AppLayout.css";
 
 // ─── ROOT APP ────────────────────────────────────────────────────────────────
 export default function App() {
@@ -33,6 +35,7 @@ export default function App() {
     { id: "todo", label: "Checklist", icon: "✅" },
     { id: "resources", label: "Ressources", icon: "📚" },
     { id: "stats", label: "Statistiques", icon: "📊" },
+    { id: "sqlcheatsheet", label: "SQL Commands", icon: "💾" },
   ];
 
   return (
@@ -70,9 +73,7 @@ export default function App() {
                 <span>PROGRESSION</span>
                 <span>{donePct}%</span>
               </div>
-              <div className="sidebar-bar">
-                <div className="sidebar-bar-fill" style={{ width: `${donePct}%` }} />
-              </div>
+              <progress className="sidebar-progress-meter" max={100} value={donePct} />
             </div>
           </aside>
         </>
@@ -91,6 +92,12 @@ export default function App() {
               <>
                 <div className="page-title">Statistiques des concours</div>
                 <Stats />
+              </>
+            )}
+            {page === "sqlcheatsheet" && (
+              <>
+                <div className="page-title">SQL Commands</div>
+                <SQLCheatSheet />
               </>
             )}
           </div>
