@@ -6,6 +6,7 @@ import Stats from "./pages/Stats.jsx";
 import SQLCheatSheet from "./pages/SQLCheatSheet.jsx";
 import PythonCheatSheet from "./pages/PythonCheatSheet.jsx";
 import CNCAlgoRef from "./pages/CNCAlgoRef.jsx";
+import ConcoursPage from "./pages/ConcoursPage.jsx";
 import "./css/AppLayout.css";
 
 // ─── ROOT APP ────────────────────────────────────────────────────────────────
@@ -40,6 +41,7 @@ export default function App() {
     { id: "sqlcheatsheet", label: "SQL Ref", icon: "📋" },
     { id: "python", label: "Python Ref", icon: "🐍" },
     { id: "cnc", label: "Algo CNC", icon: "🧮" },
+    { id: "concours", label: "Concours", icon: "🏆" },
   ];
 
   return (
@@ -106,6 +108,12 @@ export default function App() {
             )}
             {page === "python" && <PythonCheatSheet />}
             {page === "cnc" && <CNCAlgoRef />}
+            {page === "concours" && (
+              <>
+                <div className="page-title">Annales Informatique</div>
+                <ConcoursPage />
+              </>
+            )}
           </div>
         </main>
       </div>

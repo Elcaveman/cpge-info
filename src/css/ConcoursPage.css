@@ -1,0 +1,460 @@
+/* ── ConcoursPage ───────────────────────────────────────── */
+
+.concours-page {
+  display: flex;
+  gap: 0;
+  min-height: 100%;
+  font-family: 'Rajdhani', 'Chakra Petch', sans-serif;
+}
+
+/* ── Sidebar ── */
+.concours-sidebar {
+  width: 200px;
+  flex-shrink: 0;
+  border-right: 1px solid #1e1e2e;
+  padding: 16px 0;
+  position: sticky;
+  top: 0;
+  height: fit-content;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+.concours-sidebar-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #4b5563;
+  padding: 0 16px 10px;
+}
+
+.concours-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 16px;
+  background: none;
+  border: none;
+  border-left: 3px solid transparent;
+  cursor: pointer;
+  color: #6b7280;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  text-align: left;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+}
+
+.concours-nav-btn:hover {
+  background: #13131f;
+  color: #e2e8f0;
+}
+
+.concours-nav-btn.active {
+  color: var(--c-color, #fff);
+  border-left-color: var(--c-color, #fff);
+  background: #13131f;
+}
+
+.concours-nav-flag {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.concours-nav-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Main ── */
+.concours-main {
+  flex: 1;
+  min-width: 0;
+  padding: 24px 28px;
+}
+
+/* ── Header ── */
+.concours-header {
+  margin-bottom: 24px;
+}
+
+.concours-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.concours-flag-big {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.concours-name {
+  font-size: 26px;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+.concours-official-link {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--c-color, #4b5563);
+  color: var(--c-color, #e2e8f0);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.concours-official-link:hover {
+  background: color-mix(in srgb, var(--c-color) 12%, transparent);
+}
+
+.concours-desc {
+  font-size: 13.5px;
+  color: #9ca3af;
+  line-height: 1.65;
+  max-width: 680px;
+  font-family: 'Syne', sans-serif;
+}
+
+/* ── Exam info pills ── */
+.concours-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 20px;
+}
+
+.concours-meta-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: #12121e;
+  border: 1px solid #1e1e2e;
+  font-size: 12px;
+  color: #e2e8f0;
+}
+
+.concours-meta-pill-label {
+  color: #4b5563;
+  font-weight: 600;
+}
+
+/* ── Coefficients ── */
+.coeff-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.coeff-badge {
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  background: color-mix(in srgb, var(--c-color) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c-color) 30%, transparent);
+  color: var(--c-color);
+}
+
+/* ── Filière tabs ── */
+.filiere-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #1e1e2e;
+  padding-bottom: 0;
+}
+
+.filiere-tab {
+  padding: 7px 16px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  color: #4b5563;
+  transition: color 0.15s, border-color 0.15s;
+  margin-bottom: -1px;
+}
+
+.filiere-tab:hover {
+  color: #e2e8f0;
+}
+
+.filiere-tab.active {
+  color: var(--c-color, #e2e8f0);
+  border-bottom-color: var(--c-color, #e2e8f0);
+}
+
+/* ── Annales table ── */
+.annales-table-wrap {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid #1e1e2e;
+  margin-bottom: 28px;
+}
+
+.annales-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.annales-table th {
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4b5563;
+  background: #0d0d14;
+  border-bottom: 1px solid #1e1e2e;
+}
+
+.annales-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid #12121e;
+  color: #e2e8f0;
+  vertical-align: middle;
+}
+
+.annales-table tr:last-child td {
+  border-bottom: none;
+}
+
+.annales-table tr:hover td {
+  background: #0f0f1a;
+}
+
+.year-cell {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--c-color);
+  white-space: nowrap;
+}
+
+.link-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pdf-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 5px;
+  background: #1a1a28;
+  border: 1px solid #2a2a40;
+  color: #a5b4fc;
+  text-decoration: none;
+  font-size: 11.5px;
+  font-weight: 600;
+  transition: background 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.pdf-link:hover {
+  background: #22223a;
+  border-color: #4a4a6a;
+  color: #c7d2fe;
+}
+
+.pdf-link.rapport {
+  color: #86efac;
+  border-color: #1e3a2a;
+  background: #111a14;
+}
+
+.pdf-link.rapport:hover {
+  background: #172210;
+  border-color: #2a4a35;
+}
+
+.pdf-link.zip {
+  color: #fde68a;
+  border-color: #3a3010;
+  background: #1a1608;
+}
+
+.pdf-link.zip:hover {
+  background: #221e0a;
+  border-color: #5a4a10;
+}
+
+.na-cell {
+  color: #374151;
+  font-size: 12px;
+}
+
+.note-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  background: #1e1208;
+  border: 1px solid #3a2410;
+  color: #d97706;
+}
+
+/* ── Mines ZIP note ── */
+.mines-note {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 16px;
+  padding: 10px 14px;
+  background: #0d0d14;
+  border-radius: 6px;
+  border-left: 3px solid #f472b6;
+  font-family: 'Syne', sans-serif;
+}
+
+/* ── Sources section ── */
+.sources-section {
+  margin-top: 12px;
+  padding-top: 24px;
+  border-top: 1px solid #1e1e2e;
+}
+
+.sources-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4b5563;
+  margin-bottom: 14px;
+}
+
+.sources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.source-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: #0d0d14;
+  border: 1px solid #1e1e2e;
+  text-decoration: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.source-card:hover {
+  background: #111120;
+  border-color: var(--s-color, #2a2a40);
+}
+
+.source-card-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--s-color, #e2e8f0);
+}
+
+.source-card-desc {
+  font-size: 11.5px;
+  color: #6b7280;
+  font-family: 'Syne', sans-serif;
+  line-height: 1.4;
+}
+
+/* ── E3A special ── */
+.e3a-note {
+  padding: 12px 16px;
+  background: #111118;
+  border: 1px solid #2a2a20;
+  border-left: 3px solid #fb923c;
+  border-radius: 6px;
+  font-size: 12.5px;
+  color: #9ca3af;
+  margin-bottom: 16px;
+  font-family: 'Syne', sans-serif;
+}
+
+.site-link-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  background: #0d0d14;
+  border: 1px solid #1e1e2e;
+  text-decoration: none;
+  color: var(--c-color, #e2e8f0);
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.site-link-row:hover {
+  background: #111120;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .concours-page {
+    flex-direction: column;
+  }
+  .concours-sidebar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    border-right: none;
+    border-bottom: 1px solid #1e1e2e;
+    padding: 8px 0;
+    position: static;
+    max-height: none;
+  }
+  .concours-sidebar-title {
+    display: none;
+  }
+  .concours-nav-btn {
+    border-left: none;
+    border-bottom: 2px solid transparent;
+    padding: 8px 14px;
+    white-space: nowrap;
+  }
+  .concours-nav-btn.active {
+    border-left-color: transparent;
+    border-bottom-color: var(--c-color, #fff);
+  }
+  .concours-main {
+    padding: 16px;
+  }
+  .concours-title-row {
+    flex-wrap: wrap;
+  }
+  .concours-official-link {
+    margin-left: 0;
+  }
+}
