@@ -313,3 +313,31 @@ export const SOURCES = [
     icon: "🗄️",
   },
 ];
+
+// Stats Configuration — Maps stats keys to concours info
+export const CONCOURS_CONFIG = {
+  cnc: {
+    label: "CNC",
+    note: "CNC Maroc",
+    filieres: ["mp", "psi", "tsi"],
+    color: "#4ade80",
+  },
+  ccp: {
+    label: "CCINP",
+    note: "Concours Commun INP",
+    filieres: ["mp", "psi"],
+    color: "#60a5fa",
+  },
+  xm: {
+    label: "Mines-Ponts",
+    note: "X-ENS / Mines-Ponts",
+    filieres: ["mp", "psi"],
+    color: "#f472b6",
+  },
+  e3a: {
+    label: "E3A",
+    note: "E3A / Polytech",
+    filieres: ["mp", "psi"],
+    color: "#fb923c",
+  },
+};

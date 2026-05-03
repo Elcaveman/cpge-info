@@ -1,4 +1,8 @@
-// Stats Dashboard - Data
+// ─── DATA ────────────────────────────────────────────────────────────────────
+// Concours: CNC (Maroc MP/PSI), CCP/CCINP (France MP/PSI), X-ENS/Mines-Ponts (France MP), E3A/Polytech
+// Frequency: out of 10 (sessions ~2015-2025 per filière). Weight: avg pts contribution (scale varies by concours).
+// Sources: zbakhinfo, official PDFs, community analyses.
+
 export const ALL_DATA = [
   // ─ topic, cat, concours frequencies (out of 10), avg weight (/40 or normalised), trend
   // CNC = CNC Maroc; CCP = CCINP/CCP; XM = X-ENS / Mines-Ponts; E3A = E3A-Polytech
@@ -89,3 +93,14 @@ export const CAT_COLORS = {
   "IA & Jeux":        "#fb923c",
   "Représentation":   "#facc15",
 };
+
+export const CONCOURS_CONFIG = {
+  cnc:  { label: "CNC Maroc",           color: "#f472b6", filieres: ["mp","psi"], note: "~10 sessions MP+PSI" },
+  ccp:  { label: "CCP / CCINP",         color: "#60a5fa", filieres: ["mp","psi"], note: "~8 sessions MP+PSI" },
+  xm:   { label: "X-ENS / Mines-Ponts", color: "#34d399", filieres: ["mp","psi"], note: "~8 sessions MP+PSI" },
+  e3a:  { label: "E3A / Polytech",      color: "#fb923c", filieres: ["mp","psi"], note: "~7 sessions MP+PSI" },
+};
+
+export const TREND_ICON  = { hausse: "↑", stable: "→", baisse: "↓" };
+export const TREND_COLOR = { hausse: "#34d399", stable: "#475569", baisse: "#ef4444" };
+export const CATEGORIES  = ["Toutes", ...Object.keys(CAT_COLORS)];
