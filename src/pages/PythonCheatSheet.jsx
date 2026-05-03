@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import "../css/PythonCheatSheet.css";
+import "./PythonCheatSheet.css";
 
 const FONT = "'JetBrains Mono', 'Fira Code', monospace";
 const HEADING = "'Rajdhani', 'Chakra Petch', sans-serif";
@@ -226,6 +226,212 @@ const NAV_ITEMS = [
   { id: "sqlite",    label: "SQLite3",     icon: "🗄"  },
 ];
 
+const css = `
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0d0d0f;
+    color: #e2e8f0;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    min-height: 100vh;
+  }
+
+  .layout { display: flex; min-height: 100vh; }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: 200px; min-width: 200px;
+    background: #111114;
+    border-right: 1px solid #1e1e26;
+    display: flex; flex-direction: column;
+    position: fixed; top: 0; left: 0; bottom: 0;
+    z-index: 10;
+  }
+  .sidebar-logo {
+    padding: 20px 18px 14px;
+    border-bottom: 1px solid #1e1e26;
+  }
+  .logo-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: 0.02em;
+  }
+  .logo-sub {
+    font-size: 10px; color: #4b5563;
+    margin-top: 3px; letter-spacing: 0.15em;
+  }
+  .sidebar-nav { flex: 1; padding: 14px 0; overflow-y: auto; }
+  .nav-item {
+    display: flex; align-items: center; gap: 9px;
+    padding: 9px 18px;
+    font-size: 12px; color: #6b7280;
+    cursor: pointer; transition: all 0.15s;
+    border-left: 2px solid transparent;
+    user-select: none;
+  }
+  .nav-item:hover { color: #e2e8f0; background: #16161a; }
+  .nav-item.active { color: #fff; background: #16161a; }
+  .nav-icon { width: 18px; text-align: center; flex-shrink: 0; }
+  .nav-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    margin-left: auto; flex-shrink: 0;
+  }
+  .sidebar-footer {
+    padding: 14px 18px;
+    border-top: 1px solid #1e1e26;
+    font-size: 10px; color: #374151; letter-spacing: 0.05em;
+  }
+  .progress-bar-bg {
+    height: 2px; background: #1e1e26;
+    margin-top: 6px; border-radius: 2px; overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4ade80, #38bdf8, #c084fc);
+    border-radius: 2px; transition: width 0.5s ease;
+  }
+
+  /* ── MAIN ── */
+  .main { margin-left: 200px; flex: 1; display: flex; flex-direction: column; }
+
+  .topbar {
+    padding: 16px 36px;
+    border-bottom: 1px solid #1e1e26;
+    background: #111114;
+    position: sticky; top: 0; z-index: 5;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .topbar-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 22px; font-weight: 700;
+    color: #fff; letter-spacing: 0.04em;
+  }
+  .search-input {
+    background: #1a1a20; border: 1px solid #2a2a35;
+    border-radius: 6px; color: #e2e8f0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; padding: 7px 14px; width: 230px;
+    outline: none; transition: border-color 0.15s;
+  }
+  .search-input::placeholder { color: #4b5563; }
+  .search-input:focus { border-color: #4b5563; }
+
+  .content { padding: 30px 36px; }
+
+  .page-heading {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 32px; font-weight: 700;
+    color: #fff; margin-bottom: 6px; letter-spacing: 0.02em;
+  }
+  .page-sub {
+    font-size: 11px; color: #4b5563;
+    letter-spacing: 0.1em; margin-bottom: 26px;
+  }
+  .page-sub span { margin-right: 8px; }
+  .page-sub span::after { content: ' ·'; margin-left: 8px; color: #2a2a35; }
+  .page-sub span:last-child::after { content: ''; }
+
+  /* ── FILTER BAR ── */
+  .filter-bar {
+    background: #111114;
+    border: 1px solid #1e1e26;
+    border-radius: 10px; padding: 16px 20px;
+    margin-bottom: 22px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .filter-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .filter-label {
+    font-size: 9px; letter-spacing: 0.18em;
+    color: #4b5563; width: 70px; flex-shrink: 0;
+  }
+  .pill {
+    font-size: 11px; padding: 5px 13px;
+    border-radius: 20px; border: 1px solid #2a2a35;
+    background: transparent; color: #9ca3af;
+    cursor: pointer; font-family: inherit;
+    transition: all 0.15s; user-select: none; white-space: nowrap;
+  }
+  .pill:hover { border-color: #4b5563; color: #e2e8f0; }
+  .pill.active { color: #0d0d0f; border-color: transparent; font-weight: 600; }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #9ca3af; }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── SECTION ── */
+  .section {
+    background: #111114; border: 1px solid #1e1e26;
+    border-radius: 10px; margin-bottom: 14px; overflow: hidden;
+  }
+  .section-header {
+    padding: 11px 20px; border-bottom: 1px solid #1e1e26;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-color-bar { width: 3px; height: 14px; border-radius: 2px; flex-shrink: 0; }
+  .section-title-text {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px; font-weight: 600;
+    color: #e2e8f0; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .section-count {
+    margin-left: auto;
+    background: #1a1a20; border: 1px solid #2a2a35;
+    border-radius: 10px; padding: 2px 9px;
+    font-size: 10px; color: #4b5563;
+  }
+
+  /* ── CMD ROW ── */
+  .cmd-table { width: 100%; border-collapse: collapse; }
+  .cmd-row {
+    border-bottom: 1px solid #16161a;
+    cursor: pointer; transition: background 0.1s;
+  }
+  .cmd-row:last-child { border-bottom: none; }
+  .cmd-row:hover { background: #16161a; }
+  .cmd-row.copied { background: #0f2520; }
+
+  .cmd-cell-code {
+    padding: 9px 20px; font-size: 11.5px; width: 55%;
+    vertical-align: top; white-space: pre;
+    line-height: 1.6;
+  }
+  .cmd-cell-desc {
+    padding: 9px 20px; font-size: 11px;
+    color: #6b7280; border-left: 1px solid #16161a;
+    width: 45%; vertical-align: middle;
+  }
+
+  /* syntax colours */
+  .py-kw  { color: #f472b6; font-weight: 600; }  /* keywords: def, import, for… */
+  .py-fn  { color: #60a5fa; }                     /* built-ins / methods */
+  .py-str { color: #fbbf24; }                     /* strings */
+  .py-cm  { color: #4b5563; font-style: italic; } /* comments */
+  .py-num { color: #a78bfa; }                     /* numbers */
+  .py-op  { color: #f87171; }                     /* operators */
+  .py-mod { color: #34d399; font-weight: 600; }   /* module names */
+
+  .copy-badge {
+    display: inline-block; font-size: 9px;
+    padding: 2px 6px; border-radius: 4px;
+    background: #0f2520; color: #4ade80;
+    margin-left: 8px; opacity: 0; transition: opacity 0.2s;
+    vertical-align: middle; white-space: nowrap;
+  }
+  .cmd-row.copied .copy-badge { opacity: 1; }
+
+  .no-results {
+    padding: 48px; text-align: center;
+    color: #374151; font-size: 13px;
+  }
+
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #2a2a35; border-radius: 2px; }
 
 // Very lightweight syntax highlighter for Python snippets
 function highlight(code) {
