@@ -252,7 +252,7 @@
   white-space: nowrap;
 }
 
-.link-cell {
+.link-cell-inner {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -290,6 +290,17 @@
 .pdf-link.rapport:hover {
   background: #172210;
   border-color: #2a4a35;
+}
+
+.pdf-link.corrige {
+  color: #c084fc;
+  border-color: #2a1e3a;
+  background: #14111a;
+}
+
+.pdf-link.corrige:hover {
+  background: #1a1221;
+  border-color: #3a2a4a;
 }
 
 .pdf-link.zip {

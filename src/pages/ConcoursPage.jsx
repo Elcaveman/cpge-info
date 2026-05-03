@@ -18,6 +18,7 @@ function PdfLink({ href, label, type = "sujet" }) {
 function FilierTable({ concours, filiere }) {
   const rows = concours.annales;
   const hasRapport = rows.some(r => r[filiere]?.rapport);
+  const hasCorrige = rows.some(r => r[filiere]?.corrige);
 
   return (
     <div className="annales-table-wrap">
@@ -27,7 +28,7 @@ function FilierTable({ concours, filiere }) {
             <th>Année</th>
             <th>Sujet</th>
             {hasRapport && <th>Rapport</th>}
-            <th>Note</th>
+            {hasCorrige && <th>Correction</th>}
           </tr>
         </thead>
         <tbody>
@@ -36,22 +37,31 @@ function FilierTable({ concours, filiere }) {
             return (
               <tr key={row.year}>
                 <td className="year-cell">{row.year}</td>
-                <td className="link-cell">
-                  {entry?.sujet
-                    ? <PdfLink href={entry.sujet} label="Sujet" type="sujet" />
-                    : <span className="na-cell">—</span>}
+                <td>
+                  <div className="link-cell-inner">
+                    {entry?.sujet
+                      ? <PdfLink href={entry.sujet} label="Sujet" type="sujet" />
+                      : <span className="na-cell">—</span>}
+                  </div>
                 </td>
                 {hasRapport && (
-                  <td className="link-cell">
-                    {entry?.rapport
-                      ? <PdfLink href={entry.rapport} label="Rapport" type="rapport" />
-                      : <span className="na-cell">—</span>}
+                  <td>
+                    <div className="link-cell-inner">
+                      {entry?.rapport
+                        ? <PdfLink href={entry.rapport} label="Rapport" type="rapport" />
+                        : <span className="na-cell">—</span>}
+                    </div>
                   </td>
                 )}
-                <td>
-                  {entry?.note && <span className="note-badge">{entry.note}</span>}
-                  {row.note && !entry && <span className="na-cell">{row.note}</span>}
-                </td>
+                {hasCorrige && (
+                  <td>
+                    <div className="link-cell-inner">
+                      {entry?.corrige
+                        ? <PdfLink href={entry.corrige} label="Correction" type="corrige" />
+                        : <span className="na-cell">—</span>}
+                    </div>
+                  </td>
+                )}
               </tr>
             );
           })}
@@ -87,23 +97,29 @@ function MinesTable({ concours }) {
               <tr key={row.year}>
                 <td className="year-cell">{row.year}</td>
                 {has2025PDFs && (
-                  <td className="link-cell">
-                    {row["MP/PC/PSI"]?.sujet
-                      ? <PdfLink href={row["MP/PC/PSI"].sujet} label="Info MP/PC/PSI" />
-                      : <span className="na-cell">dans le ZIP</span>}
+                  <td>
+                    <div className="link-cell-inner">
+                      {row["MP/PC/PSI"]?.sujet
+                        ? <PdfLink href={row["MP/PC/PSI"].sujet} label="Info MP/PC/PSI" />
+                        : <span className="na-cell">dans le ZIP</span>}
+                    </div>
                   </td>
                 )}
                 {has2025PDFs && (
-                  <td className="link-cell">
-                    {row["Option MP"]?.sujet
-                      ? <PdfLink href={row["Option MP"].sujet} label="Option MP" />
-                      : <span className="na-cell">dans le ZIP</span>}
+                  <td>
+                    <div className="link-cell-inner">
+                      {row["Option MP"]?.sujet
+                        ? <PdfLink href={row["Option MP"].sujet} label="Option MP" />
+                        : <span className="na-cell">dans le ZIP</span>}
+                    </div>
                   </td>
                 )}
-                <td className="link-cell">
-                  {row.zip
-                    ? <PdfLink href={row.zip} label={`ZIP ${row.year}`} type="zip" />
-                    : <span className="na-cell">—</span>}
+                <td>
+                  <div className="link-cell-inner">
+                    {row.zip
+                      ? <PdfLink href={row.zip} label={`ZIP ${row.year}`} type="zip" />
+                      : <span className="na-cell">—</span>}
+                  </div>
                 </td>
               </tr>
             ))}
@@ -134,12 +150,14 @@ function E3ATable({ concours }) {
             {concours.annales.map(row => (
               <tr key={row.year}>
                 <td className="year-cell">{row.year}</td>
-                <td className="link-cell">
-                  {row.siteUrl
-                    ? <a className="pdf-link" href={row.siteUrl} target="_blank" rel="noopener noreferrer">
-                        🌐 {row.note}
-                      </a>
-                    : <span className="na-cell">{row.note}</span>}
+                <td>
+                  <div className="link-cell-inner">
+                    {row.siteUrl
+                      ? <a className="pdf-link" href={row.siteUrl} target="_blank" rel="noopener noreferrer">
+                          🌐 {row.note}
+                        </a>
+                      : <span className="na-cell">{row.note}</span>}
+                  </div>
                 </td>
               </tr>
             ))}
