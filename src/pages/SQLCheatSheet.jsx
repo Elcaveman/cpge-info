@@ -85,9 +85,7 @@ export default function SQLCheatSheet() {
           <div className="content">
             <h1 className="page-heading">SQL — Référence Complète</h1>
             <div className="page-sub">
-              {["Basics", "Filtering", "Joins", "Aggregation", "DDL", "DML", "Subqueries", "Advanced"].map(l => (
-                <span key={l}>{l}</span>
-              ))}
+              Commandes SQL essentielles pour la manipulation de données relationnelles.
             </div>
 
             {/* FILTER BAR */}
@@ -104,16 +102,6 @@ export default function SQLCheatSheet() {
                   </div>
                 ))}
               </div>
-            </div>
-
-            {/* LEGEND */}
-            <div className="legend">
-              {CATS.filter(c => c.id !== "all").map(c => (
-                <div key={c.id} className="legend-item">
-                  <div className={`legend-dot cat-${c.id}`} />
-                  {c.label}
-                </div>
-              ))}
             </div>
 
             {/* SECTIONS */}

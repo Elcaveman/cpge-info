@@ -241,30 +241,6 @@
   background: var(--pill-color, #fff);
 }
 
-/* ─── LEGEND ────────────────────────────────────────────────────────────────────── */
-.python-cheat .legend {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin-bottom: 18px;
-}
-
-.python-cheat .legend-item {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 10.5px;
-  color: #9ca3af;
-}
-
-.python-cheat .legend-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  background: var(--legend-color, #fff);
-}
-
 /* ─── SECTIONS ──────────────────────────────────────────────────────────────────── */
 .python-cheat .section {
   margin-top: 24px;

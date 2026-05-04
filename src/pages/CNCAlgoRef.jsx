@@ -121,7 +121,7 @@ export default function CNCAlgoRef() {
         <aside className="sidebar">
           <div className="logo">
             <div className="logo-t">CNC Algo</div>
-            <div className="logo-s">CPGE · MP · PSI · Référence</div>
+            <div className="logo-s">CPGE · MP · PSI · TSI · Référence</div>
           </div>
           <nav className="sidebar-nav">
             {NAV.map(n=>(
@@ -160,9 +160,7 @@ export default function CNCAlgoRef() {
           <div className="content">
             <h1 className="page-h">Algorithmes Essentiels — CNC / CPGE</h1>
             <div className="page-s">
-              {["Récursivité","Tri","Recherche","Listes","Arbres","Graphes","Prog. Dyn.","Matrices","Chaînes","SQL"].map(l=>(
-                <span key={l}>{l}</span>
-              ))}
+              Algorithmes classiques, avec des implémentations Python. Idéal pour la révision.
             </div>
 
             {/* FILTER BAR */}
@@ -186,16 +184,6 @@ export default function CNCAlgoRef() {
                   <span className="freq-high">★</span><span className="freq-low">★★</span> Occasionnel
                 </span>
               </div>
-            </div>
-
-            {/* LEGEND */}
-            <div className="legend">
-              {CATS.filter(c=>c.id!=="all").map(c=>(
-                <div key={c.id} className="li">
-                  <div className="ld" style={{background:c.color}}/>
-                  {c.label}
-                </div>
-              ))}
             </div>
 
             {/* SECTIONS */}

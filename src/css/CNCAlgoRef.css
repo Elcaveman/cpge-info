@@ -268,30 +268,6 @@
   background: var(--pill-color, #fff);
 }
 
-/* ─── LEGEND ────────────────────────────────────────────────────────────────────── */
-.cnc-algo-ref .legend {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin-bottom: 18px;
-}
-
-.cnc-algo-ref .li {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 10.5px;
-  color: #9ca3af;
-}
-
-.cnc-algo-ref .ld {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  background: var(--legend-color, #fff);
-}
-
 /* ─── SECTION HEADER ────────────────────────────────────────────────────────────────── */
 .cnc-algo-ref .sec-header {
   display: flex;

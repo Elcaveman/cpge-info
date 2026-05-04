@@ -138,16 +138,6 @@ export default function PythonCheatSheet() {
               </div>
             </div>
 
-            {/* LEGEND */}
-            <div className="legend">
-              {CATS.filter(c => c.id !== "all").map(c => (
-                <div key={c.id} className="legend-item">
-                  <div className="legend-dot" style={{ '--legend-color': c.color }} />
-                  {c.label}
-                </div>
-              ))}
-            </div>
-
             {/* SECTIONS */}
             {filtered.length === 0 && (
               <div className="no-results">No commands match "{search}"</div>

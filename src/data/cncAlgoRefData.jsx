@@ -24,11 +24,23 @@ export const SECTIONS = [
     cat:"recursion", title:"Récursivité & Diviser pour Régner",
     algos:[
       {
-        title:"Factorielle",
+        title:"Factorielle (itérative)",
+        freq:3, complexity:"O(n) temps, O(1) mémoire",
+        code:`def factorielle(n):
+      res = 1
+      for k in range(2, n + 1):
+        res *= k
+      return res`,
+        note:"Version sans récursivité : évite la pile d'appels.",
+      },
+      {
+        title:"Factorielle (récursive)",
         freq:3, complexity:"O(n) temps, O(n) pile",
-        code:`def fact(n):
-    return 1 if n == 0 else n * fact(n-1)`,
-        note:"Cas de base TOUJOURS en premier. Récurrence simple.",
+        code:`def factorielle_rec(n):
+    if n <= 1:
+        return 1
+    return n * factorielle_rec(n-1)`,
+        note:"Version classique récursive avec cas de base explicite.",
       },
       {
         title:"Fibonacci (mémoïsation)",
@@ -712,6 +724,18 @@ M = [[0]*m for _ in range(n)]
 
 # Binaire : vers_base(42, 2)  → '101010'`,
         note:"★ Fréquent : binaire (b=2), octal (b=8), hexa (b=16).",
+      },
+      {
+        title:"Décimal → binaire (itératif)",
+        freq:3, complexity:"O(log n)",
+        code:`def binaire(n):
+    if n == 0: return "0"
+    bits = []
+    while n > 0:
+        bits.append(str(n % 2))
+        n //= 2
+    return "".join(reversed(bits))`,
+        note:"Version explicite demandée très souvent avant la généralisation base b.",
       },
       {
         title:"Conversion binaire → décimal",

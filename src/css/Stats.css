@@ -7,17 +7,17 @@
   font-family: 'Syne', sans-serif;
 }
 
-.stats-page .app {
+.stats-page .stats-app {
   min-height: 100vh;
   background: #0a0a0f;
   color: #e2e8f0;
   padding: 32px 20px 80px;
 }
 
-.stats-page .inner { max-width: 980px; margin: 0 auto; }
-.stats-page .hdr { margin-bottom: 24px; }
-.stats-page .title { font-size: 24px; font-weight: 800; color: #f1f5f9; letter-spacing: -0.5px; }
-.stats-page .subtitle { font-size: 11px; color: #475569; font-family: 'JetBrains Mono', monospace; margin-top: 4px; }
+.stats-page .stats-inner { max-width: 980px; margin: 0 auto; }
+.stats-page .stats-hdr { margin-bottom: 24px; }
+.stats-page .stats-title { font-size: 24px; font-weight: 800; color: #f1f5f9; letter-spacing: -0.5px; }
+.stats-page .stats-subtitle { font-size: 11px; color: #475569; font-family: 'JetBrains Mono', monospace; margin-top: 4px; }
 
 .stats-page .controls { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; background: #0e0e1a; border: 1px solid #1a1a2e; border-radius: 12px; padding: 14px 16px; }
 .stats-page .ctrl-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
@@ -25,23 +25,23 @@
 .stats-page .ctrl-vdiv { width: 1px; height: 24px; background: #1e1e2e; margin: 0 4px; }
 .stats-page .ctrl-divider { width: 100%; height: 1px; background: #1a1a2e; }
 
-.stats-page .btn { padding: 5px 12px; border-radius: 7px; border: 1px solid #1e1e2e; background: none; color: #64748b; font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 600; cursor: pointer; transition: all .15s; white-space: nowrap; }
-.stats-page .btn:hover { border-color: #334155; color: #94a3b8; }
-.stats-page .btn--active { background: #12121c; color: #f1f5f9; border-color: #334155; }
-.stats-page .btn--compare { border-color: #818cf8; color: #818cf8; }
-.stats-page .btn--compare.btn--active { background: rgba(129,140,248,.12); }
+.stats-page .stats-btn { padding: 5px 12px; border-radius: 7px; border: 1px solid #1e1e2e; background: none; color: #64748b; font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 600; cursor: pointer; transition: all .15s; white-space: nowrap; }
+.stats-page .stats-btn:hover { border-color: #334155; color: #94a3b8; }
+.stats-page .stats-btn--active { background: #12121c; color: #f1f5f9; border-color: #334155; }
+.stats-page .stats-btn--compare { border-color: #818cf8; color: #818cf8; }
+.stats-page .stats-btn--compare.stats-btn--active { background: rgba(129,140,248,.12); }
 
-.stats-page .btn--concours-cnc.btn--active { border-color: #f472b6; color: #f472b6; }
-.stats-page .btn--concours-ccp.btn--active { border-color: #60a5fa; color: #60a5fa; }
-.stats-page .btn--concours-xm.btn--active { border-color: #34d399; color: #34d399; }
-.stats-page .btn--concours-e3a.btn--active { border-color: #fb923c; color: #fb923c; }
+.stats-page .stats-btn--concours-cnc.stats-btn--active { border-color: #f472b6; color: #f472b6; }
+.stats-page .stats-btn--concours-ccp.stats-btn--active { border-color: #60a5fa; color: #60a5fa; }
+.stats-page .stats-btn--concours-xm.stats-btn--active { border-color: #34d399; color: #34d399; }
+.stats-page .stats-btn--concours-e3a.stats-btn--active { border-color: #fb923c; color: #fb923c; }
 
-.stats-page .btn--cat-bdd.btn--active { border-color: #f472b6; color: #f472b6; }
-.stats-page .btn--cat-structures.btn--active { border-color: #60a5fa; color: #60a5fa; }
-.stats-page .btn--cat-algorithmique.btn--active { border-color: #34d399; color: #34d399; }
-.stats-page .btn--cat-methodes.btn--active { border-color: #a78bfa; color: #a78bfa; }
-.stats-page .btn--cat-ia-jeux.btn--active { border-color: #fb923c; color: #fb923c; }
-.stats-page .btn--cat-representation.btn--active { border-color: #facc15; color: #facc15; }
+.stats-page .stats-btn--cat-bdd.stats-btn--active { border-color: #f472b6; color: #f472b6; }
+.stats-page .stats-btn--cat-structures.stats-btn--active { border-color: #60a5fa; color: #60a5fa; }
+.stats-page .stats-btn--cat-algorithmique.stats-btn--active { border-color: #34d399; color: #34d399; }
+.stats-page .stats-btn--cat-methodes.stats-btn--active { border-color: #a78bfa; color: #a78bfa; }
+.stats-page .stats-btn--cat-ia-jeux.stats-btn--active { border-color: #fb923c; color: #fb923c; }
+.stats-page .stats-btn--cat-representation.stats-btn--active { border-color: #facc15; color: #facc15; }
 
 .stats-page .legend { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
 .stats-page .legend-item { display: flex; align-items: center; gap: 5px; font-size: 10px; color: #64748b; font-family: 'JetBrains Mono', monospace; }
