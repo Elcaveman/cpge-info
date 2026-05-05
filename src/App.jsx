@@ -7,12 +7,18 @@ import SQLCheatSheet from "./pages/SQLCheatSheet.jsx";
 import PythonCheatSheet from "./pages/PythonCheatSheet.jsx";
 import CNCAlgoRef from "./pages/CNCAlgoRef.jsx";
 import ConcoursPage from "./pages/ConcoursPage.jsx";
+import ContactPage from "./pages/ContactPage.jsx";
 import "./css/AppLayout.css";
 
 // ─── ROOT APP ────────────────────────────────────────────────────────────────
 export default function App() {
   const [page, setPage] = useState("todo");
   const [menuOpen, setMenuOpen] = useState(false);
+  const CONTACT_LINKS = {
+    github: "https://github.com/Elcaveman/cpge-info",
+    group: "OD morrocco",
+    email: "mailto:02.oudaoud@gmail.com",
+  };
 
   const [checked, setChecked] = useState(() => {
     try {
@@ -42,6 +48,7 @@ export default function App() {
     { id: "python", label: "Python Ref", icon: "🐍" },
     { id: "cnc", label: "Algo CNC", icon: "🧮" },
     { id: "concours", label: "Concours", icon: "🏆" },
+    { id: "contact", label: "Contact", icon: "📬" },
   ];
 
   return (
@@ -114,8 +121,39 @@ export default function App() {
                 <ConcoursPage />
               </>
             )}
+            {page === "contact" && <ContactPage links={CONTACT_LINKS} />}
           </div>
         </main>
+      </div>
+
+      <div className="global-contact-dock" aria-label="Liens de contact rapides">
+        <a
+          className="global-contact-btn"
+          href={CONTACT_LINKS.github}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </a>
+        <a
+          className="global-contact-btn"
+          href={CONTACT_LINKS.group}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ display: "none" }} /* hidden for now since OD morrocco doesn't have a public page */
+        >
+          Site Groupe
+        </a>
+        <button
+          type="button"
+          className="global-contact-btn"
+          onClick={() => {
+            setPage("contact");
+            setMenuOpen(false);
+          }}
+        >
+          Contact
+        </button>
       </div>
     </>
   );
