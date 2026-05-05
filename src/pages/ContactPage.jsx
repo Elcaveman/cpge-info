@@ -119,7 +119,7 @@ export default function ContactPage({ links = {} }) {
       <div className="content">
         {/* ── heading ── */}
         <div className="contact-heading">
-          <h1 className="contact-heading-title">Contact — Prepa Info</h1>
+          <h1 className="contact-heading-title">Contact Us</h1>
           <p className="contact-breadcrumb">
             <span>Prepa Info</span>
             <span className="contact-breadcrumb-sep">·</span>
