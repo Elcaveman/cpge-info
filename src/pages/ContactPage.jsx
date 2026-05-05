@@ -251,7 +251,7 @@ export default function ContactPage({ links = {} }) {
             </div>
 
             <div className="contact-form-actions">
-              <span className="results-count">// réponse sous 48h</span>
+              <span className="results-count">// Your contributions help us grow</span>
               <button type="button" className="reset-btn contact-send-btn" onClick={handleSend}>
                 {Icon.send}
                 Envoyer
