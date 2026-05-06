@@ -3,29 +3,25 @@ import "../css/PythonCheatSheet.css";
 import { FONT, HEADING, CATS, CAT_COLOR, SECTIONS, NAV_ITEMS } from "../data/pythonCheatSheetData.jsx";
 
 function highlight(code) {
-  // We'll do a simple token-based approach
-  const keywords = /\b(import|from|as|def|class|return|if|elif|else|for|while|in|not|and|or|break|continue|pass|try|except|finally|raise|with|lambda|True|False|None|self)\b/g;
-  const builtins = /\b(print|input|len|type|int|float|str|list|dict|set|tuple|range|enumerate|map|filter|sorted|min|max|sum|abs|round|open|isinstance|staticmethod|classmethod|super|zip|any|all|hasattr|getattr|setattr)\b/g;
-  const modules  = /\b(np|px|go|json|csv|os|math|sqlite3|conn|cur|fig|df)\b/g;
-  const strings  = /(f?'[^']*'|f?"[^"]*")/g;
-  const comments = /(#.*)/g;
-  const numbers  = /\b(\d+\.?\d*)\b/g;
-
-  // Escape HTML first
-  let s = code
+  // Escape HTML first to prevent injection, then apply syntax highlighting with a single regex pass.
+  const esc = code
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
 
-  // Apply highlights (order matters — comments last to override)
-  s = s.replace(strings,  m => `<span class="py-str">${m}</span>`);
-  s = s.replace(numbers,  m => `<span class="py-num">${m}</span>`);
-  s = s.replace(keywords, m => `<span class="py-kw">${m}</span>`);
-  s = s.replace(builtins, m => `<span class="py-fn">${m}</span>`);
-  s = s.replace(modules,  m => `<span class="py-mod">${m}</span>`);
-  s = s.replace(comments, m => `<span class="py-cm">${m}</span>`);
-
-  return s;
+  // Single-pass alternation prevents matching inside injected span markup.
+  return esc.replace(
+    /(#.*)|(f?'[^']*'|f?"[^"]*")|\b(\d+\.?\d*)\b|\b(import|from|as|def|class|return|if|elif|else|for|while|in|not|and|or|break|continue|pass|try|except|finally|raise|with|lambda|True|False|None|self)\b|\b(print|input|len|type|int|float|str|list|dict|set|tuple|range|enumerate|map|filter|sorted|min|max|sum|abs|round|open|isinstance|staticmethod|classmethod|super|zip|any|all|hasattr|getattr|setattr)\b|\b(np|px|go|json|csv|os|math|sqlite3|conn|cur|fig|df)\b/g,
+    (m, cm, st, nu, kw, fn, md) => {
+      if (cm !== undefined) return `<span class="py-cm">${m}</span>`;
+      if (st !== undefined) return `<span class="py-str">${m}</span>`;
+      if (nu !== undefined) return `<span class="py-num">${m}</span>`;
+      if (kw !== undefined) return `<span class="py-kw">${m}</span>`;
+      if (fn !== undefined) return `<span class="py-fn">${m}</span>`;
+      if (md !== undefined) return `<span class="py-mod">${m}</span>`;
+      return m;
+    }
+  );
 }
 
 export default function PythonCheatSheet() {
