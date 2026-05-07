@@ -1,6 +1,7 @@
 import { useState, useMemo, useRef, useEffect } from "react";
-import "../css/CNCAlgoRef.css";
-import { FONT, HEADING, CATS, CC, SECTIONS, NAV } from "../data/cncAlgoRefData.jsx";
+import "../../css/prepa-info/common.css";
+import "../../css/prepa-info/CNCAlgoRef.css";
+import { FONT, HEADING, CATS, CC, SECTIONS, NAV } from "../../data/cncAlgoRefData.jsx";
 
 function highlight(code) {
   const esc = code.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");

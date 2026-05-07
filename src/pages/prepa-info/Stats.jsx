@@ -6,7 +6,7 @@ import {
   CAT_COLORS,
   TREND_ICON,
   CATEGORIES,
-} from "../data/statsData.jsx";
+} from "../../data/statsData.jsx";
 import {
   BarChart,
   Bar,
@@ -17,7 +17,8 @@ import {
   Cell,
   Legend,
 } from "recharts";
-import "../css/Stats.css";
+import "../../css/prepa-info/common.css";
+import "../../css/prepa-info/Stats.css";
 
 const CAT_CLASS = {
   Structures: "structures",

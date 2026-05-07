@@ -1,5 +1,6 @@
 import { useMemo, useState, useCallback } from "react";
-import "../css/ContactPage.css";
+import "../../css/prepa-info/common.css";
+import "../../css/prepa-info/ContactPage.css";
 
 /* ── tiny inline SVG icons ── */
 const Icon = {

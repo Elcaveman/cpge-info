@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
-import "../css/PythonCheatSheet.css";
-import { FONT, HEADING, CATS, CAT_COLOR, SECTIONS, NAV_ITEMS } from "../data/pythonCheatSheetData.jsx";
+import "../../css/prepa-info/common.css";
+import "../../css/prepa-info/PythonCheatSheet.css";
+import { FONT, HEADING, CATS, CAT_COLOR, SECTIONS, NAV_ITEMS } from "../../data/pythonCheatSheetData.jsx";
 
 function highlight(code) {
   // Escape HTML first to prevent injection, then apply syntax highlighting with a single regex pass.

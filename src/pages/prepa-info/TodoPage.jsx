@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
-import { ALL_ITEMS } from "../data/todoPageData";
-import "../css/TodoPage.css";
+import { ALL_ITEMS } from "../../data/todoPageData";
+import "../../css/prepa-info/common.css";
+import "../../css/prepa-info/TodoPage.css";
 
 
 const SEM_LABELS = { 0: "Annexe Python", 1: "Semestre 1", 2: "Semestre 2", 3: "Semestre 3", 4: "Semestre 4" };

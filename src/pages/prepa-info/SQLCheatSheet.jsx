@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
-import "../css/SQLCheatSheet.css";
-import { CATS, SECTIONS, NAV_ITEMS } from "../data/sqlCheatSheetData.jsx";
+import "../../css/prepa-info/common.css";
+import "../../css/prepa-info/SQLCheatSheet.css";
+import { CATS, SECTIONS, NAV_ITEMS } from "../../data/sqlCheatSheetData.jsx";
 
 export default function SQLCheatSheet() {
   const [activeCat, setActiveCat] = useState("all");
