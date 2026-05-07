@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { ALL_ITEMS } from "../data/data";
+import { ALL_ITEMS } from "../data/todoPageData";
 import "../css/TodoPage.css";
 
 

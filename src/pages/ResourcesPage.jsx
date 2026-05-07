@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { COURSES } from "../data/data";
+import { COURSES } from "../data/todoPageData";
 import "../css/ResourcesPage.css";
 
 // ─── FILE VIEWER MODAL ────────────────────────────────────────────────────────

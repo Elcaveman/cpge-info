@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
 import {TodoPage} from "./pages/TodoPage.jsx";
 import {ResourcesPage} from "./pages/ResourcesPage.jsx";
-import {COURSES, ALL_ITEMS} from "./data/data";
+import {COURSES, ALL_ITEMS} from "./data/todoPageData";
 import Stats from "./pages/Stats.jsx";
 import SQLCheatSheet from "./pages/SQLCheatSheet.jsx";
 import PythonCheatSheet from "./pages/PythonCheatSheet.jsx";
