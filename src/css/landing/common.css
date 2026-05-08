@@ -15,6 +15,7 @@
 /* ── Global resets ─────────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
+body { background: var(--odex-bg); color: var(--odex-text); font-family: 'Syne', sans-serif; overflow-x: hidden; }
 
 /* ── Scrollbar ─────────────────────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; }
@@ -72,42 +73,46 @@ html { scroll-behavior: smooth; }
 .nav-link-el.nav-link-cyan { color: var(--odex-cyan); }
 
 .pillar-card {
-  background: var(--odex-bg); padding: 40px 36px; border: 1px solid var(--odex-border);
+  background: var(--odex-bg); padding: 36px 28px; border: 1px solid var(--odex-border);
   position: relative; overflow: hidden; transition: border-color .3s, transform .3s;
 }
 .pillar-card:hover { border-color: rgba(0,212,255,0.22); transform: translateY(-3px); }
 .pillar-card:hover .pillar-glow-el { opacity: 1 !important; }
+.pillar-card:hover .pglow { opacity: 1 !important; }
 
 .math-row {
-  font-family: 'DM Mono', monospace; font-size: 13px; color: var(--odex-muted);
-  padding: 14px 20px; border: 1px solid var(--odex-border); border-radius: 4px;
+  font-family: 'DM Mono', monospace; font-size: 12px; color: var(--odex-muted);
+  padding: 12px 16px; border: 1px solid var(--odex-border); border-radius: 4px;
   transition: border-color .3s, color .3s; cursor: default;
+  overflow-x: auto;
 }
 .math-row:hover { border-color: rgba(0,212,255,0.35); color: var(--odex-text); }
 
-.step-row { display: flex; gap: 24px; align-items: flex-start; padding: 28px 0; border-bottom: 1px solid var(--odex-border); }
+.step-row { display: flex; gap: 20px; align-items: flex-start; padding: 22px 0; border-bottom: 1px solid var(--odex-border); }
 .step-row:last-child { border-bottom: none; }
 
 .btn-primary-el {
   font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700;
   letter-spacing: 2px; text-transform: uppercase; background: var(--odex-grad);
-  color: #fff; border: none; padding: 14px 32px; border-radius: 100px;
+  color: #fff; border: none; padding: 13px 28px; border-radius: 100px;
   cursor: pointer; transition: opacity .2s, transform .2s; text-decoration: none; display: inline-block;
+  white-space: nowrap;
 }
 .btn-primary-el:hover { opacity: .82; transform: translateY(-2px); }
 
 .btn-ghost-el {
   font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--odex-muted); padding: 14px 32px;
+  text-transform: uppercase; color: var(--odex-muted); padding: 13px 28px;
   border: 1px solid var(--odex-border); border-radius: 100px; cursor: pointer;
   transition: color .2s, border-color .2s; background: transparent; text-decoration: none; display: inline-block;
+  white-space: nowrap;
 }
 .btn-ghost-el:hover { color: var(--odex-text); border-color: rgba(255,255,255,0.2); }
 
 .cta-input-el {
-  flex: 1; background: var(--odex-surface); border: 1px solid var(--odex-border);
+  flex: 1; min-width: 0; background: var(--odex-surface); border: 1px solid var(--odex-border);
   color: var(--odex-text); font-family: 'DM Mono', monospace; font-size: 12px;
-  padding: 14px 20px; border-radius: 100px; outline: none; transition: border-color .2s;
+  padding: 13px 18px; border-radius: 100px; outline: none; transition: border-color .2s;
 }
 .cta-input-el::placeholder { color: var(--odex-muted); }
 .cta-input-el:focus { border-color: rgba(0,212,255,0.4); }
@@ -117,6 +122,30 @@ html { scroll-behavior: smooth; }
   text-transform: uppercase; color: var(--odex-muted); text-decoration: none; transition: color .2s;
 }
 .footer-link-el:hover { color: var(--odex-text); }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--odex-muted);
+  border-radius: 2px;
+  transition: all .3s;
+}
+
+@media (max-width: 900px) {
+  .nav-links-desktop { display: none !important; }
+  .hamburger { display: flex !important; }
+}
 
 /* ── Landing root ──────────────────────────────────────────────────────────── */
 .landing-root {
