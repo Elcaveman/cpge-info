@@ -52,7 +52,7 @@ export default function ContactPage({ links = {} }) {
     {
       icon: "🌐",
       name: "Site Groupe",
-      value: isGroupInternal ? "ODEX Morrocco" : links.group?.replace(/^https?:\/\//, "") || "site du groupe",
+      value: isGroupInternal ? "ODEX Tech" : links.group?.replace(/^https?:\/\//, "") || "site du groupe",
       badge: "GROUPE",
       badgeClass: "contact-badge--blue",
       href: links.group || "/",
@@ -105,7 +105,7 @@ export default function ContactPage({ links = {} }) {
       `De : ${clean(form.fname)} ${clean(form.lname)}\nEmail : ${clean(form.email)}\n\n${clean(form.message)}`
     );
 
-    const recipient = (links.email || "02.oudaoud@gmail.com").replace(/^mailto:/i, "").trim();
+    const recipient = (links.email || "odex@mailo.com").replace(/^mailto:/i, "").trim();
     window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
 
     setToast("sent");
