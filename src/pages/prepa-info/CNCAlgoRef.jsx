@@ -4,21 +4,35 @@ import "../../css/prepa-info/CNCAlgoRef.css";
 import { FONT, HEADING, CATS, CC, SECTIONS, NAV } from "../../data/cncAlgoRefData.jsx";
 
 function highlight(code) {
-  const esc = code.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-  // Single-pass: alternation ensures each token is consumed once,
-  // so later groups never corrupt spans inserted by earlier groups.
-  return esc.replace(
-    /(#[^\n]*|--[^\n]*)|(f?'[^']*'|f?"[^"]*")|\b(\d+\.?\d*)\b|\b(def|class|return|if|elif|else|for|while|in|not|and|or|break|continue|pass|import|from|as|with|yield|lambda|True|False|None|SELECT|FROM|WHERE|JOIN|LEFT|INNER|ON|GROUP|BY|ORDER|HAVING|CREATE|TABLE|INSERT|INTO|VALUES|PRIMARY|KEY|REFERENCES|NULL|TEXT|INTEGER|REAL|UPDATE|SET|DELETE|UNION|INTERSECT|EXCEPT|DISTINCT)\b|\b(print|len|range|append|sorted|max|min|sum|enumerate|zip|reversed|heapq|deque|lru_cache|Counter|type|isinstance)\b|\b(Noeud|Arbre|Pile|File)\b/g,
-    (m, cm, st, nu, kw, fn, tp) => {
-      if (cm !== undefined) return `<span class="cm">${m}</span>`;
-      if (st !== undefined) return `<span class="st">${m}</span>`;
-      if (nu !== undefined) return `<span class="nu">${m}</span>`;
-      if (kw !== undefined) return `<span class="kw">${m}</span>`;
-      if (fn !== undefined) return `<span class="fn">${m}</span>`;
-      if (tp !== undefined) return `<span class="tp">${m}</span>`;
-      return m;
+  const tokenRegex = /(#[^\n]*|--[^\n]*)|(f?'[^']*'|f?"[^"]*")|\b(\d+\.?\d*)\b|\b(def|class|return|if|elif|else|for|while|in|not|and|or|break|continue|pass|import|from|as|with|yield|lambda|True|False|None|SELECT|FROM|WHERE|JOIN|LEFT|INNER|ON|GROUP|BY|ORDER|HAVING|CREATE|TABLE|INSERT|INTO|VALUES|PRIMARY|KEY|REFERENCES|NULL|TEXT|INTEGER|REAL|UPDATE|SET|DELETE|UNION|INTERSECT|EXCEPT|DISTINCT)\b|\b(print|len|range|append|sorted|max|min|sum|enumerate|zip|reversed|heapq|deque|lru_cache|Counter|type|isinstance)\b|\b(Noeud|Arbre|Pile|File)\b/g;
+  const out = [];
+  let lastIndex = 0;
+  let match;
+
+  // Tokenize once and render with React nodes to avoid raw HTML injection.
+  while ((match = tokenRegex.exec(code)) !== null) {
+    if (match.index > lastIndex) {
+      out.push({ text: code.slice(lastIndex, match.index), cls: null });
     }
-  );
+
+    const [m, cm, st, nu, kw, fn, tp] = match;
+    let cls = null;
+    if (cm !== undefined) cls = "cm";
+    else if (st !== undefined) cls = "st";
+    else if (nu !== undefined) cls = "nu";
+    else if (kw !== undefined) cls = "kw";
+    else if (fn !== undefined) cls = "fn";
+    else if (tp !== undefined) cls = "tp";
+
+    out.push({ text: m, cls });
+    lastIndex = tokenRegex.lastIndex;
+  }
+
+  if (lastIndex < code.length) {
+    out.push({ text: code.slice(lastIndex), cls: null });
+  }
+
+  return out;
 }
 
 /* ─── FREQ STARS ──────────────────────────────────────────── */
@@ -61,9 +75,11 @@ function AlgoCard({ algo, color, idx }) {
         <div style={{padding:'12px 16px', display:'flex', flexDirection:'column', gap:8}}>
           {/* Code block */}
           <div className="code-block-wrapper">
-            <pre className="code-block"
-              dangerouslySetInnerHTML={{__html: highlight(algo.code)}}
-            />
+            <pre className="code-block">
+              {highlight(algo.code).map((t, i) => (
+                t.cls ? <span key={i} className={t.cls}>{t.text}</span> : <span key={i}>{t.text}</span>
+              ))}
+            </pre>
             <button
               onClick={copy}
               className={`copy-btn ${copied ? 'copied' : ''}`}

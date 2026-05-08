@@ -56,8 +56,9 @@ export function TodoPage({ checked, toggle, resetChecked }) {
       <div className="page">
         <div className="todo-header">
           <div className="header-top">
-            <div className="title">CPGE Informatique</div>
-            <div className="subtitle">MP · PC · PSI · PT — Programme 2021</div>
+            <div className="title">Checklist Programme Info</div>
+            <br />
+            <div className="subtitle">MP · PC · PSI · TSI — Programme 2025</div>
           </div>
           <div className="progress-bar-wrap">
             <div className="progress-row">

@@ -4,25 +4,35 @@ import "../../css/prepa-info/PythonCheatSheet.css";
 import { FONT, HEADING, CATS, CAT_COLOR, SECTIONS, NAV_ITEMS } from "../../data/pythonCheatSheetData.jsx";
 
 function highlight(code) {
-  // Escape HTML first to prevent injection, then apply syntax highlighting with a single regex pass.
-  const esc = code
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
+  const tokenRegex = /(#.*)|(f?'[^']*'|f?"[^"]*")|\b(\d+\.?\d*)\b|\b(import|from|as|def|class|return|if|elif|else|for|while|in|not|and|or|break|continue|pass|try|except|finally|raise|with|lambda|True|False|None|self)\b|\b(print|input|len|type|int|float|str|list|dict|set|tuple|range|enumerate|map|filter|sorted|min|max|sum|abs|round|open|isinstance|staticmethod|classmethod|super|zip|any|all|hasattr|getattr|setattr)\b|\b(np|px|go|json|csv|os|math|sqlite3|conn|cur|fig|df)\b/g;
+  const out = [];
+  let lastIndex = 0;
+  let match;
 
-  // Single-pass alternation prevents matching inside injected span markup.
-  return esc.replace(
-    /(#.*)|(f?'[^']*'|f?"[^"]*")|\b(\d+\.?\d*)\b|\b(import|from|as|def|class|return|if|elif|else|for|while|in|not|and|or|break|continue|pass|try|except|finally|raise|with|lambda|True|False|None|self)\b|\b(print|input|len|type|int|float|str|list|dict|set|tuple|range|enumerate|map|filter|sorted|min|max|sum|abs|round|open|isinstance|staticmethod|classmethod|super|zip|any|all|hasattr|getattr|setattr)\b|\b(np|px|go|json|csv|os|math|sqlite3|conn|cur|fig|df)\b/g,
-    (m, cm, st, nu, kw, fn, md) => {
-      if (cm !== undefined) return `<span class="py-cm">${m}</span>`;
-      if (st !== undefined) return `<span class="py-str">${m}</span>`;
-      if (nu !== undefined) return `<span class="py-num">${m}</span>`;
-      if (kw !== undefined) return `<span class="py-kw">${m}</span>`;
-      if (fn !== undefined) return `<span class="py-fn">${m}</span>`;
-      if (md !== undefined) return `<span class="py-mod">${m}</span>`;
-      return m;
+  // Tokenize once and render as React spans to avoid raw HTML injection.
+  while ((match = tokenRegex.exec(code)) !== null) {
+    if (match.index > lastIndex) {
+      out.push({ text: code.slice(lastIndex, match.index), cls: null });
     }
-  );
+
+    const [m, cm, st, nu, kw, fn, md] = match;
+    let cls = null;
+    if (cm !== undefined) cls = "py-cm";
+    else if (st !== undefined) cls = "py-str";
+    else if (nu !== undefined) cls = "py-num";
+    else if (kw !== undefined) cls = "py-kw";
+    else if (fn !== undefined) cls = "py-fn";
+    else if (md !== undefined) cls = "py-mod";
+
+    out.push({ text: m, cls });
+    lastIndex = tokenRegex.lastIndex;
+  }
+
+  if (lastIndex < code.length) {
+    out.push({ text: code.slice(lastIndex), cls: null });
+  }
+
+  return out;
 }
 
 export default function PythonCheatSheet() {
@@ -162,9 +172,11 @@ export default function PythonCheatSheet() {
                             title="Click to copy"
                           >
                             <td className="cmd-cell-code">
-                              <span
-                                dangerouslySetInnerHTML={{ __html: highlight(c.code) }}
-                              />
+                              <span>
+                                {highlight(c.code).map((t, idx) => (
+                                  t.cls ? <span key={idx} className={t.cls}>{t.text}</span> : <span key={idx}>{t.text}</span>
+                                ))}
+                              </span>
                               <span className="copy-badge">copied!</span>
                             </td>
                             <td className="cmd-cell-desc">{c.desc}</td>

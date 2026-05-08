@@ -36,6 +36,7 @@ export default function ContactPage({ links = {} }) {
   const [errors, setErrors]   = useState(EMPTY_ERRORS);
   const [toast, setToast]     = useState(null); // null | "sent" | { field: "copied", text }
   const [copied, setCopied]   = useState(null); // which row was just copied
+  const isGroupInternal = (links.group || "/").startsWith("/");
 
   /* ── derived link list ── */
   const contactLinks = useMemo(() => [
@@ -51,11 +52,11 @@ export default function ContactPage({ links = {} }) {
     {
       icon: "🌐",
       name: "Site Groupe",
-      value: links.group?.replace(/^https?:\/\//, "") || "site du groupe",
+      value: isGroupInternal ? "Accueil" : links.group?.replace(/^https?:\/\//, "") || "site du groupe",
       badge: "GROUPE",
       badgeClass: "contact-badge--blue",
-      href: links.group || "#",
-      isExternal: true,
+      href: links.group || "/",
+      isExternal: !isGroupInternal,
     },
     {
       icon: "📧",
@@ -66,8 +67,9 @@ export default function ContactPage({ links = {} }) {
       href: links.email || "mailto:contact@example.com",
       isExternal: false,
     },
-  ], [links.github, links.group, links.email]);
+  ], [ links.email, links.github, links.group]);
 
+  console.log("ContactPage rendered with links:", contactLinks);
   /* ── copy-to-clipboard on row ── */
   const handleCopy = useCallback((e, name, text) => {
     e.preventDefault();
@@ -103,10 +105,8 @@ export default function ContactPage({ links = {} }) {
       `De : ${clean(form.fname)} ${clean(form.lname)}\nEmail : ${clean(form.email)}\n\n${clean(form.message)}`
     );
 
-    const link = document.createElement("a");
-    link.href = `mailto:${links.email || "02.oudaoud@gmail.com"}?subject=${subject}&body=${body}`;
-    link.rel = "noopener noreferrer";
-    link.click();
+    const recipient = (links.email || "02.oudaoud@gmail.com").replace(/^mailto:/i, "").trim();
+    window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
 
     setToast("sent");
     setTimeout(() => setToast(null), 2500);
