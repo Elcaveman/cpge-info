@@ -61,15 +61,14 @@ export default function ContactPage({ links = {} }) {
     {
       icon: "📧",
       name: "Email",
-      value: (links.email || "mailto:contact@example.com").replace(/^mailto:/, ""),
+      value: (links.email || "mailto:odex@mailo.com").replace(/^mailto:/, ""),
       badge: "MAIL",
       badgeClass: "contact-badge--orange",
-      href: links.email || "mailto:contact@example.com",
-      isExternal: false,
+      href: links.email || "mailto:odex@mailo.com",
+      isExternal: true,
     },
   ], [ links.email, links.github, links.group]);
 
-  console.log("ContactPage rendered with links:", contactLinks);
   /* ── copy-to-clipboard on row ── */
   const handleCopy = useCallback((e, name, text) => {
     e.preventDefault();
@@ -144,7 +143,7 @@ export default function ContactPage({ links = {} }) {
                 key={name}
                 className={`contact-row${copied === name ? " contact-row--copied" : ""}`}
                 href={href}
-                target={isExternal ? "_blank" : undefined}
+                target={isExternal && !href?.startsWith("mailto:") ? "_blank" : undefined}
                 rel="noopener noreferrer"
                 title={`Ouvrir ${name}`}
               >

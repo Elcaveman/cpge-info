@@ -398,7 +398,7 @@ function Footer() {
         <span className="footer-logo grad-text">ODEX</span>
         <span className="footer-copy">Association Loi 1901 · Du Maroc vers le Monde · 2025</span>
         <div className="footer-links">
-          {[["Instagram", "#"], ["LinkedIn", "#"], ["contact@odex.fr", "#"]].map(([l, h]) => (
+          {[["Instagram", "#"], ["LinkedIn", "#"], ["odex@mailo.com", "#"]].map(([l, h]) => (
             <a key={l} href={h} className="footer-link-el">{l}</a>
           ))}
         </div>
