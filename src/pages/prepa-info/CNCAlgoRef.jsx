@@ -1,7 +1,8 @@
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useMemo } from "react";
 import "../../css/prepa-info/common.css";
 import "../../css/prepa-info/CNCAlgoRef.css";
 import { FONT, HEADING, CATS, CC, SECTIONS, NAV } from "../../data/cncAlgoRefData.jsx";
+import { useMediaQuery } from "../../components/useMediaQuery.jsx";
 
 function highlight(code) {
   const tokenRegex = /(#[^\n]*|--[^\n]*)|(f?'[^']*'|f?"[^"]*")|\b(\d+\.?\d*)\b|\b(def|class|return|if|elif|else|for|while|in|not|and|or|break|continue|pass|import|from|as|with|yield|lambda|True|False|None|SELECT|FROM|WHERE|JOIN|LEFT|INNER|ON|GROUP|BY|ORDER|HAVING|CREATE|TABLE|INSERT|INTO|VALUES|PRIMARY|KEY|REFERENCES|NULL|TEXT|INTEGER|REAL|UPDATE|SET|DELETE|UNION|INTERSECT|EXCEPT|DISTINCT)\b|\b(print|len|range|append|sorted|max|min|sum|enumerate|zip|reversed|heapq|deque|lru_cache|Counter|type|isinstance)\b|\b(Noeud|Arbre|Pile|File)\b/g;
@@ -99,6 +100,7 @@ function AlgoCard({ algo, color, idx }) {
 
 /* ─── APP ─────────────────────────────────────────────────── */
 export default function CNCAlgoRef() {
+  const isMobile = useMediaQuery("(max-width: 900px)");
   const [activeCat, setActiveCat] = useState("all");
   const [search, setSearch]       = useState("");
   const [activeNav, setActiveNav] = useState(null);
@@ -135,7 +137,7 @@ export default function CNCAlgoRef() {
       <div className="layout">
 
         {/* SIDEBAR */}
-        <aside className="sidebar">
+        {!isMobile && <aside className="sidebar">
           <div className="logo">
             <div className="logo-t">CNC Algo</div>
             <div className="logo-s">CPGE · MP · PSI · TSI · Référence</div>
@@ -160,7 +162,7 @@ export default function CNCAlgoRef() {
               <div className="pb-fill" style={{width:`${Math.round(shown/total*100)}%`}}/>
             </div>
           </div>
-        </aside>
+        </aside>}
 
         {/* MAIN */}
         <div className="main">

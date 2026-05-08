@@ -2,8 +2,10 @@ import { useState, useMemo } from "react";
 import "../../css/prepa-info/common.css";
 import "../../css/prepa-info/SQLCheatSheet.css";
 import { CATS, SECTIONS, NAV_ITEMS } from "../../data/sqlCheatSheetData.jsx";
+import { useMediaQuery } from "../../components/useMediaQuery.jsx";
 
 export default function SQLCheatSheet() {
+  const isMobile = useMediaQuery("(max-width: 900px)");
   const [activeCat, setActiveCat] = useState("all");
   const [search, setSearch] = useState("");
   const [copied, setCopied] = useState(null);
@@ -45,9 +47,9 @@ export default function SQLCheatSheet() {
 
   return (
     <div className="sql-cheat">
-      <div className="layout">
+      <div className="layout">  
         {/* SIDEBAR */}
-        <aside className="sidebar">
+        {!isMobile && <aside className="sidebar">
           <div className="sidebar-logo">
             <div className="logo-title">SQL Ref</div>
             <div className="logo-sub">SELECT · JOIN · GROUP BY</div>
@@ -69,7 +71,7 @@ export default function SQLCheatSheet() {
             VISIBLE · {shown}/{total}
             <progress className="progress-meter" max={100} value={progress} />
           </div>
-        </aside>
+        </aside>}
 
         {/* MAIN */}
         <div className="main">

@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import "../../css/prepa-info/common.css";
 import "../../css/prepa-info/PythonCheatSheet.css";
 import { FONT, HEADING, CATS, CAT_COLOR, SECTIONS, NAV_ITEMS } from "../../data/pythonCheatSheetData.jsx";
+import { useMediaQuery } from "../../components/useMediaQuery.jsx";
 
 function highlight(code) {
   const tokenRegex = /(#.*)|(f?'[^']*'|f?"[^"]*")|\b(\d+\.?\d*)\b|\b(import|from|as|def|class|return|if|elif|else|for|while|in|not|and|or|break|continue|pass|try|except|finally|raise|with|lambda|True|False|None|self)\b|\b(print|input|len|type|int|float|str|list|dict|set|tuple|range|enumerate|map|filter|sorted|min|max|sum|abs|round|open|isinstance|staticmethod|classmethod|super|zip|any|all|hasattr|getattr|setattr)\b|\b(np|px|go|json|csv|os|math|sqlite3|conn|cur|fig|df)\b/g;
@@ -36,6 +37,7 @@ function highlight(code) {
 }
 
 export default function PythonCheatSheet() {
+  const isMobile = useMediaQuery("(max-width: 900px)");
   const [activeCat, setActiveCat]   = useState("all");
   const [search,    setSearch]      = useState("");
   const [copied,    setCopied]      = useState(null);
@@ -81,7 +83,7 @@ export default function PythonCheatSheet() {
       <div className="layout">
 
         {/* ── SIDEBAR ── */}
-        <aside className="sidebar">
+        {!isMobile && <aside className="sidebar">
           <div className="sidebar-logo">
             <div className="logo-title">Py Ref</div>
             <div className="logo-sub">PYTHON · NUMPY · PLOTLY</div>
@@ -106,7 +108,7 @@ export default function PythonCheatSheet() {
               <div className="progress-bar-fill" style={{ width: `${progress}%` }} />
             </div>
           </div>
-        </aside>
+        </aside>}
 
         {/* ── MAIN ── */}
         <div className="main">

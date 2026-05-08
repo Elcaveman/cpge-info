@@ -102,13 +102,11 @@ export default function PrepaApp({ page, navigateTo }) {
             )}
             {page === "stats" && (
               <>
-                <div className="page-title">Statistiques des concours</div>
                 <Stats />
               </>
             )}
             {page === "sqlcheatsheet" && (
               <>
-                <div className="page-title">SQL Commands</div>
                 <SQLCheatSheet />
               </>
             )}
