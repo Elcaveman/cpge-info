@@ -41,7 +41,6 @@ function Nav() {
   const links = [
     { label: "À propos", href: "#about" },
     { label: "Programmes", href: "#programs" },
-    { label: "Prépa", href: "/prepa-info" },
     { label: "Olympiades", href: "#olympiad" },
     { label: "Contact", href: "#contact" },
   ];
@@ -65,6 +64,9 @@ function Nav() {
               <a href={link.href} className="nav-link-el">{link.label}</a>
             </li>
           ))}
+          <li>
+            <a href="/prepa-info/" className="nav-link-el nav-link-cyan">Prépa Info ↗</a>
+          </li>
         </ul>
 
         <div style={{ display:"flex", alignItems:"center", gap:12 }}>
@@ -88,6 +90,8 @@ function Nav() {
             <a key={link.label} href={link.href} className="nav-link-el" style={{ fontSize:20, letterSpacing:3 }}
               onClick={() => setMenuOpen(false)}>{link.label}</a>
           ))}
+          <a href="/prepa-info/" className="nav-link-el nav-link-cyan" style={{ fontSize:20, letterSpacing:3 }}
+            onClick={() => setMenuOpen(false)}>Prépa Info ↗</a>
           <a href="#contact" className="btn-primary-el" onClick={() => setMenuOpen(false)}>Rejoindre</a>
         </div>
       )}
