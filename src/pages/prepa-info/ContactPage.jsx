@@ -52,7 +52,7 @@ export default function ContactPage({ links = {} }) {
     {
       icon: "🌐",
       name: "Site Groupe",
-      value: isGroupInternal ? "Accueil" : links.group?.replace(/^https?:\/\//, "") || "site du groupe",
+      value: isGroupInternal ? "ODEX Morrocco" : links.group?.replace(/^https?:\/\//, "") || "site du groupe",
       badge: "GROUPE",
       badgeClass: "contact-badge--blue",
       href: links.group || "/",

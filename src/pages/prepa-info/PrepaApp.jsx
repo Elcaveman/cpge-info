@@ -15,7 +15,7 @@ export default function PrepaApp({ page, navigateTo }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const CONTACT_LINKS = {
     github: "https://github.com/Elcaveman/cpge-info",
-    group: "https://github.com/Elcaveman",
+    group: "/",
     email: "mailto:02.oudaoud@gmail.com",
   };
 

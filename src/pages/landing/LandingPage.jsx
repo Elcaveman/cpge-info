@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import "../../css/landing/common.css";
 
 function useReveal() {
   const ref = useRef(null);
