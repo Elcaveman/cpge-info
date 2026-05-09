@@ -1,6 +1,4 @@
 import { useState, useMemo } from "react";
-import "../../css/prepa-info/common.css";
-import "../../css/prepa-info/SQLCheatSheet.css";
 import { CATS, SECTIONS, NAV_ITEMS } from "../../data/sqlCheatSheetData.jsx";
 import { useMediaQuery } from "../../components/useMediaQuery.jsx";
 

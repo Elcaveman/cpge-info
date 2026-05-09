@@ -1,6 +1,4 @@
 import { useState, useMemo } from "react";
-import "../../css/prepa-info/common.css";
-import "../../css/prepa-info/CNCAlgoRef.css";
 import { FONT, HEADING, CATS, CC, SECTIONS, NAV } from "../../data/cncAlgoRefData.jsx";
 import { useMediaQuery } from "../../components/useMediaQuery.jsx";
 

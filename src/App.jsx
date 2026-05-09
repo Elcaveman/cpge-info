@@ -1,7 +1,7 @@
 import { lazy, Suspense, useState, useEffect } from "react";
 
-const LandingApp = lazy(() => import("./pages/landing/LandingApp.jsx"));
-const PrepaApp = lazy(() => import("./pages/prepa-info/PrepaApp.jsx"));
+const LandingApp = lazy(() => import("./views/landing/LandingApp.jsx"));
+const PrepaApp = lazy(() => import("./views/prepa-info/PrepaApp.jsx"));
 
 // ─── URL ROUTING ─────────────────────────────────────────────────────────────
 const PAGE_TO_PATH = {

@@ -1,6 +1,4 @@
 import { useState } from "react";
-import "../../css/prepa-info/common.css";
-import "../../css/prepa-info/ConcoursPage.css";
 import { CONCOURS, SOURCES } from "../../data/concoursData.jsx";
 
 /* ── Link helpers ── */

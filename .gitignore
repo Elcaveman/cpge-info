@@ -12,6 +12,13 @@ dist
 dist-ssr
 *.local
 
+# Next.js build output
+.next
+.vercel
+
+# Cloudflare / Wrangler
+.wrangler
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

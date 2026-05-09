@@ -1,4 +1,5 @@
-import "../../css/landing/common.css";
+"use client";
+
 import LandingPage from "./LandingPage.jsx";
 
 export default function LandingApp() {

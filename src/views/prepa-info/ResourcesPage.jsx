@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { COURSES } from "../../data/todoPageData";
-import "../../css/prepa-info/common.css";
-import "../../css/prepa-info/ResourcesPage.css";
 
 // ─── FILE VIEWER MODAL ────────────────────────────────────────────────────────
 function FileViewer({ file, onClose }) {

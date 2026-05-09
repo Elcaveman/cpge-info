@@ -1,17 +1,21 @@
-import { useState, useEffect } from "react";
-import { TodoPage } from "./TodoPage.jsx";
-import { ResourcesPage } from "./ResourcesPage.jsx";
-import { ALL_ITEMS } from "../../data/todoPageData";
-import Stats from "./Stats.jsx";
-import SQLCheatSheet from "./SQLCheatSheet.jsx";
-import PythonCheatSheet from "./PythonCheatSheet.jsx";
-import CNCAlgoRef from "./CNCAlgoRef.jsx";
-import ConcoursPage from "./ConcoursPage.jsx";
-import ContactPage from "./ContactPage.jsx";
-import "../../css/prepa-info/common.css";
-import "../../css/prepa-info/AppLayout.css";
+"use client";
 
-export default function PrepaApp({ page, navigateTo }) {
+import { useState, useEffect, lazy, Suspense } from "react";
+import { useRouter } from "next/navigation";
+import { ALL_ITEMS } from "../../data/todoPageData";
+
+// Lazy-load each sub-page so only the active page's code is downloaded
+const TodoPage      = lazy(() => import("./TodoPage.jsx").then(m => ({ default: m.TodoPage })));
+const ResourcesPage = lazy(() => import("./ResourcesPage.jsx").then(m => ({ default: m.ResourcesPage })));
+const Stats         = lazy(() => import("./Stats.jsx"));
+const SQLCheatSheet = lazy(() => import("./SQLCheatSheet.jsx"));
+const PythonCheatSheet = lazy(() => import("./PythonCheatSheet.jsx"));
+const CNCAlgoRef    = lazy(() => import("./CNCAlgoRef.jsx"));
+const ConcoursPage  = lazy(() => import("./ConcoursPage.jsx"));
+const ContactPage   = lazy(() => import("./ContactPage.jsx"));
+
+export default function PrepaApp({ page }) {
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const CONTACT_LINKS = {
     github: "https://github.com/Elcaveman/cpge-info",
@@ -53,6 +57,17 @@ export default function PrepaApp({ page, navigateTo }) {
     { id: "contact", label: "Contact", icon: "📬" },
   ];
 
+  const PAGE_TO_PATH = {
+    todo: "/prepa-info",
+    resources: "/prepa-info/resources",
+    stats: "/prepa-info/stats",
+    sqlcheatsheet: "/prepa-info/sql",
+    python: "/prepa-info/python",
+    cnc: "/prepa-info/cnc",
+    concours: "/prepa-info/concours",
+    contact: "/prepa-info/contact",
+  };
+
   return (
     <div className="prepa-root">
       <div className="shell">
@@ -73,7 +88,7 @@ export default function PrepaApp({ page, navigateTo }) {
                 key={n.id}
                 className={`nav-btn ${page === n.id ? "nav-btn--active" : ""}`}
                 onClick={() => {
-                  navigateTo(n.id);
+                  router.push(PAGE_TO_PATH[n.id] ?? "/prepa-info");
                   setMenuOpen(false);
                 }}
               >
@@ -93,6 +108,7 @@ export default function PrepaApp({ page, navigateTo }) {
 
         <main className="main">
           <div className="page-inner">
+            <Suspense fallback={<div style={{ padding: "40px 32px", color: "#475569", fontFamily: "'JetBrains Mono', monospace", fontSize: 12 }}>Chargement…</div>}>
             {page === "todo" && <TodoPage checked={checked} toggle={toggle} resetChecked={resetChecked} />}
             {page === "resources" && (
               <>
@@ -119,6 +135,7 @@ export default function PrepaApp({ page, navigateTo }) {
               </>
             )}
             {page === "contact" && <ContactPage links={CONTACT_LINKS} />}
+            </Suspense>
           </div>
         </main>
       </div>

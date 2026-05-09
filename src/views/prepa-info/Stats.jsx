@@ -17,8 +17,6 @@ import {
   Cell,
   Legend,
 } from "recharts";
-import "../../css/prepa-info/common.css";
-import "../../css/prepa-info/Stats.css";
 
 const CAT_CLASS = {
   Structures: "structures",

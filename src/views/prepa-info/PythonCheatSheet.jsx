@@ -1,6 +1,4 @@
 import { useState, useMemo } from "react";
-import "../../css/prepa-info/common.css";
-import "../../css/prepa-info/PythonCheatSheet.css";
 import { FONT, HEADING, CATS, CAT_COLOR, SECTIONS, NAV_ITEMS } from "../../data/pythonCheatSheetData.jsx";
 import { useMediaQuery } from "../../components/useMediaQuery.jsx";
 
