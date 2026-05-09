@@ -1,20 +1,6 @@
 import PrepaApp from "../../../src/views/prepa-info/PrepaApp.jsx";
 
-// All known slug values — Next will prerender each at build time so Cloudflare
-// serves them as static HTML files from CDN edge cache instead of running a
-// Worker on every request.
-export function generateStaticParams() {
-  return [
-    { slug: [] },
-    { slug: ["resources"] },
-    { slug: ["stats"] },
-    { slug: ["sql"] },
-    { slug: ["python"] },
-    { slug: ["cnc"] },
-    { slug: ["concours"] },
-    { slug: ["contact"] },
-  ];
-}
+export const runtime = "edge";
 
 const PATH_TO_PAGE = {
   "": "todo",
