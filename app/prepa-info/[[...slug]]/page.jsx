@@ -1,7 +1,5 @@
 import PrepaApp from "../../../src/views/prepa-info/PrepaApp.jsx";
 
-export const runtime = "edge";
-
 const PATH_TO_PAGE = {
   "": "todo",
   resources: "resources",
