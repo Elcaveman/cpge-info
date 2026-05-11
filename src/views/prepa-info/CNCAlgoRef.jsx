@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useState, useCallback } from "react";
 import { FONT, HEADING, CATS, CC, SECTIONS, NAV } from "../../data/cncAlgoRefData.jsx";
 import { useMediaQuery } from "../../components/useMediaQuery.jsx";
 import { MQ } from "../../lib/constants.js";
