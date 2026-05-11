@@ -1,5 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import { useBreakpoint } from "../../components/useBreakpoint.jsx";
+import { useMediaQuery } from "../../components/useMediaQuery.jsx";
+
+function useBreakpoint() {
+  const isMobile = useMediaQuery("(max-width: 640px)");
+  const isTablet = useMediaQuery("(max-width: 900px)");
+  return { isMobile, isTablet };
+}
 
 const C = {
   cyan: "#00D4FF", purple: "#9B40FF",
