@@ -8,6 +8,7 @@ const PATH_TO_PAGE = {
   python: "python",
   cnc: "cnc",
   concours: "concours",
+  "sujet-editor": "sujeteditor",
   contact: "contact",
 };
 

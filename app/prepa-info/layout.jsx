@@ -8,6 +8,7 @@ import "../../src/css/prepa-info/PythonCheatSheet.css";
 import "../../src/css/prepa-info/CNCAlgoRef.css";
 import "../../src/css/prepa-info/ConcoursPage.css";
 import "../../src/css/prepa-info/ContactPage.css";
+import "../../src/css/prepa-info/SujetEditorPage.css";
 
 export default function PrepaLayout({ children }) {
   return children;

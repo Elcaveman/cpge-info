@@ -17,6 +17,7 @@ const routes = [
   "/prepa-info/python",
   "/prepa-info/cnc",
   "/prepa-info/concours",
+  "/prepa-info/sujet-editor",
   "/prepa-info/contact",
 ];
 

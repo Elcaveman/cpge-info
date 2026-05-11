@@ -13,6 +13,7 @@ const PythonCheatSheet = lazy(() => import("./PythonCheatSheet.jsx"));
 const CNCAlgoRef    = lazy(() => import("./CNCAlgoRef.jsx"));
 const ConcoursPage  = lazy(() => import("./ConcoursPage.jsx"));
 const ContactPage   = lazy(() => import("./ContactPage.jsx"));
+const SujetEditorPage = lazy(() => import("./SujetEditorPage.jsx"));
 
 export default function PrepaApp({ page }) {
   const router = useRouter();
@@ -54,6 +55,7 @@ export default function PrepaApp({ page }) {
     { id: "python", label: "Python Ref", icon: "🐍" },
     { id: "cnc", label: "Algo CNC", icon: "🧮" },
     { id: "concours", label: "Concours", icon: "🏆" },
+    { id: "sujeteditor", label: "Éditeur sujet", icon: "🧾" },
     { id: "contact", label: "Contact", icon: "📬" },
   ];
 
@@ -65,6 +67,7 @@ export default function PrepaApp({ page }) {
     python: "/prepa-info/python",
     cnc: "/prepa-info/cnc",
     concours: "/prepa-info/concours",
+    sujeteditor: "/prepa-info/sujet-editor",
     contact: "/prepa-info/contact",
   };
 
@@ -134,6 +137,7 @@ export default function PrepaApp({ page }) {
                 <ConcoursPage />
               </>
             )}
+            {page === "sujeteditor" && <SujetEditorPage />}
             {page === "contact" && <ContactPage links={CONTACT_LINKS} />}
             </Suspense>
           </div>
