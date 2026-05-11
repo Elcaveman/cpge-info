@@ -1,23 +1,4 @@
-.todo-progress-meter {
-  width: 100%;
-  height: 4px;
-  border: 0;
-  border-radius: 4px;
-  overflow: hidden;
-  appearance: none;
-}
-
-.todo-progress-meter::-webkit-progress-bar {
-  background: #1e1e2e;
-}
-
-.todo-progress-meter::-webkit-progress-value {
-  background: linear-gradient(90deg, #34d399, #60a5fa);
-}
-
-.todo-progress-meter::-moz-progress-bar {
-  background: linear-gradient(90deg, #34d399, #60a5fa);
-}
+@import './shared-components.css';
 
 .stat-num--done { color: #34d399; }
 .stat-num--remaining { color: #60a5fa; }

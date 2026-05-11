@@ -1,0 +1,306 @@
+/* Shared styles for SQLCheatSheet, PythonCheatSheet, and CNCAlgoRef */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap');
+
+/* ─── LAYOUT ────────────────────────────────────────────────────────────── */
+.sql-cheat .layout,
+.python-cheat .layout,
+.cnc-algo-ref .layout { display: flex; }
+
+.sql-cheat .main,
+.python-cheat .main,
+.cnc-algo-ref .main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── SIDEBAR ───────────────────────────────────────────────────────────── */
+.sql-cheat .sidebar,
+.python-cheat .sidebar,
+.cnc-algo-ref .sidebar {
+  width: 200px;
+  min-width: 200px;
+  background: #111114;
+  border-right: 1px solid #1e1e26;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.sql-cheat .sidebar-logo,
+.python-cheat .sidebar-logo,
+.cnc-algo-ref .logo {
+  padding: 18px 18px 12px;
+  border-bottom: 1px solid #1e1e26;
+}
+
+.sql-cheat .sidebar-logo .logo-title,
+.python-cheat .logo-title,
+.cnc-algo-ref .logo-t {
+  font-family: 'Rajdhani', 'Chakra Petch', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.sql-cheat .sidebar-logo .logo-sub,
+.python-cheat .logo-sub,
+.cnc-algo-ref .logo-s {
+  font-size: 9.5px;
+  color: #4b5563;
+  margin-top: 3px;
+  letter-spacing: 0.15em;
+}
+
+.sql-cheat .sidebar-nav,
+.python-cheat .sidebar-nav,
+.cnc-algo-ref .sidebar-nav {
+  flex: 1;
+  padding: 12px 0;
+  overflow-y: auto;
+}
+
+/* Python and CNC nav items are identical; SQL has slightly different sizing and stays in its own file */
+.python-cheat .nav-item,
+.cnc-algo-ref .ni {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 16px;
+  font-size: 11.5px;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.15s;
+  border-left: 2px solid transparent;
+  user-select: none;
+}
+
+.python-cheat .nav-item:hover,
+.cnc-algo-ref .ni:hover {
+  color: #e2e8f0;
+  background: #16161a;
+}
+
+.python-cheat .nav-item.active,
+.cnc-algo-ref .ni.active {
+  color: #fff;
+  background: #16161a;
+  border-left-color: var(--cat-color, #fff);
+}
+
+.python-cheat .nav-icon,
+.cnc-algo-ref .ni-icon {
+  width: 16px;
+  text-align: center;
+  flex-shrink: 0;
+  font-size: 13px;
+}
+
+.python-cheat .nav-dot,
+.cnc-algo-ref .ni-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-left: auto;
+  flex-shrink: 0;
+  background: var(--cat-color, #fff);
+}
+
+.python-cheat .sidebar-footer,
+.cnc-algo-ref .sfooter {
+  padding: 12px 16px;
+  border-top: 1px solid #1e1e26;
+  font-size: 10px;
+  color: #374151;
+  letter-spacing: 0.05em;
+}
+
+/* ─── PROGRESS BAR (div-based — Python & CNC) ────────────────────────────── */
+.python-cheat .progress-bar-bg,
+.cnc-algo-ref .pb-bg {
+  height: 2px;
+  background: #1e1e26;
+  margin-top: 6px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.python-cheat .progress-bar-fill,
+.cnc-algo-ref .pb-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4ade80, #f472b6, #60a5fa, #facc15, #c084fc);
+  border-radius: 2px;
+  transition: width 0.5s;
+}
+
+/* ─── TOPBAR ────────────────────────────────────────────────────────────── */
+.sql-cheat .topbar,
+.python-cheat .topbar,
+.cnc-algo-ref .topbar {
+  border-bottom: 1px solid #1e1e26;
+  background: #111114;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Topbar padding differs per page; each file specifies its own */
+.python-cheat .topbar,
+.cnc-algo-ref .topbar { padding: 14px 32px; }
+
+.sql-cheat .topbar-title,
+.python-cheat .topbar-title,
+.cnc-algo-ref .topbar-t {
+  font-family: 'Rajdhani', 'Chakra Petch', sans-serif;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+
+/* ─── SEARCH INPUT ──────────────────────────────────────────────────────── */
+.sql-cheat .search-input,
+.python-cheat .search-input,
+.cnc-algo-ref .search-input {
+  background: #1a1a20;
+  border: 1px solid #2a2a35;
+  border-radius: 6px;
+  color: #e2e8f0;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 12px;
+  padding: 7px 14px;
+  outline: none;
+  transition: border-color 0.15s;
+  /* width is page-specific */
+}
+
+.sql-cheat .search-input::placeholder,
+.python-cheat .search-input::placeholder,
+.cnc-algo-ref .search-input::placeholder { color: #4b5563; }
+
+.sql-cheat .search-input:focus,
+.python-cheat .search-input:focus,
+.cnc-algo-ref .search-input:focus { border-color: #4b5563; }
+
+/* ─── FILTER BAR ────────────────────────────────────────────────────────── */
+/* Python and CNC filter-bar are identical */
+.python-cheat .filter-bar,
+.cnc-algo-ref .filter-bar {
+  background: #111114;
+  border: 1px solid #1e1e26;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sql-cheat .filter-row,
+.python-cheat .filter-row,
+.cnc-algo-ref .filter-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* .filter-label in SQL/Python, .flabel in CNC */
+.sql-cheat .filter-label,
+.python-cheat .filter-label,
+.cnc-algo-ref .flabel {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: #4b5563;
+  width: 70px;
+  flex-shrink: 0;
+}
+
+/* ─── PILLS ─────────────────────────────────────────────────────────────── */
+/* Python and CNC pills are identical; SQL has slightly larger padding and stays in its own file */
+.python-cheat .pill,
+.cnc-algo-ref .pill {
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid #2a2a35;
+  background: transparent;
+  color: #9ca3af;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  transition: all 0.15s;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.python-cheat .pill:hover,
+.cnc-algo-ref .pill:hover {
+  border-color: #4b5563;
+  color: #e2e8f0;
+}
+
+.python-cheat .pill.active,
+.cnc-algo-ref .pill.active {
+  color: #0d0d0f;
+  border-color: transparent;
+  font-weight: 600;
+  background: var(--pill-color, #fff);
+}
+
+/* ─── SECTION HEADER ────────────────────────────────────────────────────── */
+.python-cheat .section-header,
+.cnc-algo-ref .sec-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  margin-top: 24px;
+}
+
+.python-cheat .section-color-bar,
+.cnc-algo-ref .sec-bar {
+  width: 3px;
+  height: 18px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  background: var(--section-color, #fff);
+}
+
+.python-cheat .section-title-text,
+.cnc-algo-ref .sec-title {
+  font-family: 'Rajdhani', 'Chakra Petch', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.sql-cheat .section-count,
+.python-cheat .section-count,
+.cnc-algo-ref .sec-count {
+  background: #1a1a20;
+  border: 1px solid #2a2a35;
+  border-radius: 10px;
+  padding: 2px 9px;
+  font-size: 10px;
+  color: #4b5563;
+  margin-left: auto;
+}
+
+/* ─── NO-RESULTS ────────────────────────────────────────────────────────── */
+.sql-cheat .no-results,
+.python-cheat .no-results,
+.cnc-algo-ref .no-res {
+  padding: 48px;
+  text-align: center;
+  color: #374151;
+  font-size: 13px;
+}
+
+/* ─── SCROLLBAR ─────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-thumb { background: #2a2a35; border-radius: 2px; }

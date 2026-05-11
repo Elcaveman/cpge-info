@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap');
+@import './cheatsheet-shared.css';
 
-/* ─── BASE STYLES ───────────────────────────────────────────────────────────────────── */
+/* ─── BASE ──────────────────────────────────────────────────────────────────── */
 .cnc-algo-ref {
   box-sizing: border-box;
   background: #0d0d0f;
@@ -8,167 +8,11 @@
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
-.cnc-algo-ref * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+.cnc-algo-ref * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ─── MAIN LAYOUT ───────────────────────────────────────────────────────────────────── */
-.cnc-algo-ref .layout {
-  display: flex;
-}
-
-.cnc-algo-ref .sidebar {
-  width: 200px;
-  min-width: 200px;
-  background: #111114;
-  border-right: 1px solid #1e1e26;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-
-.cnc-algo-ref .logo {
-  padding: 18px 18px 12px;
-  border-bottom: 1px solid #1e1e26;
-}
-
-.cnc-algo-ref .logo-t {
-  font-family: 'Rajdhani', 'Chakra Petch', sans-serif;
-  font-size: 20px;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: 0.02em;
-}
-
-.cnc-algo-ref .logo-s {
-  font-size: 9.5px;
-  color: #4b5563;
-  margin-top: 3px;
-  letter-spacing: 0.15em;
-}
-
-.cnc-algo-ref .sidebar-nav {
-  flex: 1;
-  padding: 12px 0;
-  overflow-y: auto;
-}
-
-.cnc-algo-ref .ni {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 8px 16px;
-  font-size: 11.5px;
-  color: #6b7280;
-  cursor: pointer;
-  transition: all 0.15s;
-  border-left: 2px solid transparent;
-  user-select: none;
-}
-
-.cnc-algo-ref .ni:hover {
-  color: #e2e8f0;
-  background: #16161a;
-}
-
-.cnc-algo-ref .ni.active {
-  color: #fff;
-  background: #16161a;
-  border-left-color: var(--cat-color, #fff);
-}
-
-.cnc-algo-ref .ni-icon {
-  width: 16px;
-  text-align: center;
-  flex-shrink: 0;
-  font-size: 13px;
-}
-
-.cnc-algo-ref .ni-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  margin-left: auto;
-  flex-shrink: 0;
-  background: var(--cat-color, #fff);
-}
-
-.cnc-algo-ref .sfooter {
-  padding: 12px 16px;
-  border-top: 1px solid #1e1e26;
-  font-size: 10px;
-  color: #374151;
-  letter-spacing: 0.05em;
-}
-
-.cnc-algo-ref .pb-bg {
-  height: 2px;
-  background: #1e1e26;
-  margin-top: 6px;
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.cnc-algo-ref .pb-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #4ade80, #f472b6, #60a5fa, #facc15, #c084fc);
-  border-radius: 2px;
-  transition: width 0.5s;
-}
-
-/* ─── MAIN CONTENT ──────────────────────────────────────────────────────────────────── */
-.cnc-algo-ref .main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.cnc-algo-ref .topbar {
-  padding: 14px 32px;
-  border-bottom: 1px solid #1e1e26;
-  background: #111114;
-  position: sticky;
-  top: 0;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.cnc-algo-ref .topbar-t {
-  font-family: 'Rajdhani', 'Chakra Petch', sans-serif;
-  font-size: 21px;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: 0.04em;
-}
-
-.cnc-algo-ref .search-input {
-  background: #1a1a20;
-  border: 1px solid #2a2a35;
-  border-radius: 6px;
-  color: #e2e8f0;
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  font-size: 12px;
-  padding: 7px 14px;
-  width: 230px;
-  outline: none;
-  transition: border-color 0.15s;
-}
-
-.cnc-algo-ref .search-input::placeholder {
-  color: #4b5563;
-}
-
-.cnc-algo-ref .search-input:focus {
-  border-color: #4b5563;
-}
-
-.cnc-algo-ref .content {
-  padding: 28px 32px;
-}
+.cnc-algo-ref .topbar-t { font-size: 21px; }
+.cnc-algo-ref .search-input { width: 230px; }
+.cnc-algo-ref .content { padding: 28px 32px; }
 
 .cnc-algo-ref .page-h {
   font-family: 'Rajdhani', 'Chakra Petch', sans-serif;
@@ -186,130 +30,13 @@
   margin-bottom: 24px;
 }
 
-.cnc-algo-ref .page-s span::after {
-  content: ' ·';
-  margin: 0 6px;
-  color: #2a2a35;
-}
+.cnc-algo-ref .page-s span::after { content: ' ·'; margin: 0 6px; color: #2a2a35; }
+.cnc-algo-ref .page-s span:last-child::after { content: ''; }
 
-.cnc-algo-ref .page-s span:last-child::after {
-  content: '';
-}
-
-/* ─── FILTER BAR ────────────────────────────────────────────────────────────────────── */
-.cnc-algo-ref .filter-bar {
-  background: #111114;
-  border: 1px solid #1e1e26;
-  border-radius: 10px;
-  padding: 14px 18px;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.cnc-algo-ref .filter-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.cnc-algo-ref .flabel {
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  color: #4b5563;
-  width: 70px;
-  flex-shrink: 0;
-}
-
-.cnc-algo-ref .freq-legend {
-  font-size: 11px;
-  color: #9ca3af;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  flex-wrap: wrap;
-}
-
-.cnc-algo-ref .freq-high {
-  color: #facc15;
-  font-size: 11px;
-}
-
-.cnc-algo-ref .freq-low {
-  color: #2a2a35;
-  font-size: 11px;
-}
-
-.cnc-algo-ref .pill {
-  font-size: 11px;
-  padding: 4px 12px;
-  border-radius: 20px;
-  border: 1px solid #2a2a35;
-  background: transparent;
-  color: #9ca3af;
-  cursor: pointer;
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  transition: all 0.15s;
-  user-select: none;
-  white-space: nowrap;
-}
-
-.cnc-algo-ref .pill:hover {
-  border-color: #4b5563;
-  color: #e2e8f0;
-}
-
-.cnc-algo-ref .pill.active {
-  color: #0d0d0f;
-  border-color: transparent;
-  font-weight: 600;
-  background: var(--pill-color, #fff);
-}
-
-/* ─── SECTION HEADER ────────────────────────────────────────────────────────────────── */
-.cnc-algo-ref .sec-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
-  margin-top: 24px;
-}
-
-.cnc-algo-ref .sec-bar {
-  width: 3px;
-  height: 18px;
-  border-radius: 2px;
-  flex-shrink: 0;
-  background: var(--section-color, #fff);
-}
-
-.cnc-algo-ref .sec-title {
-  font-family: 'Rajdhani', 'Chakra Petch', sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.cnc-algo-ref .sec-count {
-  background: #1a1a20;
-  border: 1px solid #2a2a35;
-  border-radius: 10px;
-  padding: 2px 9px;
-  font-size: 10px;
-  color: #4b5563;
-  margin-left: auto;
-}
-
-.cnc-algo-ref .no-res {
-  padding: 48px;
-  text-align: center;
-  color: #374151;
-  font-size: 13px;
-}
+/* ─── FREQUENCY LEGEND ──────────────────────────────────────────────────────── */
+.cnc-algo-ref .freq-legend { font-size: 11px; color: #9ca3af; display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.cnc-algo-ref .freq-high { color: #facc15; font-size: 11px; }
+.cnc-algo-ref .freq-low { color: #2a2a35; font-size: 11px; }
 
 /* ─── ALGO CARD ────────────────────────────────────────────────────────────────────── */
 .cnc-algo-ref .algo-card {

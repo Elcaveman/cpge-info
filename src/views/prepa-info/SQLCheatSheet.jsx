@@ -1,47 +1,23 @@
-import { useState, useMemo } from "react";
+import { useCallback } from "react";
 import { CATS, SECTIONS, NAV_ITEMS } from "../../data/sqlCheatSheetData.jsx";
 import { useMediaQuery } from "../../components/useMediaQuery.jsx";
+import { MQ } from "../../lib/constants.js";
+import { useCheatSheet } from "../../lib/useCheatSheet.js";
+import { FilterBar } from "../../components/FilterBar.jsx";
+import { SectionHeader } from "../../components/SectionHeader.jsx";
+
+const sqlMatch = (c, q) => (c.kw + c.rest).toLowerCase().includes(q) || c.desc.toLowerCase().includes(q);
 
 export default function SQLCheatSheet() {
-  const isMobile = useMediaQuery("(max-width: 900px)");
-  const [activeCat, setActiveCat] = useState("all");
-  const [search, setSearch] = useState("");
-  const [copied, setCopied] = useState(null);
-  const [activeNav, setActiveNav] = useState(null);
-
-  const filtered = useMemo(() => {
-    return SECTIONS
-      .filter(s => activeCat === "all" || s.cat === activeCat)
-      .map(s => ({
-        ...s,
-        cmds: s.cmds.filter(c => {
-          if (!search) return true;
-          const q = search.toLowerCase();
-          return (c.kw + c.rest).toLowerCase().includes(q) || c.desc.toLowerCase().includes(q);
-        })
-      }))
-      .filter(s => s.cmds.length > 0);
-  }, [activeCat, search]);
-
-  const total = SECTIONS.reduce((a, s) => a + s.cmds.length, 0);
-  const shown = filtered.reduce((a, s) => a + s.cmds.length, 0);
-  const progress = Math.round((shown / total) * 100);
-
-  function copy(raw, id) {
-    navigator.clipboard.writeText(raw).catch(() => {});
-    setCopied(id);
-    setTimeout(() => setCopied(null), 1400);
-  }
-
-  function scrollToSection(catId) {
-    setActiveCat("all");
-    setSearch("");
-    setActiveNav(catId);
-    setTimeout(() => {
-      const el = document.getElementById("sec-" + catId);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 60);
-  }
+  const isMobile = useMediaQuery(MQ.tablet);
+  const matchItem = useCallback(sqlMatch, []);
+  const {
+    activeCat, setActiveCat,
+    search, setSearch,
+    copied, copy,
+    activeNav, scrollToSection,
+    filtered, total, shown, progress,
+  } = useCheatSheet(SECTIONS, "cmds", matchItem);
 
   return (
     <div className="sql-cheat">
@@ -90,20 +66,12 @@ export default function SQLCheatSheet() {
             </div>
 
             {/* FILTER BAR */}
-            <div className="filter-bar">
-              <div className="filter-row">
-                <span className="filter-label">CATÉGORIE</span>
-                {CATS.map(c => (
-                  <div
-                    key={c.id}
-                    className={`pill cat-${c.id} ${activeCat === c.id ? "active" : ""}`}
-                    onClick={() => { setActiveCat(c.id); setSearch(""); setActiveNav(null); }}
-                  >
-                    {c.label}
-                  </div>
-                ))}
-              </div>
-            </div>
+            <FilterBar
+              label="CATÉGORIE"
+              options={CATS.map(c => ({ ...c, className: `cat-${c.id}` }))}
+              value={activeCat}
+              onChange={id => { setActiveCat(id); setSearch(""); }}
+            />
 
             {/* SECTIONS */}
             {filtered.length === 0 && (
@@ -112,11 +80,11 @@ export default function SQLCheatSheet() {
             {filtered.map(sec => {
               return (
                 <div key={sec.cat} id={"sec-" + sec.cat} className="section">
-                  <div className="section-header">
-                    <div className={`section-color-bar cat-${sec.cat}`} />
-                    <span className="section-title-text">{sec.title}</span>
-                    <span className="section-count">{sec.cmds.length} cmds</span>
-                  </div>
+                  <SectionHeader
+                    title={sec.title}
+                    count={`${sec.cmds.length} cmds`}
+                    barClass={`cat-${sec.cat}`}
+                  />
                   <table className="cmd-table">
                     <tbody>
                       {sec.cmds.map((c, i) => {

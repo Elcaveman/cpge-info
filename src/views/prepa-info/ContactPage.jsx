@@ -1,4 +1,5 @@
 import { useMemo, useState, useCallback } from "react";
+import { required, isEmail, sanitize } from "../../lib/validators.js";
 
 /* ── tiny inline SVG icons ── */
 const Icon = {
@@ -84,22 +85,20 @@ export default function ContactPage({ links = {} }) {
   /* ── send ── */
   function handleSend() {
     const newErrors = {
-      fname:   !form.fname.trim(),
-      email:   !form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email),
-      message: !form.message.trim(),
+      fname:   !required(form.fname),
+      email:   !required(form.email) || !isEmail(form.email),
+      message: !required(form.message),
     };
     if (Object.values(newErrors).some(Boolean)) {
       setErrors(newErrors);
       return;
     }
 
-    const clean = (str) => str.replace(/[<>]/g, "").trim();
-
     const subject = encodeURIComponent(
-      `[Prepa Info] ${clean(form.subject) || "Message"} — ${clean(form.fname)} ${clean(form.lname)}`
+      `[Prepa Info] ${sanitize(form.subject) || "Message"} — ${sanitize(form.fname)} ${sanitize(form.lname)}`
     );
     const body = encodeURIComponent(
-      `De : ${clean(form.fname)} ${clean(form.lname)}\nEmail : ${clean(form.email)}\n\n${clean(form.message)}`
+      `De : ${sanitize(form.fname)} ${sanitize(form.lname)}\nEmail : ${sanitize(form.email)}\n\n${sanitize(form.message)}`
     );
 
     const recipient = (links.email || "odex@mailo.com").replace(/^mailto:/i, "").trim();

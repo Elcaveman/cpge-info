@@ -1,80 +1,32 @@
-import { useState, useMemo } from "react";
+import { useCallback } from "react";
 import { FONT, HEADING, CATS, CAT_COLOR, SECTIONS, NAV_ITEMS } from "../../data/pythonCheatSheetData.jsx";
 import { useMediaQuery } from "../../components/useMediaQuery.jsx";
+import { MQ } from "../../lib/constants.js";
+import { tokenize } from "../../lib/codeHighlight.js";
+import { useCheatSheet } from "../../lib/useCheatSheet.js";
+import { FilterBar } from "../../components/FilterBar.jsx";
+import { SectionHeader } from "../../components/SectionHeader.jsx";
+
+const PY_REGEX = /(#.*)|(f?'[^']*'|f?"[^"]*")|\b(\d+\.?\d*)\b|\b(import|from|as|def|class|return|if|elif|else|for|while|in|not|and|or|break|continue|pass|try|except|finally|raise|with|lambda|True|False|None|self)\b|\b(print|input|len|type|int|float|str|list|dict|set|tuple|range|enumerate|map|filter|sorted|min|max|sum|abs|round|open|isinstance|staticmethod|classmethod|super|zip|any|all|hasattr|getattr|setattr)\b|\b(np|px|go|json|csv|os|math|sqlite3|conn|cur|fig|df)\b/g;
+const PY_CLASSES = ["py-cm", "py-str", "py-num", "py-kw", "py-fn", "py-mod"];
 
 function highlight(code) {
-  const tokenRegex = /(#.*)|(f?'[^']*'|f?"[^"]*")|\b(\d+\.?\d*)\b|\b(import|from|as|def|class|return|if|elif|else|for|while|in|not|and|or|break|continue|pass|try|except|finally|raise|with|lambda|True|False|None|self)\b|\b(print|input|len|type|int|float|str|list|dict|set|tuple|range|enumerate|map|filter|sorted|min|max|sum|abs|round|open|isinstance|staticmethod|classmethod|super|zip|any|all|hasattr|getattr|setattr)\b|\b(np|px|go|json|csv|os|math|sqlite3|conn|cur|fig|df)\b/g;
-  const out = [];
-  let lastIndex = 0;
-  let match;
-
-  // Tokenize once and render as React spans to avoid raw HTML injection.
-  while ((match = tokenRegex.exec(code)) !== null) {
-    if (match.index > lastIndex) {
-      out.push({ text: code.slice(lastIndex, match.index), cls: null });
-    }
-
-    const [m, cm, st, nu, kw, fn, md] = match;
-    let cls = null;
-    if (cm !== undefined) cls = "py-cm";
-    else if (st !== undefined) cls = "py-str";
-    else if (nu !== undefined) cls = "py-num";
-    else if (kw !== undefined) cls = "py-kw";
-    else if (fn !== undefined) cls = "py-fn";
-    else if (md !== undefined) cls = "py-mod";
-
-    out.push({ text: m, cls });
-    lastIndex = tokenRegex.lastIndex;
-  }
-
-  if (lastIndex < code.length) {
-    out.push({ text: code.slice(lastIndex), cls: null });
-  }
-
-  return out;
+  PY_REGEX.lastIndex = 0;
+  return tokenize(code, PY_REGEX, PY_CLASSES);
 }
 
+const pyMatch = (c, q) => c.code.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q);
+
 export default function PythonCheatSheet() {
-  const isMobile = useMediaQuery("(max-width: 900px)");
-  const [activeCat, setActiveCat]   = useState("all");
-  const [search,    setSearch]      = useState("");
-  const [copied,    setCopied]      = useState(null);
-  const [activeNav, setActiveNav]   = useState(null);
-
-  const filtered = useMemo(() => {
-    return SECTIONS
-      .filter(s => activeCat === "all" || s.cat === activeCat)
-      .map(s => ({
-        ...s,
-        cmds: s.cmds.filter(c => {
-          if (!search) return true;
-          const q = search.toLowerCase();
-          return c.code.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q);
-        })
-      }))
-      .filter(s => s.cmds.length > 0);
-  }, [activeCat, search]);
-
-  const total  = SECTIONS.reduce((a, s) => a + s.cmds.length, 0);
-  const shown  = filtered.reduce((a, s) => a + s.cmds.length, 0);
-  const progress = Math.round((shown / total) * 100);
-
-  function copy(code, id) {
-    const raw = code.replace(/\n/g, "\n");
-    navigator.clipboard.writeText(raw).catch(() => {});
-    setCopied(id);
-    setTimeout(() => setCopied(null), 1400);
-  }
-
-  function scrollTo(catId) {
-    setActiveCat("all");
-    setSearch("");
-    setActiveNav(catId);
-    setTimeout(() => {
-      const el = document.getElementById("sec-" + catId);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 60);
-  }
+  const isMobile = useMediaQuery(MQ.tablet);
+  const matchItem = useCallback(pyMatch, []);
+  const {
+    activeCat, setActiveCat,
+    search, setSearch,
+    copied, copy,
+    activeNav, scrollToSection: scrollTo,
+    filtered, total, shown, progress,
+  } = useCheatSheet(SECTIONS, "cmds", matchItem);
 
   return (
     <div className="python-cheat">
@@ -129,21 +81,12 @@ export default function PythonCheatSheet() {
             </div>
 
             {/* FILTER BAR */}
-            <div className="filter-bar">
-              <div className="filter-row">
-                <span className="filter-label">CATÉGORIE</span>
-                {CATS.map(c => (
-                  <div
-                    key={c.id}
-                    className={`pill ${activeCat === c.id ? "active" : ""}`}
-                    style={{ '--pill-color': activeCat === c.id ? c.color : 'transparent' }}
-                    onClick={() => { setActiveCat(c.id); setSearch(""); setActiveNav(null); }}
-                  >
-                    {c.label}
-                  </div>
-                ))}
-              </div>
-            </div>
+            <FilterBar
+              label="CATÉGORIE"
+              options={CATS}
+              value={activeCat}
+              onChange={id => { setActiveCat(id); setSearch(""); }}
+            />
 
             {/* SECTIONS */}
             {filtered.length === 0 && (
@@ -154,11 +97,11 @@ export default function PythonCheatSheet() {
               const color = CAT_COLOR[sec.cat];
               return (
                 <div key={sec.cat} id={"sec-" + sec.cat} className="section">
-                  <div className="section-header">
-                    <div className="section-color-bar" style={{ '--section-color': color }} />
-                    <span className="section-title-text">{sec.title}</span>
-                    <span className="section-count">{sec.cmds.length} cmds</span>
-                  </div>
+                  <SectionHeader
+                    title={sec.title}
+                    count={`${sec.cmds.length} cmds`}
+                    color={color}
+                  />
                   <table className="cmd-table">
                     <tbody>
                       {sec.cmds.map((c, i) => {

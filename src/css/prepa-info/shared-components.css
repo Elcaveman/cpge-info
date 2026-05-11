@@ -1,0 +1,25 @@
+/* Shared component styles used across multiple prepa-info pages */
+
+/* ─── PROGRESS METER (native <progress> element) ────────────────────────── */
+.sidebar-progress-meter,
+.todo-progress-meter,
+.progress-meter {
+  width: 100%;
+  height: 3px;
+  border: 0;
+  border-radius: 3px;
+  overflow: hidden;
+  appearance: none;
+}
+
+.sidebar-progress-meter::-webkit-progress-bar,
+.todo-progress-meter::-webkit-progress-bar,
+.progress-meter::-webkit-progress-bar { background: #1e1e2e; }
+
+.sidebar-progress-meter::-webkit-progress-value,
+.todo-progress-meter::-webkit-progress-value,
+.progress-meter::-webkit-progress-value { background: linear-gradient(90deg, #34d399, #60a5fa); }
+
+.sidebar-progress-meter::-moz-progress-bar,
+.todo-progress-meter::-moz-progress-bar,
+.progress-meter::-moz-progress-bar { background: linear-gradient(90deg, #34d399, #60a5fa); }

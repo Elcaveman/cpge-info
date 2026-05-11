@@ -13,7 +13,7 @@ const PythonCheatSheet = lazy(() => import("./PythonCheatSheet.jsx"));
 const CNCAlgoRef    = lazy(() => import("./CNCAlgoRef.jsx"));
 const ConcoursPage  = lazy(() => import("./ConcoursPage.jsx"));
 const ContactPage   = lazy(() => import("./ContactPage.jsx"));
-const SujetEditorPage = lazy(() => import("./SujetEditorPage.jsx"));
+const SujetEditorPage = lazy(() => import("./SujetEditor/index.jsx"));
 
 export default function PrepaApp({ page }) {
   const router = useRouter();
