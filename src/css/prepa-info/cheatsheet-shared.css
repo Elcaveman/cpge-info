@@ -134,34 +134,7 @@
   transition: width 0.5s;
 }
 
-/* ─── TOPBAR ────────────────────────────────────────────────────────────── */
-.sql-cheat .topbar,
-.python-cheat .topbar,
-.cnc-algo-ref .topbar {
-  border-bottom: 1px solid #1a1a2e;
-  background: #0e0e1a;
-  position: sticky;
-  top: 0;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* Topbar padding differs per page; each file specifies its own */
-.python-cheat .topbar,
-.cnc-algo-ref .topbar { padding: 14px 32px; }
-
-.sql-cheat .topbar-title,
-.python-cheat .topbar-title,
-.cnc-algo-ref .topbar-t {
-  font-family: 'Syne', sans-serif;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: 0.04em;
-}
-
-/* ─── SEARCH INPUT ──────────────────────────────────────────────────────── */
+/* ─── SEARCH INPUT (inside filter bar) ─────────────────────────────────── */
 .sql-cheat .search-input,
 .python-cheat .search-input,
 .cnc-algo-ref .search-input {
@@ -174,7 +147,6 @@
   padding: 7px 14px;
   outline: none;
   transition: border-color 0.15s;
-  /* width is page-specific */
 }
 
 .sql-cheat .search-input::placeholder,
@@ -184,6 +156,13 @@
 .sql-cheat .search-input:focus,
 .python-cheat .search-input:focus,
 .cnc-algo-ref .search-input:focus { border-color: #334155; }
+
+.sql-cheat .filter-search,
+.python-cheat .filter-search,
+.cnc-algo-ref .filter-search {
+  flex: 1;
+  min-width: 0;
+}
 
 /* ─── FILTER BAR ────────────────────────────────────────────────────────── */
 /* Python and CNC filter-bar are identical */

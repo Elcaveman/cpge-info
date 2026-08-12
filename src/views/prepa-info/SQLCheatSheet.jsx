@@ -25,7 +25,7 @@ export default function SQLCheatSheet() {
         {/* SIDEBAR */}
         {!isMobile && <aside className="sidebar">
           <div className="sidebar-logo">
-            <div className="logo-title">SQL Ref</div>
+            <div className="logo-title">SQL</div>
             <div className="logo-sub">SELECT · JOIN · GROUP BY</div>
           </div>
           <nav className="sidebar-nav">
@@ -49,18 +49,8 @@ export default function SQLCheatSheet() {
 
         {/* MAIN */}
         <div className="main">
-          <div className="topbar">
-            <div className="topbar-title">SQL Cheat Sheet</div>
-            <input
-              className="search-input"
-              placeholder="Search commands..."
-              value={search}
-              onChange={e => { setSearch(e.target.value); setActiveCat("all"); }}
-            />
-          </div>
-
           <div className="content">
-            <h1 className="page-heading">SQL — Référence Complète</h1>
+            <h1 className="page-heading">SQL — Aide Mémoire</h1>
             <div className="page-sub">
               Commandes SQL essentielles pour la manipulation de données relationnelles.
             </div>
@@ -71,6 +61,17 @@ export default function SQLCheatSheet() {
               options={CATS.map(c => ({ ...c, className: `cat-${c.id}` }))}
               value={activeCat}
               onChange={id => { setActiveCat(id); setSearch(""); }}
+              topSlot={
+                <div className="filter-row">
+                  <span className="filter-label flabel">RECHERCHE</span>
+                  <input
+                    className="search-input filter-search"
+                    placeholder="Rechercher une commande…"
+                    value={search}
+                    onChange={e => { setSearch(e.target.value); setActiveCat("all"); }}
+                  />
+                </div>
+              }
             />
 
             {/* SECTIONS */}

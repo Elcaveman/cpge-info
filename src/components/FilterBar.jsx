@@ -8,9 +8,10 @@
  *   onChange — (id) => void
  *   children — optional extra content appended after the pills (e.g. frequency legend)
  */
-export function FilterBar({ label, options, value, onChange, children }) {
+export function FilterBar({ label, options, value, onChange, children, topSlot }) {
   return (
     <div className="filter-bar">
+      {topSlot}
       <div className="filter-row">
         {label && <span className="filter-label flabel">{label}</span>}
         {options.map(opt => (

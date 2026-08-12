@@ -7,8 +7,6 @@
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
-.python-cheat .topbar-title { font-size: 21px; }
-.python-cheat .search-input { width: 230px; }
 .python-cheat .content { padding: 28px 32px; }
 
 .python-cheat .page-heading {

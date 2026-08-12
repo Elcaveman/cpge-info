@@ -100,8 +100,8 @@ export default function CNCAlgoRef() {
         {/* SIDEBAR */}
         {!isMobile && <aside className="sidebar">
           <div className="logo">
-            <div className="logo-t">CNC Algo</div>
-            <div className="logo-s">CPGE · MP · PSI · TSI · Référence</div>
+            <div className="logo-t">Classique Concours</div>
+            <div className="logo-s">CNC · MP · PSI · TSI</div>
           </div>
           <nav className="sidebar-nav">
             {NAV.map(n=>(
@@ -127,16 +127,6 @@ export default function CNCAlgoRef() {
 
         {/* MAIN */}
         <div className="main">
-          <div className="topbar">
-            <div className="topbar-t">Référence Algorithmes CNC</div>
-            <input
-              className="search-input"
-              placeholder="Rechercher un algo…"
-              value={search}
-              onChange={e=>{setSearch(e.target.value);setActiveCat("all");setActiveNav(null);}}
-            />
-          </div>
-
           <div className="content">
             <h1 className="page-h">Algorithmes Essentiels — CNC / CPGE</h1>
             <div className="page-s">
@@ -149,6 +139,17 @@ export default function CNCAlgoRef() {
               options={CATS}
               value={activeCat}
               onChange={id => { setActiveCat(id); setSearch(""); }}
+              topSlot={
+                <div className="filter-row">
+                  <span className="filter-label flabel">RECHERCHE</span>
+                  <input
+                    className="search-input filter-search"
+                    placeholder="Rechercher un algo…"
+                    value={search}
+                    onChange={e => { setSearch(e.target.value); setActiveCat("all"); }}
+                  />
+                </div>
+              }
             >
               <div className="filter-row">
                 <span className="flabel">FRÉQUENCE</span>
