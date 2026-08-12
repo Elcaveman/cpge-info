@@ -4,7 +4,7 @@
   display: flex;
   gap: 0;
   min-height: 100%;
-  font-family: 'Rajdhani', 'Chakra Petch', sans-serif;
+  font-family: 'Syne', sans-serif;
 }
 
 /* ── Sidebar ── */
@@ -25,7 +25,7 @@
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #4b5563;
+  color: #475569;
   padding: 0 16px 10px;
 }
 
@@ -39,7 +39,7 @@
   border: none;
   border-left: 3px solid transparent;
   cursor: pointer;
-  color: #6b7280;
+  color: #64748b;
   font-size: 13px;
   font-weight: 600;
   font-family: inherit;
@@ -48,14 +48,14 @@
 }
 
 .concours-nav-btn:hover {
-  background: #13131f;
+  background: #12121c;
   color: #e2e8f0;
 }
 
 .concours-nav-btn.active {
   color: var(--c-color, #fff);
   border-left-color: var(--c-color, #fff);
-  background: #13131f;
+  background: #12121c;
 }
 
 .concours-nav-flag {
@@ -123,7 +123,7 @@
 
 .concours-desc {
   font-size: 13.5px;
-  color: #9ca3af;
+  color: #94a3b8;
   line-height: 1.65;
   max-width: 680px;
   font-family: 'Syne', sans-serif;
@@ -143,14 +143,14 @@
   gap: 6px;
   padding: 4px 12px;
   border-radius: 20px;
-  background: #12121e;
-  border: 1px solid #1e1e2e;
+  background: #12121c;
+  border: 1px solid #1a1a2e;
   font-size: 12px;
   color: #e2e8f0;
 }
 
 .concours-meta-pill-label {
-  color: #4b5563;
+  color: #475569;
   font-weight: 600;
 }
 
@@ -190,7 +190,7 @@
   font-size: 13px;
   font-weight: 700;
   font-family: inherit;
-  color: #4b5563;
+  color: #475569;
   transition: color 0.15s, border-color 0.15s;
   margin-bottom: -1px;
 }
@@ -225,14 +225,14 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #4b5563;
-  background: #0d0d14;
-  border-bottom: 1px solid #1e1e2e;
+  color: #475569;
+  background: #0e0e1a;
+  border-bottom: 1px solid #1a1a2e;
 }
 
 .annales-table td {
   padding: 10px 16px;
-  border-bottom: 1px solid #12121e;
+  border-bottom: 1px solid #12121c;
   color: #e2e8f0;
   vertical-align: middle;
 }
@@ -242,7 +242,7 @@
 }
 
 .annales-table tr:hover td {
-  background: #0f0f1a;
+  background: #12121c;
 }
 
 .year-cell {
@@ -315,7 +315,7 @@
 }
 
 .na-cell {
-  color: #374151;
+  color: #334155;
   font-size: 12px;
 }
 
@@ -333,10 +333,10 @@
 /* ── Mines ZIP note ── */
 .mines-note {
   font-size: 12px;
-  color: #6b7280;
+  color: #64748b;
   margin-bottom: 16px;
   padding: 10px 14px;
-  background: #0d0d14;
+  background: #0e0e1a;
   border-radius: 6px;
   border-left: 3px solid #f472b6;
   font-family: 'Syne', sans-serif;
@@ -354,7 +354,7 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #4b5563;
+  color: #475569;
   margin-bottom: 14px;
 }
 
@@ -370,14 +370,14 @@
   gap: 4px;
   padding: 12px 14px;
   border-radius: 8px;
-  background: #0d0d14;
-  border: 1px solid #1e1e2e;
+  background: #0e0e1a;
+  border: 1px solid #1a1a2e;
   text-decoration: none;
   transition: border-color 0.15s, background 0.15s;
 }
 
 .source-card:hover {
-  background: #111120;
+  background: #12121c;
   border-color: var(--s-color, #2a2a40);
 }
 
@@ -392,7 +392,7 @@
 
 .source-card-desc {
   font-size: 11.5px;
-  color: #6b7280;
+  color: #64748b;
   font-family: 'Syne', sans-serif;
   line-height: 1.4;
 }
@@ -400,12 +400,12 @@
 /* ── E3A special ── */
 .e3a-note {
   padding: 12px 16px;
-  background: #111118;
-  border: 1px solid #2a2a20;
+  background: #0e0e1a;
+  border: 1px solid #1a1a2e;
   border-left: 3px solid #fb923c;
   border-radius: 6px;
   font-size: 12.5px;
-  color: #9ca3af;
+  color: #94a3b8;
   margin-bottom: 16px;
   font-family: 'Syne', sans-serif;
 }
@@ -416,8 +416,8 @@
   gap: 10px;
   padding: 14px 16px;
   border-radius: 8px;
-  background: #0d0d14;
-  border: 1px solid #1e1e2e;
+  background: #0e0e1a;
+  border: 1px solid #1a1a2e;
   text-decoration: none;
   color: var(--c-color, #e2e8f0);
   font-size: 13px;
@@ -427,7 +427,7 @@
 }
 
 .site-link-row:hover {
-  background: #111120;
+  background: #12121c;
 }
 
 /* ── Responsive ── */
@@ -441,7 +441,7 @@
     flex-direction: row;
     overflow-x: auto;
     border-right: none;
-    border-bottom: 1px solid #1e1e2e;
+    border-bottom: 1px solid #1a1a2e;
     padding: 8px 0;
     position: static;
     max-height: none;

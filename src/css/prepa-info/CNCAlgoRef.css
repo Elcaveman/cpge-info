@@ -3,7 +3,7 @@
 /* ─── BASE ──────────────────────────────────────────────────────────────────── */
 .cnc-algo-ref {
   box-sizing: border-box;
-  background: #0d0d0f;
+  background: #0a0a0f;
   color: #e2e8f0;
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
 }
@@ -15,7 +15,7 @@
 .cnc-algo-ref .content { padding: 28px 32px; }
 
 .cnc-algo-ref .page-h {
-  font-family: 'Rajdhani', 'Chakra Petch', sans-serif;
+  font-family: 'Syne', sans-serif;
   font-size: 30px;
   font-weight: 700;
   color: #fff;
@@ -25,23 +25,23 @@
 
 .cnc-algo-ref .page-s {
   font-size: 10.5px;
-  color: #4b5563;
+  color: #475569;
   letter-spacing: 0.1em;
   margin-bottom: 24px;
 }
 
-.cnc-algo-ref .page-s span::after { content: ' ·'; margin: 0 6px; color: #2a2a35; }
+.cnc-algo-ref .page-s span::after { content: ' ·'; margin: 0 6px; color: #1a1a2e; }
 .cnc-algo-ref .page-s span:last-child::after { content: ''; }
 
 /* ─── FREQUENCY LEGEND ──────────────────────────────────────────────────────── */
 .cnc-algo-ref .freq-legend { font-size: 11px; color: #9ca3af; display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
 .cnc-algo-ref .freq-high { color: #facc15; font-size: 11px; }
-.cnc-algo-ref .freq-low { color: #2a2a35; font-size: 11px; }
+.cnc-algo-ref .freq-low { color: #1a1a2e; font-size: 11px; }
 
 /* ─── ALGO CARD ────────────────────────────────────────────────────────────────────── */
 .cnc-algo-ref .algo-card {
-  background: #111114;
-  border: 1px solid #1e1e26;
+  background: #0e0e1a;
+  border: 1px solid #1a1a2e;
   border-radius: 8px;
   margin-bottom: 8px;
   overflow: hidden;
@@ -59,19 +59,19 @@
   gap: 10px;
   padding: 10px 16px;
   cursor: pointer;
-  background: var(--header-bg, #111114);
+  background: var(--header-bg, #0e0e1a);
   border-bottom: var(--header-border, none);
   transition: all 0.15s;
 }
 
 .cnc-algo-ref .algo-card[data-open="true"] .card-header,
 .cnc-algo-ref .algo-card.open .card-header {
-  background: #16161a;
-  border-bottom: 1px solid #1e1e26;
+  background: #12121c;
+  border-bottom: 1px solid #1a1a2e;
 }
 
 .cnc-algo-ref .algo-card:hover .card-header {
-  background: #16161a;
+  background: #12121c;
 }
 
 .cnc-algo-ref .card-color-bar {
@@ -83,7 +83,7 @@
 }
 
 .cnc-algo-ref .card-title {
-  font-family: 'Rajdhani', 'Chakra Petch', sans-serif;
+  font-family: 'Syne', sans-serif;
   font-size: 13px;
   font-weight: 600;
   color: #e2e8f0;
@@ -94,13 +94,13 @@
 .cnc-algo-ref .card-complexity {
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
   font-size: 9.5px;
-  color: #4b5563;
+  color: #475569;
   margin-left: 10px;
   white-space: nowrap;
 }
 
 .cnc-algo-ref .card-toggle {
-  color: #4b5563;
+  color: #475569;
   font-size: 11px;
   margin-left: 8px;
 }
@@ -121,11 +121,11 @@
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
   font-size: 11.5px;
   line-height: 1.7;
-  background: #0d0d0f;
+  background: #0a0a0f;
   border-radius: 6px;
   padding: 12px 14px;
   overflow-x: auto;
-  border: 1px solid #1e1e26;
+  border: 1px solid #1a1a2e;
   margin: 0;
   white-space: pre;
 }
@@ -136,9 +136,9 @@
   right: 8px;
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
   font-size: 10px;
-  background: #1a1a20;
-  color: #6b7280;
-  border: 1px solid #2a2a35;
+  background: #12121c;
+  color: #64748b;
+  border: 1px solid #1e1e2e;
   border-radius: 4px;
   padding: 3px 9px;
   cursor: pointer;
@@ -146,7 +146,7 @@
 }
 
 .cnc-algo-ref .copy-btn:hover {
-  background: #16161a;
+  background: #1e1e2e;
   color: #e2e8f0;
 }
 
@@ -160,9 +160,9 @@
 .cnc-algo-ref .algo-note {
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
   font-size: 11px;
-  color: #9ca3af;
-  background: #16161a;
-  border: 1px solid #1e1e26;
+  color: #94a3b8;
+  background: #12121c;
+  border: 1px solid #1a1a2e;
   border-left: 3px solid var(--note-color, #fff);
   border-radius: 6px;
   padding: 8px 12px;
@@ -180,14 +180,14 @@
 
 .cnc-algo-ref .star.empty,
 .cnc-algo-ref .star-empty {
-  color: #2a2a35;
+  color: #1e1e2e;
 }
 
 /* ─── SYNTAX HIGHLIGHTING ──────────────────────────────────────────────────────────── */
 .cnc-algo-ref .kw { color: #f472b6; font-weight: 600; }
 .cnc-algo-ref .fn { color: #60a5fa; }
 .cnc-algo-ref .st { color: #fbbf24; }
-.cnc-algo-ref .cm { color: #4b5563; font-style: italic; }
+.cnc-algo-ref .cm { color: #475569; font-style: italic; }
 .cnc-algo-ref .nu { color: #a78bfa; }
 .cnc-algo-ref .tp { color: #34d399; }
 
@@ -206,6 +206,6 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2a2a35;
+  background: #333;
   border-radius: 2px;
 }

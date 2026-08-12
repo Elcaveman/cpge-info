@@ -2,7 +2,7 @@
 @import './shared-components.css';
 
 .sql-cheat {
-  background: #0d0d0f;
+  background: #0a0a0f;
   color: #e2e8f0;
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
 }
@@ -18,23 +18,23 @@
   gap: 10px;
   padding: 9px 18px;
   font-size: 12px;
-  color: #6b7280;
+  color: #64748b;
   cursor: pointer;
   transition: all 0.15s;
   border-left: 2px solid transparent;
   user-select: none;
 }
 
-.sql-cheat .nav-item:hover { color: #e2e8f0; background: #16161a; }
-.sql-cheat .nav-item.active { color: #fff; background: #16161a; }
+.sql-cheat .nav-item:hover { color: #e2e8f0; background: #12121c; }
+.sql-cheat .nav-item.active { color: #fff; background: #12121c; }
 .sql-cheat .nav-item .nav-icon { font-size: 14px; width: 18px; text-align: center; }
 .sql-cheat .nav-item .nav-dot { width: 6px; height: 6px; border-radius: 50%; margin-left: auto; flex-shrink: 0; }
 
 .sql-cheat .sidebar-footer {
   padding: 14px 18px;
-  border-top: 1px solid #1e1e26;
+  border-top: 1px solid #1a1a2e;
   font-size: 10px;
-  color: #374151;
+  color: #334155;
   letter-spacing: 0.05em;
 }
 
@@ -44,7 +44,7 @@
   height: 2px;
   border-radius: 2px;
 }
-.sql-cheat .progress-meter::-webkit-progress-bar { background: #1e1e26; }
+.sql-cheat .progress-meter::-webkit-progress-bar { background: #1a1a2e; }
 .sql-cheat .progress-meter::-webkit-progress-value { background: linear-gradient(90deg, #4ade80, #60a5fa); }
 .sql-cheat .progress-meter::-moz-progress-bar { background: linear-gradient(90deg, #4ade80, #60a5fa); }
 
@@ -57,7 +57,7 @@
 .sql-cheat .content { padding: 32px 36px; }
 
 .sql-cheat .page-heading {
-  font-family: 'Rajdhani', 'Chakra Petch', sans-serif;
+  font-family: 'Syne', sans-serif;
   font-size: 32px;
   font-weight: 700;
   color: #fff;
@@ -67,19 +67,19 @@
 
 .sql-cheat .page-sub {
   font-size: 11px;
-  color: #4b5563;
+  color: #475569;
   letter-spacing: 0.12em;
   margin-bottom: 28px;
 }
 
 .sql-cheat .page-sub span { margin-right: 8px; }
-.sql-cheat .page-sub span::after { content: ' ·'; margin-left: 8px; color: #2a2a35; }
+.sql-cheat .page-sub span::after { content: ' ·'; margin-left: 8px; color: #1a1a2e; }
 .sql-cheat .page-sub span:last-child::after { content: ''; }
 
 /* SQL filter-bar has slightly larger padding and gap */
 .sql-cheat .filter-bar {
-  background: #111114;
-  border: 1px solid #1e1e26;
+  background: #0e0e1a;
+  border: 1px solid #1a1a2e;
   border-radius: 10px;
   padding: 16px 20px;
   margin-bottom: 24px;
@@ -95,7 +95,7 @@
   font-size: 11px;
   padding: 5px 13px;
   border-radius: 20px;
-  border: 1px solid #2a2a35;
+  border: 1px solid #1e1e2e;
   background: transparent;
   color: #9ca3af;
   cursor: pointer;
@@ -105,7 +105,7 @@
   white-space: nowrap;
 }
 
-.sql-cheat .pill:hover { border-color: #4b5563; color: #e2e8f0; }
+.sql-cheat .pill:hover { border-color: #334155; color: #e2e8f0; }
 .sql-cheat .pill.active { color: #0d0d0f; border-color: transparent; font-weight: 600; }
 
 .sql-cheat .legend { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 20px; }
@@ -113,8 +113,8 @@
 .sql-cheat .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 
 .sql-cheat .section {
-  background: #111114;
-  border: 1px solid #1e1e26;
+  background: #0e0e1a;
+  border: 1px solid #1a1a2e;
   border-radius: 10px;
   margin-bottom: 16px;
   overflow: hidden;
@@ -122,7 +122,7 @@
 
 .sql-cheat .section-header {
   padding: 12px 20px;
-  border-bottom: 1px solid #1e1e26;
+  border-bottom: 1px solid #1a1a2e;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -134,7 +134,7 @@
 .sql-cheat .section-color-bar { width: 3px; height: 14px; border-radius: 2px; flex-shrink: 0; }
 
 .sql-cheat .section-title-text {
-  font-family: 'Rajdhani', 'Chakra Petch', sans-serif;
+  font-family: 'Syne', sans-serif;
   font-size: 13px;
   font-weight: 600;
   color: #e2e8f0;
@@ -143,9 +143,9 @@
 }
 
 .sql-cheat .cmd-table { width: 100%; border-collapse: collapse; }
-.sql-cheat .cmd-row { border-bottom: 1px solid #16161a; cursor: pointer; transition: background 0.1s; }
+.sql-cheat .cmd-row { border-bottom: 1px solid #1a1a2e; cursor: pointer; transition: background 0.1s; }
 .sql-cheat .cmd-row:last-child { border-bottom: none; }
-.sql-cheat .cmd-row:hover { background: #16161a; }
+.sql-cheat .cmd-row:hover { background: #12121c; }
 .sql-cheat .cmd-row.copied { background: #0f2d1a; }
 
 .sql-cheat .cmd-cell-code { padding: 10px 20px; font-size: 12px; width: 55%; }

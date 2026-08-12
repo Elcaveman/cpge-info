@@ -2,6 +2,7 @@
 
 import { useState, useEffect, lazy, Suspense } from "react";
 import { useRouter } from "next/navigation";
+import { PageLoader } from "../../components/PageLoader.jsx";
 import { ALL_ITEMS } from "../../data/todoPageData";
 
 // Lazy-load each sub-page so only the active page's code is downloaded
@@ -108,10 +109,11 @@ export default function PrepaApp({ page }) {
             <progress className="sidebar-progress-meter" max={100} value={donePct} />
           </div>
         </aside>
-
+        
         <main className="main">
+          <Suspense fallback={<PageLoader />}>
+          
           <div className="page-inner">
-            <Suspense fallback={<div style={{ padding: "40px 32px", color: "#475569", fontFamily: "'JetBrains Mono', monospace", fontSize: 12 }}>Chargement…</div>}>
             {page === "todo" && <TodoPage checked={checked} toggle={toggle} resetChecked={resetChecked} />}
             {page === "resources" && (
               <>
@@ -139,8 +141,8 @@ export default function PrepaApp({ page }) {
             )}
             {page === "sujeteditor" && <SujetEditorPage />}
             {page === "contact" && <ContactPage links={CONTACT_LINKS} />}
-            </Suspense>
           </div>
+          </Suspense>
         </main>
       </div>
 

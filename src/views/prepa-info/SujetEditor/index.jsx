@@ -79,9 +79,6 @@ export default function SujetEditorPage() {
         </div>
 
         <div className="sujet-editor-topbar__meta">
-          <span className="sujet-editor-topbar__stats">
-            {sujet.parties.length} partie{sujet.parties.length > 1 ? "s" : ""} · {totalQuestions} question{totalQuestions > 1 ? "s" : ""}
-          </span>
 
           <div className="sujet-editor-tabs" role="tablist" aria-label="Outils de l'éditeur">
             {SUJET_EDITOR_TABS.map((t) => (
