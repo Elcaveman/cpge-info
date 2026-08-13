@@ -1,18 +1,18 @@
 import { lazy, Suspense, useState, useEffect } from "react";
 
 const LandingApp = lazy(() => import("./views/landing/LandingApp.jsx"));
-const PrepaApp = lazy(() => import("./views/prepa-info/PrepaApp.jsx"));
+const PrepaApp = lazy(() => import("./views/cpge/PrepaApp.jsx"));
 
 // ─── URL ROUTING ─────────────────────────────────────────────────────────────
 const PAGE_TO_PATH = {
-  todo:          "/prepa-info/",
-  resources:     "/prepa-info/resources",
-  stats:         "/prepa-info/stats",
-  sqlcheatsheet: "/prepa-info/sql",
-  python:        "/prepa-info/python",
-  cnc:           "/prepa-info/cnc",
-  concours:      "/prepa-info/concours",
-  contact:       "/prepa-info/contact",
+  todo:          "/cpge/",
+  resources:     "/cpge/resources",
+  stats:         "/cpge/stats",
+  sqlcheatsheet: "/cpge/sql",
+  python:        "/cpge/python",
+  cnc:           "/cpge/cnc",
+  concours:      "/cpge/concours",
+  contact:       "/cpge/contact",
 };
 
 const PATH_TO_PAGE = Object.fromEntries(
@@ -31,7 +31,7 @@ function getPageFromPath(path) {
 
 // ─── ROOT APP ────────────────────────────────────────────────────────────────
 export default function App() {
-  const isPrepa = window.location.pathname.startsWith("/prepa-info");
+  const isPrepa = window.location.pathname.startsWith("/cpge");
   const [route, setRoute] = useState(isPrepa ? "prepa" : "landing");
   const [page, setPage] = useState(() =>
     isPrepa ? getPageFromPath(window.location.pathname) : "todo"
@@ -40,7 +40,7 @@ export default function App() {
   useEffect(() => {
     const onPop = () => {
       const path = window.location.pathname;
-      if (path.startsWith("/prepa-info")) {
+      if (path.startsWith("/cpge")) {
         setRoute("prepa");
         setPage(getPageFromPath(path));
       } else {
@@ -52,7 +52,7 @@ export default function App() {
   }, []);
 
   const navigateTo = (pageId) => {
-    const path = PAGE_TO_PATH[pageId] ?? "/prepa-info/";
+    const path = PAGE_TO_PATH[pageId] ?? "/cpge/";
     history.pushState({}, "", path);
     setRoute("prepa");
     setPage(pageId);

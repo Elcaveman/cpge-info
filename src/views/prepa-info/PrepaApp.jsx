@@ -61,15 +61,15 @@ export default function PrepaApp({ page }) {
   ];
 
   const PAGE_TO_PATH = {
-    todo: "/prepa-info",
-    resources: "/prepa-info/resources",
-    stats: "/prepa-info/stats",
-    sqlcheatsheet: "/prepa-info/sql",
-    python: "/prepa-info/python",
-    cnc: "/prepa-info/cnc",
-    concours: "/prepa-info/concours",
-    sujeteditor: "/prepa-info/sujet-editor",
-    contact: "/prepa-info/contact",
+    todo: "/cpge",
+    resources: "/cpge/resources",
+    stats: "/cpge/stats",
+    sqlcheatsheet: "/cpge/sql",
+    python: "/cpge/python",
+    cnc: "/cpge/cnc",
+    concours: "/cpge/concours",
+    sujeteditor: "/cpge/sujet-editor",
+    contact: "/cpge/contact",
   };
 
   return (
@@ -92,7 +92,7 @@ export default function PrepaApp({ page }) {
                 key={n.id}
                 className={`nav-btn ${page === n.id ? "nav-btn--active" : ""}`}
                 onClick={() => {
-                  router.push(PAGE_TO_PATH[n.id] ?? "/prepa-info");
+                  router.push(PAGE_TO_PATH[n.id] ?? "/cpge");
                   setMenuOpen(false);
                 }}
               >
