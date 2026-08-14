@@ -2,6 +2,7 @@
 
 import { useState, useEffect, lazy, Suspense } from "react";
 import { useRouter } from "next/navigation";
+import { PageLoader } from "../../components/PageLoader.jsx";
 import { ALL_ITEMS } from "../../data/todoPageData";
 
 // Lazy-load each sub-page so only the active page's code is downloaded
@@ -13,7 +14,7 @@ const PythonCheatSheet = lazy(() => import("./PythonCheatSheet.jsx"));
 const CNCAlgoRef    = lazy(() => import("./CNCAlgoRef.jsx"));
 const ConcoursPage  = lazy(() => import("./ConcoursPage.jsx"));
 const ContactPage   = lazy(() => import("./ContactPage.jsx"));
-const SujetEditorPage = lazy(() => import("./SujetEditorPage.jsx"));
+const SujetEditorPage = lazy(() => import("./SujetEditor/index.jsx"));
 
 export default function PrepaApp({ page }) {
   const router = useRouter();
@@ -21,7 +22,7 @@ export default function PrepaApp({ page }) {
   const CONTACT_LINKS = {
     github: "https://github.com/Elcaveman/cpge-info",
     group: "/",
-    email: "mailto:odex@mailo.com",
+    email: "mailto:help.info.pivot@gmail.com",
   };
 
   const [checked, setChecked] = useState(() => {
@@ -51,24 +52,24 @@ export default function PrepaApp({ page }) {
     { id: "todo", label: "Checklist", icon: "✅" },
     { id: "resources", label: "Ressources", icon: "📚" },
     { id: "stats", label: "Statistiques", icon: "📊" },
-    { id: "sqlcheatsheet", label: "SQL Ref", icon: "📋" },
-    { id: "python", label: "Python Ref", icon: "🐍" },
-    { id: "cnc", label: "Algo CNC", icon: "🧮" },
+    { id: "sqlcheatsheet", label: "SQL", icon: "📋" },
+    { id: "python", label: "Python", icon: "🐍" },
+    { id: "cnc", label: "Classique Concours", icon: "🧮" },
     { id: "concours", label: "Concours", icon: "🏆" },
     { id: "sujeteditor", label: "Éditeur sujet", icon: "🧾" },
     { id: "contact", label: "Contact", icon: "📬" },
   ];
 
   const PAGE_TO_PATH = {
-    todo: "/prepa-info",
-    resources: "/prepa-info/resources",
-    stats: "/prepa-info/stats",
-    sqlcheatsheet: "/prepa-info/sql",
-    python: "/prepa-info/python",
-    cnc: "/prepa-info/cnc",
-    concours: "/prepa-info/concours",
-    sujeteditor: "/prepa-info/sujet-editor",
-    contact: "/prepa-info/contact",
+    todo: "/cpge",
+    resources: "/cpge/resources",
+    stats: "/cpge/stats",
+    sqlcheatsheet: "/cpge/sql",
+    python: "/cpge/python",
+    cnc: "/cpge/cnc",
+    concours: "/cpge/concours",
+    sujeteditor: "/cpge/sujet-editor",
+    contact: "/cpge/contact",
   };
 
   return (
@@ -91,7 +92,7 @@ export default function PrepaApp({ page }) {
                 key={n.id}
                 className={`nav-btn ${page === n.id ? "nav-btn--active" : ""}`}
                 onClick={() => {
-                  router.push(PAGE_TO_PATH[n.id] ?? "/prepa-info");
+                  router.push(PAGE_TO_PATH[n.id] ?? "/cpge");
                   setMenuOpen(false);
                 }}
               >
@@ -100,6 +101,10 @@ export default function PrepaApp({ page }) {
               </button>
             ))}
           </nav>
+          <a href="/" className="nav-btn sidebar-home-btn">
+            <span className="nav-btn-icon">←</span>
+            Accueil
+          </a>
           <div className="sidebar-progress">
             <div className="sidebar-progress-label">
               <span>PROGRESSION</span>
@@ -108,10 +113,11 @@ export default function PrepaApp({ page }) {
             <progress className="sidebar-progress-meter" max={100} value={donePct} />
           </div>
         </aside>
-
+        
         <main className="main">
+          <Suspense fallback={<PageLoader />}>
+          
           <div className="page-inner">
-            <Suspense fallback={<div style={{ padding: "40px 32px", color: "#475569", fontFamily: "'JetBrains Mono', monospace", fontSize: 12 }}>Chargement…</div>}>
             {page === "todo" && <TodoPage checked={checked} toggle={toggle} resetChecked={resetChecked} />}
             {page === "resources" && (
               <>
@@ -139,12 +145,18 @@ export default function PrepaApp({ page }) {
             )}
             {page === "sujeteditor" && <SujetEditorPage />}
             {page === "contact" && <ContactPage links={CONTACT_LINKS} />}
-            </Suspense>
           </div>
+          </Suspense>
         </main>
       </div>
 
       <div className="global-contact-dock" aria-label="Liens de contact rapides">
+        <a className="global-contact-btn" href="/" title="Accueil">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9.5z" />
+            <polyline points="9,21 9,12 15,12 15,21" />
+          </svg>
+        </a>
         <a
           className="global-contact-btn"
           href={CONTACT_LINKS.github}

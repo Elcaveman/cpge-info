@@ -78,7 +78,7 @@ function drawPageFooter(doc, state) {
   doc.setFontSize(7);
   doc.setFont("courier", "normal");
   setColor(doc, COLORS.faint);
-  doc.text(`ODEX · ${state.concours} ${state.year} · Informatique`, MARGIN_X, PAGE_H - 8);
+  doc.text(`Pivot · ${state.concours} ${state.year} · Informatique`, MARGIN_X, PAGE_H - 8);
   doc.text(`${pageNum}`, PAGE_W - MARGIN_X, PAGE_H - 8, { align: "right" });
 
   doc.setDrawColor(...COLORS.faint);
@@ -98,7 +98,7 @@ function drawCoverPage(doc, sujet) {
   doc.setFontSize(11);
   doc.setFont("courier", "bold");
   setColor(doc, COLORS.cyan);
-  doc.text("ODEX", MARGIN_X, 20);
+  doc.text("Pivot", MARGIN_X, 20);
 
   doc.setFontSize(7);
   doc.setFont("courier", "normal");
@@ -191,7 +191,7 @@ function drawCoverPage(doc, sujet) {
   doc.setFontSize(7);
   doc.setFont("courier", "normal");
   setColor(doc, COLORS.faint);
-  doc.text("odextech.uk  ·  Du Maroc vers le monde", PAGE_W / 2, PAGE_H - 14, { align: "center" });
+  doc.text("prepainfo.com  ·  Pivot", PAGE_W / 2, PAGE_H - 14, { align: "center" });
 }
 
 function drawPartieHeader(doc, partie, y, state) {

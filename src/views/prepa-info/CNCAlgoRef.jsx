@@ -1,37 +1,18 @@
-import { useState, useMemo } from "react";
+import { useState, useCallback } from "react";
 import { FONT, HEADING, CATS, CC, SECTIONS, NAV } from "../../data/cncAlgoRefData.jsx";
 import { useMediaQuery } from "../../components/useMediaQuery.jsx";
+import { MQ } from "../../lib/constants.js";
+import { tokenize } from "../../lib/codeHighlight.js";
+import { useCheatSheet } from "../../lib/useCheatSheet.js";
+import { FilterBar } from "../../components/FilterBar.jsx";
+import { SectionHeader } from "../../components/SectionHeader.jsx";
+
+const CNC_REGEX = /(#[^\n]*|--[^\n]*)|(f?'[^']*'|f?"[^"]*")|\b(\d+\.?\d*)\b|\b(def|class|return|if|elif|else|for|while|in|not|and|or|break|continue|pass|import|from|as|with|yield|lambda|True|False|None|SELECT|FROM|WHERE|JOIN|LEFT|INNER|ON|GROUP|BY|ORDER|HAVING|CREATE|TABLE|INSERT|INTO|VALUES|PRIMARY|KEY|REFERENCES|NULL|TEXT|INTEGER|REAL|UPDATE|SET|DELETE|UNION|INTERSECT|EXCEPT|DISTINCT)\b|\b(print|len|range|append|sorted|max|min|sum|enumerate|zip|reversed|heapq|deque|lru_cache|Counter|type|isinstance)\b|\b(Noeud|Arbre|Pile|File)\b/g;
+const CNC_CLASSES = ["cm", "st", "nu", "kw", "fn", "tp"];
 
 function highlight(code) {
-  const tokenRegex = /(#[^\n]*|--[^\n]*)|(f?'[^']*'|f?"[^"]*")|\b(\d+\.?\d*)\b|\b(def|class|return|if|elif|else|for|while|in|not|and|or|break|continue|pass|import|from|as|with|yield|lambda|True|False|None|SELECT|FROM|WHERE|JOIN|LEFT|INNER|ON|GROUP|BY|ORDER|HAVING|CREATE|TABLE|INSERT|INTO|VALUES|PRIMARY|KEY|REFERENCES|NULL|TEXT|INTEGER|REAL|UPDATE|SET|DELETE|UNION|INTERSECT|EXCEPT|DISTINCT)\b|\b(print|len|range|append|sorted|max|min|sum|enumerate|zip|reversed|heapq|deque|lru_cache|Counter|type|isinstance)\b|\b(Noeud|Arbre|Pile|File)\b/g;
-  const out = [];
-  let lastIndex = 0;
-  let match;
-
-  // Tokenize once and render with React nodes to avoid raw HTML injection.
-  while ((match = tokenRegex.exec(code)) !== null) {
-    if (match.index > lastIndex) {
-      out.push({ text: code.slice(lastIndex, match.index), cls: null });
-    }
-
-    const [m, cm, st, nu, kw, fn, tp] = match;
-    let cls = null;
-    if (cm !== undefined) cls = "cm";
-    else if (st !== undefined) cls = "st";
-    else if (nu !== undefined) cls = "nu";
-    else if (kw !== undefined) cls = "kw";
-    else if (fn !== undefined) cls = "fn";
-    else if (tp !== undefined) cls = "tp";
-
-    out.push({ text: m, cls });
-    lastIndex = tokenRegex.lastIndex;
-  }
-
-  if (lastIndex < code.length) {
-    out.push({ text: code.slice(lastIndex), cls: null });
-  }
-
-  return out;
+  CNC_REGEX.lastIndex = 0;
+  return tokenize(code, CNC_REGEX, CNC_CLASSES);
 }
 
 /* ─── FREQ STARS ──────────────────────────────────────────── */
@@ -96,39 +77,21 @@ function AlgoCard({ algo, color, idx }) {
   );
 }
 
+const cncMatch = (a, q) =>
+  a.title.toLowerCase().includes(q) ||
+  a.code.toLowerCase().includes(q) ||
+  (a.note || "").toLowerCase().includes(q);
+
 /* ─── APP ─────────────────────────────────────────────────── */
 export default function CNCAlgoRef() {
-  const isMobile = useMediaQuery("(max-width: 900px)");
-  const [activeCat, setActiveCat] = useState("all");
-  const [search, setSearch]       = useState("");
-  const [activeNav, setActiveNav] = useState(null);
-
-  const filtered = useMemo(()=>{
-    return SECTIONS
-      .filter(s=> activeCat==="all" || s.cat===activeCat)
-      .map(s=>({
-        ...s,
-        algos: s.algos.filter(a=>{
-          if (!search) return true;
-          const q = search.toLowerCase();
-          return a.title.toLowerCase().includes(q)
-              || a.code.toLowerCase().includes(q)
-              || (a.note||"").toLowerCase().includes(q);
-        })
-      }))
-      .filter(s=> s.algos.length > 0);
-  },[activeCat, search]);
-
-  const total = SECTIONS.reduce((a,s)=>a+s.algos.length,0);
-  const shown = filtered.reduce((a,s)=>a+s.algos.length,0);
-
-  function scrollTo(catId) {
-    setActiveCat("all"); setSearch(""); setActiveNav(catId);
-    setTimeout(()=>{
-      const el = document.getElementById("sec-"+catId);
-      if (el) el.scrollIntoView({behavior:"smooth",block:"start"});
-    },60);
-  }
+  const isMobile = useMediaQuery(MQ.tablet);
+  const matchItem = useCallback(cncMatch, []);
+  const {
+    activeCat, setActiveCat,
+    search, setSearch,
+    activeNav, scrollToSection: scrollTo,
+    filtered, total, shown,
+  } = useCheatSheet(SECTIONS, "algos", matchItem);
 
   return (
     <div className="cnc-algo-ref">
@@ -137,8 +100,8 @@ export default function CNCAlgoRef() {
         {/* SIDEBAR */}
         {!isMobile && <aside className="sidebar">
           <div className="logo">
-            <div className="logo-t">CNC Algo</div>
-            <div className="logo-s">CPGE · MP · PSI · TSI · Référence</div>
+            <div className="logo-t">Classique Concours</div>
+            <div className="logo-s">CNC · MP · PSI · TSI</div>
           </div>
           <nav className="sidebar-nav">
             {NAV.map(n=>(
@@ -164,16 +127,6 @@ export default function CNCAlgoRef() {
 
         {/* MAIN */}
         <div className="main">
-          <div className="topbar">
-            <div className="topbar-t">Référence Algorithmes CNC</div>
-            <input
-              className="search-input"
-              placeholder="Rechercher un algo…"
-              value={search}
-              onChange={e=>{setSearch(e.target.value);setActiveCat("all");setActiveNav(null);}}
-            />
-          </div>
-
           <div className="content">
             <h1 className="page-h">Algorithmes Essentiels — CNC / CPGE</h1>
             <div className="page-s">
@@ -181,18 +134,23 @@ export default function CNCAlgoRef() {
             </div>
 
             {/* FILTER BAR */}
-            <div className="filter-bar">
-              <div className="filter-row">
-                <span className="flabel">THÈME</span>
-                {CATS.map(c=>(
-                  <div
-                    key={c.id}
-                    className={`pill ${activeCat===c.id?"active":""}`}
-                    style={{background: activeCat===c.id ? c.color : 'transparent'}}
-                    onClick={()=>{setActiveCat(c.id);setSearch("");setActiveNav(null);}}
-                  >{c.label}</div>
-                ))}
-              </div>
+            <FilterBar
+              label="THÈME"
+              options={CATS}
+              value={activeCat}
+              onChange={id => { setActiveCat(id); setSearch(""); }}
+              topSlot={
+                <div className="filter-row">
+                  <span className="filter-label flabel">RECHERCHE</span>
+                  <input
+                    className="search-input filter-search"
+                    placeholder="Rechercher un algo…"
+                    value={search}
+                    onChange={e => { setSearch(e.target.value); setActiveCat("all"); }}
+                  />
+                </div>
+              }
+            >
               <div className="filter-row">
                 <span className="flabel">FRÉQUENCE</span>
                 <span className="freq-legend">
@@ -201,7 +159,7 @@ export default function CNCAlgoRef() {
                   <span className="freq-high">★</span><span className="freq-low">★★</span> Occasionnel
                 </span>
               </div>
-            </div>
+            </FilterBar>
 
             {/* SECTIONS */}
             {filtered.length===0 && (
@@ -212,11 +170,11 @@ export default function CNCAlgoRef() {
               const color = CC[sec.cat];
               return (
                 <div key={sec.cat} id={"sec-"+sec.cat}>
-                  <div className="sec-header">
-                    <div className="sec-bar" style={{background:color}}/>
-                    <span className="sec-title">{sec.title}</span>
-                    <span className="sec-count">{sec.algos.length} algos</span>
-                  </div>
+                  <SectionHeader
+                    title={sec.title}
+                    count={`${sec.algos.length} algos`}
+                    color={color}
+                  />
                   {sec.algos.map((a,i)=>(
                     <AlgoCard key={i} algo={a} color={color} idx={i}/>
                   ))}

@@ -1,5 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import { useBreakpoint } from "../../components/useBreakpoint.jsx";
+import { useMediaQuery } from "../../components/useMediaQuery.jsx";
+
+function useBreakpoint() {
+  const isMobile = useMediaQuery("(max-width: 640px)");
+  const isTablet = useMediaQuery("(max-width: 900px)");
+  return { isMobile, isTablet };
+}
 
 const C = {
   cyan: "#00D4FF", purple: "#9B40FF",
@@ -41,7 +47,6 @@ function Nav() {
   const links = [
     { label: "À propos", href: "#about" },
     { label: "Programmes", href: "#programs" },
-    { label: "Olympiades", href: "#olympiad" },
     { label: "Contact", href: "#contact" },
   ];
 
@@ -56,7 +61,10 @@ function Nav() {
         background: scrolled ? "rgba(6,6,14,0.95)" : "rgba(6,6,14,0.6)",
         transition:"background .3s, border-color .3s",
       }}>
-        <span style={{ fontSize:20, fontWeight:800, letterSpacing:"-0.5px" }} className="grad-text">ODEX</span>
+        <div style={{ display:"flex", alignItems:"center", gap:8 }}>
+          <img src="/pivot-icon.svg" alt="Pivot" style={{ width:50, height:50 }} />
+          <span style={{ fontSize:20, fontWeight:800, letterSpacing:"-0.5px" }} className="grad-text">PIVOT</span>
+        </div>
 
         <ul className="nav-links-desktop" style={{ display:"flex", gap:32, listStyle:"none" }}>
           {links.map((link) => (
@@ -65,7 +73,7 @@ function Nav() {
             </li>
           ))}
           <li>
-            <a href="/prepa-info/" className="nav-link-el nav-link-cyan">Prépa Info ↗</a>
+            <a href="/cpge/" className="nav-link-el nav-link-cyan">Prépa Info ↗</a>
           </li>
         </ul>
 
@@ -90,7 +98,7 @@ function Nav() {
             <a key={link.label} href={link.href} className="nav-link-el" style={{ fontSize:20, letterSpacing:3 }}
               onClick={() => setMenuOpen(false)}>{link.label}</a>
           ))}
-          <a href="/prepa-info/" className="nav-link-el nav-link-cyan" style={{ fontSize:20, letterSpacing:3 }}
+          <a href="/cpge/" className="nav-link-el nav-link-cyan" style={{ fontSize:20, letterSpacing:3 }}
             onClick={() => setMenuOpen(false)}>Prépa Info ↗</a>
           <a href="#contact" className="btn-primary-el" onClick={() => setMenuOpen(false)}>Rejoindre</a>
         </div>
@@ -114,7 +122,7 @@ function Hero() {
       <div style={{ position:"absolute", width:500, height:500, borderRadius:"50%", background:"radial-gradient(circle,rgba(155,64,255,0.08) 0%,transparent 70%)", top:"40%", right:"5%", transform:"translate(40%,-50%)", pointerEvents:"none" }} />
 
       <p className="anim-1" style={{ fontFamily:"'DM Mono',monospace", fontSize:isMobile?9:10, letterSpacing:isMobile?2:4, textTransform:"uppercase", color:C.cyan, marginBottom:24 }}>
-        Du Maroc vers le monde · Association fondée 2025
+        Prépa Informatique · MP · PC · PSI · PT
       </p>
 
       <h1 className="anim-2" style={{ fontSize:"clamp(42px,9vw,112px)", fontWeight:800, lineHeight:0.93, letterSpacing:"-3px", position:"relative", zIndex:1 }}>
@@ -124,16 +132,22 @@ function Hero() {
       </h1>
 
       <p className="anim-3" style={{ maxWidth:500, margin:"28px auto 0", fontFamily:"'DM Mono',monospace", fontSize:isMobile?12:13, lineHeight:1.9, color:C.muted, fontWeight:300, position:"relative", zIndex:1 }}>
-        From potential to exceptional — ODEX accompagne les étudiants marocains vers les meilleures universités, grandes écoles et carrières du monde entier.
+        From potential to exceptional — tout ce qu'il te faut pour exceller en informatique, au même endroit.
       </p>
 
+      <div className="anim-3" style={{ display:"flex", gap:10, justifyContent:"center", flexWrap:"wrap", marginTop:20, position:"relative", zIndex:1 }}>
+        {["Cours", "Checklist programme", "Aide mémoire", "Concours corrigés"].map(tag => (
+          <span key={tag} style={{ fontFamily:"'DM Mono',monospace", fontSize:10, letterSpacing:1, color:C.cyan, border:`1px solid rgba(0,212,255,0.25)`, padding:"4px 12px", borderRadius:100 }}>{tag}</span>
+        ))}
+      </div>
+
       <div className="anim-4" style={{ display:"flex", gap:12, justifyContent:"center", marginTop:40, position:"relative", zIndex:1, flexWrap:"wrap" }}>
-        <a href="#contact" className="btn-primary-el">Rejoindre ODEX</a>
+        <a href="/cpge/" className="btn-primary-el">Accéder à la plateforme</a>
         <a href="#about" className="btn-ghost-el">En savoir plus →</a>
       </div>
 
       <div className="anim-5" style={{ display:"flex", gap:isMobile?28:64, justifyContent:"center", marginTop:72, paddingTop:40, borderTop:`1px solid ${C.border}`, width:"100%", maxWidth:600, position:"relative", zIndex:1 }}>
-        {[["2","Pays"],["∞","Ambition"],["01","Mission"]].map(([n,l]) => (
+        {[["4","Filières"],["∞","Ressources"],["01","Objectif"]].map(([n,l]) => (
           <div key={l}>
             <div className="grad-text" style={{ fontSize:isMobile?26:38, fontWeight:800, letterSpacing:"-1px" }}>{n}</div>
             <div style={{ fontFamily:"'DM Mono',monospace", fontSize:9, letterSpacing:3, textTransform:"uppercase", color:C.muted, marginTop:4 }}>{l}</div>
@@ -146,7 +160,7 @@ function Hero() {
 
 // ── MARQUEE ───────────────────────────────────────────────────────────────────
 function Marquee() {
-  const items = ["Prépa Bac","Prépa CPGE","Concours Après Bac","Math Olympiad","Webinaires & Ressources","Du Maroc vers le Monde","Mentorat","Grandes Écoles","Universités Mondiales"];
+  const items = ["Prépa CPGE Informatique","Algorithmique","Python","SQL & Bases de données","Structures de données","Annales CNC","Checklist Programme","Aide Mémoire","Classique Concours","MP · PC · PSI · PT"];
   const doubled = [...items,...items];
   return (
     <div style={{ overflow:"hidden", borderTop:`1px solid ${C.border}`, borderBottom:`1px solid ${C.border}`, padding:"16px 0", background:C.surface }}>
@@ -173,13 +187,13 @@ function About() {
         <div>
           <p style={{ fontFamily:"'DM Mono',monospace", fontSize:9, letterSpacing:4, textTransform:"uppercase", color:C.purple, marginBottom:18 }}>Notre mission</p>
           <h2 style={{ fontSize:"clamp(30px,4vw,54px)", fontWeight:800, lineHeight:1.05, letterSpacing:"-2px" }}>
-            No one gets<br />there
-            <span className="grad-text" style={{ fontFamily:"'Instrument Serif',serif", fontStyle:"italic", fontWeight:400 }}> alone.</span>
+            La prépa info,<br />sans
+            <span className="grad-text" style={{ fontFamily:"'Instrument Serif',serif", fontStyle:"italic", fontWeight:400 }}> se perdre.</span>
           </h2>
         </div>
         <div style={{ fontFamily:"'DM Mono',monospace", fontSize:isMobile?12:13, lineHeight:2, color:C.muted, fontWeight:300 }}>
-          <p>ODEX n'est pas là pour sélectionner les meilleurs. Nous sommes là pour maximiser le potentiel de chaque étudiant — lycéen, préparationnaire, universitaire — et les accompagner vers la meilleure version d'eux-mêmes.</p>
-          <p style={{ marginTop:16 }}>Ingénieurs, enseignants, chercheurs de haut calibre — ce sont des destins qui se construisent avec les bonnes personnes, les bonnes ressources, et une communauté qui croit en toi avant même que tu y croies toi-même. Du Maroc vers le monde entier.</p>
+          <p>Pivot est une plateforme pensée pour les étudiants en classe préparatoire informatique — MP, PC, PSI, PT. Pas de contenu générique : chaque outil, chaque ressource est calé sur le programme officiel 2025.</p>
+          <p style={{ marginTop:16 }}>Checklist interactive du programme, aide mémoire Python et SQL, algorithmes classiques des concours CNC, annales commentées — tout est là, organisé, accessible, et gratuit.</p>
         </div>
       </div>
     </section>
@@ -188,12 +202,12 @@ function About() {
 
 // ── PILLARS ───────────────────────────────────────────────────────────────────
 const PILLARS = [
-  { n:"01", icon:"📖", title:"Prépa Bac", text:"Maths, Physique-Chimie, Sciences de l'Ingénieur et Informatique — toutes les matières scientifiques du bac marocain avec cours, exercices et webinaires live." },
-  { n:"02", icon:"🎯", title:"Prépa CPGE", text:"Ressources ciblées pour MP, PC, PSI, PT — Maths, Physique, SII et Informatique. Annales, méthodes et mentorat par des étudiants en grandes écoles d'ingénieurs." },
-  { n:"03", icon:"🏛️", title:"Concours Après Bac", text:"Orientation et préparation aux concours post-bac scientifiques — grandes écoles d'ingénieurs, informatique et IA, physique appliquée — France et international." },
-  { n:"04", icon:"🌍", title:"Mobilité Internationale", text:"Campus France, bourses, équivalences, logement — tout le soutien concret pour franchir le pas vers les meilleures universités du monde." },
-  { n:"05", icon:"🏆", title:"Math Olympiad", text:"L'ODEX Math Olympiad — notre compétition phare pour les esprits les plus affûtés, ouverte aux lycéens et préparationnaires du Maroc et du monde." },
-  { n:"06", icon:"🤝", title:"Mentorat & Réseau", text:"Alumni dans les grandes écoles françaises et universités mondiales — connectés à toi, pour que tu ne partes jamais seul vers tes objectifs." },
+  { n:"01", icon:"✅", title:"CPGE Informatique", text:"Checklist complète du programme 2025 — MP, PC, PSI, PT. Notions classées par semestre, priorité et section. Progression sauvegardée localement.", available: true },
+  { n:"02", icon:"🐍", title:"Python & NumPy", text:"Aide mémoire complet — syntaxe, structures de données, NumPy, Plotly, SQLite3. Filtrable par catégorie, copiable en un clic.", available: true },
+  { n:"03", icon:"📋", title:"SQL", text:"Référence SQL pour les bases de données relationnelles — SELECT, JOIN, GROUP BY, sous-requêtes. Tout ce qui tombe au concours.", available: true },
+  { n:"04", icon:"🧮", title:"Classique Concours", text:"Algorithmes essentiels du CNC — tri, graphes, arbres, programmation dynamique. Implémentations Python, complexité, fréquence d'apparition.", available: true },
+  { n:"05", icon:"🎓", title:"Licence & Master", text:"Algorithmique avancée, systèmes, réseaux, machine learning — des ressources structurées pour la suite après la prépa.", available: false },
+  { n:"06", icon:"⚙️", title:"École d'ingénieurs", text:"Automatique, électronique, génie logiciel, optimisation — un accompagnement pour les premières années d'école d'ingénieurs.", available: false },
 ];
 
 function Pillars() {
@@ -206,8 +220,8 @@ function Pillars() {
     <section id="programs" style={{ background:C.surface, borderTop:`1px solid ${C.border}`, borderBottom:`1px solid ${C.border}` }}>
       <div style={{ maxWidth:1200, margin:"0 auto", padding:`${isMobile?"64px":"100px"} ${px}` }}>
         <div ref={ref} className="reveal" style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-end", marginBottom:44, flexWrap:"wrap", gap:10 }}>
-          <h2 style={{ fontSize:"clamp(26px,4vw,48px)", fontWeight:800, letterSpacing:"-2px", lineHeight:1.05 }}>Ce que<br />nous faisons.</h2>
-          <p style={{ fontFamily:"'DM Mono',monospace", fontSize:9, letterSpacing:4, textTransform:"uppercase", color:C.purple }}>Six piliers</p>
+          <h2 style={{ fontSize:"clamp(26px,4vw,48px)", fontWeight:800, letterSpacing:"-2px", lineHeight:1.05 }}>Ce que<br />tu trouveras.</h2>
+          <p style={{ fontFamily:"'DM Mono',monospace", fontSize:9, letterSpacing:4, textTransform:"uppercase", color:C.purple }}>Six outils</p>
         </div>
         <div style={{ display:"grid", gridTemplateColumns:cols, gap:2 }}>
           {PILLARS.map((p,i) => <PillarCard key={p.n} {...p} delay={i*0.07} />)}
@@ -217,14 +231,17 @@ function Pillars() {
   );
 }
 
-function PillarCard({ n, icon, title, text, delay }) {
+function PillarCard({ n, icon, title, text, delay, available }) {
   const ref = useReveal();
   const [hov, setHov] = useState(false);
   return (
-    <div ref={ref} className="reveal pillar-card" style={{ transitionDelay:`${delay}s` }}
+    <div ref={ref} className="reveal pillar-card" style={{ transitionDelay:`${delay}s`, opacity: available ? 1 : 0.6 }}
       onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}>
       <div className="pglow" style={{ position:"absolute", inset:0, background:"radial-gradient(circle at 20% 20%,rgba(0,212,255,0.05) 0%,transparent 60%)", opacity:hov?1:0, transition:"opacity .4s", pointerEvents:"none" }} />
-      <div style={{ fontFamily:"'DM Mono',monospace", fontSize:10, letterSpacing:2, color:C.cyan, marginBottom:24, opacity:0.6 }}>{n}</div>
+      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:24 }}>
+        <span style={{ fontFamily:"'DM Mono',monospace", fontSize:10, letterSpacing:2, color:C.cyan, opacity:0.6 }}>{n}</span>
+        {!available && <span style={{ fontFamily:"'DM Mono',monospace", fontSize:8, letterSpacing:2, textTransform:"uppercase", color:C.purple, border:`1px solid ${C.purple}44`, padding:"3px 8px", borderRadius:100 }}>Bientôt</span>}
+      </div>
       <div style={{ fontSize:24, marginBottom:14 }}>{icon}</div>
       <div style={{ fontSize:16, fontWeight:700, letterSpacing:"-0.5px", marginBottom:10 }}>{title}</div>
       <div style={{ fontFamily:"'DM Mono',monospace", fontSize:11, lineHeight:1.9, color:C.muted, fontWeight:300 }}>{text}</div>
@@ -233,29 +250,30 @@ function PillarCard({ n, icon, title, text, delay }) {
 }
 
 // ── PROGRAM CARDS ─────────────────────────────────────────────────────────────
-const BAC_ITEMS = [
-  "Mathématiques — cours, exercices et annales corrigées",
-  "Physique-Chimie — fiches de révision et méthodes",
-  "Sciences de l'Ingénieur — mécanique, électricité, automatique",
-  "Informatique — algorithmique, Python, bases de données",
-  "Webinaires live avant les examens nationaux",
+const CPGE_ITEMS = [
+  "Checklist interactive du programme 2025 — MP · PC · PSI · PT",
+  "Aide mémoire Python — NumPy, Plotly, SQLite3",
+  "Aide mémoire SQL — bases de données relationnelles",
+  "Classique Concours — algorithmes CNC avec code Python",
+  "Annales informatique — sujets et corrigés",
+  "Éditeur de sujets avec export PDF",
 ];
-const PREPA_ITEMS = [
-  "Mathématiques — MP, PC, PSI, PT — cours & colles",
-  "Physique & Chimie — annales commentées des concours",
-  "Sciences Industrielles de l'Ingénieur (SII)",
-  "Informatique — algo, structures de données, SQL, IA",
-  "Mentorat par des étudiants en grandes écoles d'ingénieurs",
+const MASTER_ITEMS = [
+  "Algorithmique avancée — graphes, complexité, NP-complétude",
+  "Bases de données — relationnelles & NoSQL",
+  "Systèmes d'exploitation & réseaux",
+  "Machine Learning & Intelligence Artificielle",
+  "Génie logiciel & architecture logicielle",
 ];
-const CONCOURS_ITEMS = [
-  "Concours ingénieurs — CentraleSupélec, Mines, Polytechnique",
-  "Informatique & IA — écoles spécialisées et masters",
-  "Sciences Industrielles — filières mécanique & automatique",
-  "Physique appliquée — ENS, Institut d'Optique, ESPCI",
-  "Universités internationales STEM — MIT, ETH, TU Berlin",
+const INGÉ_ITEMS = [
+  "Automatique & traitement du signal",
+  "Électronique & systèmes embarqués",
+  "Probabilités & statistiques appliquées",
+  "Optimisation & recherche opérationnelle",
+  "Projets & stages industriels",
 ];
 
-function ProgramCard({ badge, badgeColor, title, italic, body, items, accent, cta }) {
+function ProgramCard({ badge, badgeColor, title, italic, body, items, accent, cta, href }) {
   const ref = useReveal();
   const { isMobile, isTablet } = useBreakpoint();
   const p = isMobile ? "24px" : isTablet ? "40px" : "64px";
@@ -276,7 +294,7 @@ function ProgramCard({ badge, badgeColor, title, italic, body, items, accent, ct
           <span style={{ fontFamily:"'Instrument Serif',serif", fontStyle:"italic", fontWeight:400, background:accent, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>{italic}</span>
         </h2>
         <p style={{ fontFamily:"'DM Mono',monospace", fontSize:12, lineHeight:1.9, color:C.muted, fontWeight:300, marginBottom:24 }}>{body}</p>
-        <a href="#contact" className="btn-primary-el" style={{ background:accent }}>{cta}</a>
+        <a href={href || "#contact"} className="btn-primary-el" style={{ background:accent }}>{cta}</a>
       </div>
       <div style={{ display:"flex", flexDirection:"column", gap:8 }}>
         {items.map((item,i) => (
@@ -299,73 +317,41 @@ function Programs() {
       <div style={{ marginBottom:48 }}>
         <p style={{ fontFamily:"'DM Mono',monospace", fontSize:9, letterSpacing:4, textTransform:"uppercase", color:C.purple, marginBottom:12 }}>Nos programmes</p>
         <h2 style={{ fontSize:"clamp(26px,4vw,52px)", fontWeight:800, letterSpacing:"-2px", lineHeight:1.05 }}>
-          Chaque étape.<br />
-          <span className="grad-text" style={{ fontFamily:"'Instrument Serif',serif", fontStyle:"italic", fontWeight:400 }}>Chaque niveau.</span>
+          Chaque niveau.<br />
+          <span className="grad-text" style={{ fontFamily:"'Instrument Serif',serif", fontStyle:"italic", fontWeight:400 }}>Chaque étape.</span>
         </h2>
       </div>
-      <ProgramCard badge="📖 Ouvert aux inscriptions" badgeColor={C.cyan} title="ODEX" italic="Prépa Bac"
-        body="Un accompagnement complet pour réussir le baccalauréat marocain — toutes les matières scientifiques. Des cours structurés, des webinaires live et un suivi personnalisé pour décrocher la mention que tu mérites."
-        items={BAC_ITEMS} accent="linear-gradient(90deg,#00D4FF,#00ffaa)" cta="Rejoindre la Prépa Bac" />
-      <ProgramCard badge="🎯 Bientôt disponible" badgeColor={C.purple} title="ODEX" italic="Prépa CPGE"
-        body="Les classes préparatoires sont exigeantes. ODEX te donne les ressources des meilleurs — annales, méthodes, mentorat par des étudiants en grandes écoles — pour que la prépa soit une rampe de lancement, pas un mur."
-        items={PREPA_ITEMS} accent="linear-gradient(90deg,#9B40FF,#00D4FF)" cta="Être notifié au lancement" />
-      <ProgramCard badge="🏛️ Bientôt disponible" badgeColor="#f472b6" title="Concours" italic="Après Bac"
-        body="Le bac en poche, la vraie question commence. ODEX t'oriente et te prépare aux concours post-bac scientifiques — grandes écoles d'ingénieurs, filières informatique et IA, physique appliquée — en France et dans les meilleures universités STEM du monde."
-        items={CONCOURS_ITEMS} accent="linear-gradient(90deg,#f472b6,#9B40FF)" cta="Être notifié au lancement" />
-    </section>
-  );
-}
-
-// ── OLYMPIAD ──────────────────────────────────────────────────────────────────
-const MATH = [
-  { eq:<>∀ε &gt; 0, ∃δ &gt; 0 : |x − a| &lt; δ ⟹ |<span style={{color:C.cyan}}>f(x) − L</span>| &lt; ε</> },
-  { eq:<>∑<sub>n=1</sub><sup>∞</sup> 1/n² = <span style={{color:C.cyan}}>π²/6</span></> },
-  { eq:<>e<sup>iπ</sup> + 1 = <span style={{color:C.cyan}}>0</span></> },
-  { eq:<>P(A|B) = P(B|A) · P(A) / <span style={{color:C.cyan}}>P(B)</span></> },
-  { eq:<>det(AB) = <span style={{color:C.cyan}}>det(A)</span> · det(B)</> },
-];
-
-function Olympiad() {
-  const ref = useReveal();
-  const { isMobile, isTablet } = useBreakpoint();
-  const px = isMobile ? "24px" : isTablet ? "40px" : "64px";
-  const spx = isMobile ? "20px" : isTablet ? "32px" : "48px";
-
-  return (
-    <section id="olympiad" style={{ maxWidth:1200, margin:"0 auto", padding:`${isMobile?"64px":"120px"} ${spx}` }}>
-      <div ref={ref} className="reveal" style={{
-        background:C.surface, border:`1px solid ${C.border}`, borderRadius:4,
-        padding:px, display:"grid",
-        gridTemplateColumns: isTablet ? "1fr" : "1fr 1fr",
-        gap: isTablet ? 32 : 72,
-        alignItems:"center", position:"relative", overflow:"hidden",
-      }}>
-        <div style={{ position:"absolute", top:0, left:0, right:0, height:2, background:grad }} />
-        <div>
-          <div style={{ display:"inline-flex", alignItems:"center", gap:8, fontFamily:"'DM Mono',monospace", fontSize:9, letterSpacing:3, textTransform:"uppercase", color:C.cyan, border:`1px solid rgba(0,212,255,0.25)`, padding:"6px 14px", borderRadius:100, marginBottom:18 }}>🔢 Bientôt disponible</div>
-          <h2 style={{ fontSize:"clamp(26px,4vw,52px)", fontWeight:800, letterSpacing:"-2px", lineHeight:1.0, marginBottom:16 }}>
-            ODEX<br />Math{" "}
-            <span className="grad-text" style={{ fontFamily:"'Instrument Serif',serif", fontStyle:"italic", fontWeight:400 }}>Olympiad</span>
-          </h2>
-          <p style={{ fontFamily:"'DM Mono',monospace", fontSize:12, lineHeight:1.9, color:C.muted, fontWeight:300, marginBottom:24 }}>
-            Une compétition mathématique internationale pensée pour les esprits les plus curieux — lycéens et préparationnaires du Maroc et du monde entier, réunis autour de problèmes qui ne s'inventent pas.
-          </p>
-          <a href="#contact" className="btn-primary-el">Être notifié au lancement</a>
-        </div>
-        <div style={{ display:"flex", flexDirection:"column", gap:8 }}>
-          {MATH.map((m,i) => <div key={i} className="math-row">{m.eq}</div>)}
-        </div>
-      </div>
+      <ProgramCard
+        badge="✅ Disponible maintenant" badgeColor={C.cyan}
+        title="CPGE" italic="Informatique"
+        body="Une plateforme complète pour les préparationnaires en informatique — checklist du programme, aide mémoire, algorithmes des concours, annales. Gratuit, sans inscription."
+        items={CPGE_ITEMS} accent="linear-gradient(90deg,#00D4FF,#00ffaa)"
+        cta="Accéder à la plateforme" href="/cpge/"
+      />
+      <ProgramCard
+        badge="🎓 Bientôt disponible" badgeColor={C.purple}
+        title="Licence &" italic="Master"
+        body="Des ressources structurées pour la suite après la prépa — algorithmique avancée, bases de données, systèmes, machine learning. La même rigueur, appliquée aux niveaux L3, M1 et M2."
+        items={MASTER_ITEMS} accent="linear-gradient(90deg,#9B40FF,#00D4FF)"
+        cta="Être notifié au lancement"
+      />
+      <ProgramCard
+        badge="⚙️ Bientôt disponible" badgeColor="#f472b6"
+        title="École" italic="d'ingénieurs"
+        body="Un accompagnement ciblé pour les premières années d'école d'ingénieurs — automatique, électronique, probabilités, optimisation. Pour que le passage de la prépa à l'école soit une transition, pas un choc."
+        items={INGÉ_ITEMS} accent="linear-gradient(90deg,#f472b6,#9B40FF)"
+        cta="Être notifié au lancement"
+      />
     </section>
   );
 }
 
 // ── CORRIDOR ──────────────────────────────────────────────────────────────────
 const STEPS = [
-  { n:"01", title:"Prépa Bac", text:"On commence ici — révision structurée, méthodes, webinaires et suivi pour réussir le bac marocain avec les meilleures mentions." },
-  { n:"02", title:"Prépa CPGE & Concours", text:"Intégration en CPGE ou orientation vers les concours post-bac — en France, au Maroc, au Canada, aux États-Unis." },
-  { n:"03", title:"Mobilité & Admission", text:"Campus France, dossiers d'admission, bourses, équivalences — on t'accompagne dans chaque étape pour que rien ne te bloque." },
-  { n:"04", title:"Du Maroc vers le monde", text:"Grandes écoles françaises, MIT, Polytechnique, ETH Zurich — le monde est la destination, pas juste une ville." },
+  { n:"01", title:"Programme & Checklist", text:"Commence par avoir une vision claire de tout le programme — par semestre, par priorité. Coche au fur et à mesure, suis ta progression." },
+  { n:"02", title:"Aide mémoire & Références", text:"Python, SQL, algorithmes CNC — des références filtrables que tu consultes en deux secondes pendant tes révisions ou tes TDs." },
+  { n:"03", title:"Annales & Concours", text:"Entraîne-toi sur de vrais sujets de concours, avec des corrigés détaillés. Identifie les algorithmes qui reviennent, les pièges classiques." },
+  { n:"04", title:"Licence, Master & Ingé — bientôt", text:"La plateforme grandit avec toi. Les ressources pour les niveaux post-prépa arrivent prochainement." },
 ];
 
 function Corridor() {
@@ -378,16 +364,12 @@ function Corridor() {
     <section style={{ background:C.surface, borderTop:`1px solid ${C.border}`, borderBottom:`1px solid ${C.border}` }}>
       <div style={{ maxWidth:1200, margin:"0 auto", padding:`${isMobile?"64px":"100px"} ${px}`, display:"grid", gridTemplateColumns:isTablet?"1fr":"1fr 1fr", gap:isTablet?40:80, alignItems:"center" }}>
         <div ref={refL} className="reveal">
-          <div style={{ display:"flex", gap:8, marginBottom:24, flexWrap:"wrap", alignItems:"center" }}>
-            {["🇲🇦","→","🇫🇷","🇺🇸","🇨🇦","🇬🇧","🌍"].map((f,i) => (
-              <span key={i} style={{ fontSize:f==="→"?18:isMobile?26:32, color:f==="→"?C.cyan:"inherit", animation:f!=="→"?`float 3s ease-in-out ${i*0.4}s infinite`:"none", display:"inline-block", opacity:f==="→"?0.5:1 }}>{f}</span>
-            ))}
-          </div>
+          <p style={{ fontFamily:"'DM Mono',monospace", fontSize:9, letterSpacing:4, textTransform:"uppercase", color:C.purple, marginBottom:18 }}>Comment ça marche</p>
           <h2 style={{ fontSize:"clamp(24px,3.5vw,44px)", fontWeight:800, letterSpacing:"-1.5px", lineHeight:1.05, marginBottom:16 }}>
-            Du Maroc<br /><span className="grad-text">vers le monde.</span>
+            Un outil,<br /><span className="grad-text">une progression.</span>
           </h2>
           <p style={{ fontFamily:"'DM Mono',monospace", fontSize:12, lineHeight:1.9, color:C.muted, fontWeight:300 }}>
-            Le Maroc est notre point de départ, pas notre plafond. ODEX construit le chemin de A à Z — du bac jusqu'aux meilleures institutions mondiales — avec les outils, les mentors et la communauté pour y arriver.
+            Pivot n'est pas un agrégateur de cours. C'est un outil de travail — pensé pour que chaque minute passée dessus soit utile. Checklist, références, entraînement : tout est là, dans l'ordre.
           </p>
         </div>
         <div ref={refR} className="reveal">
@@ -420,13 +402,13 @@ function CTA() {
 
   return (
     <section id="contact" style={{ maxWidth:1200, margin:"0 auto", padding:`${isMobile?"72px":"140px"} ${px}`, textAlign:"center" }}>
-      <p style={{ fontFamily:"'DM Mono',monospace", fontSize:9, letterSpacing:4, textTransform:"uppercase", color:C.purple, marginBottom:18 }}>Rejoindre le mouvement</p>
+      <p style={{ fontFamily:"'DM Mono',monospace", fontSize:9, letterSpacing:4, textTransform:"uppercase", color:C.purple, marginBottom:18 }}>Être notifié des nouvelles ressources</p>
       <h2 ref={ref} className="reveal" style={{ fontSize:"clamp(36px,7vw,96px)", fontWeight:800, letterSpacing:"-3px", lineHeight:0.93, marginBottom:24 }}>
-        Built for those<br />who refuse
-        <span className="grad-text" style={{ fontFamily:"'Instrument Serif',serif", fontStyle:"italic", fontWeight:400 }}> to settle.</span>
+        La prépa, c'est<br />mieux avec
+        <span className="grad-text" style={{ fontFamily:"'Instrument Serif',serif", fontStyle:"italic", fontWeight:400 }}> les bons outils.</span>
       </h2>
       <p style={{ fontFamily:"'DM Mono',monospace", fontSize:12, color:C.muted, fontWeight:300, letterSpacing:1, marginBottom:36 }}>
-        {done ? "✓ Reçu — on revient vers toi au lancement 🚀" : "From potential to exceptional. Rejoins le mouvement."}
+        {done ? "✓ Reçu — on te prévient à chaque nouvelle ressource 🚀" : "Laisse ton email pour être averti des nouvelles ressources et du lancement des prochains niveaux."}
       </p>
       {!done && (
         <div style={{ display:"flex", gap:10, justifyContent:"center", maxWidth:480, margin:"0 auto", flexDirection:isMobile?"column":"row" }}>
@@ -450,10 +432,13 @@ function Footer() {
         display:"flex", alignItems:"center", justifyContent:"space-between",
         flexDirection:isMobile?"column":"row", gap:isMobile?16:0, textAlign:isMobile?"center":"left",
       }}>
-        <span className="grad-text" style={{ fontSize:16, fontWeight:800 }}>ODEX</span>
-        <span style={{ fontFamily:"'DM Mono',monospace", fontSize:9, letterSpacing:2, color:C.muted }}>Association Loi 1901 · Du Maroc vers le Monde · 2025</span>
+        <div style={{ display:"flex", alignItems:"center", gap:8 }}>
+          <img src="/pivot-icon.svg" alt="Pivot" style={{ width:50, height:50 }} />
+          <span className="grad-text" style={{ fontSize:16, fontWeight:800 }}>PIVOT</span>
+        </div>
+        <span style={{ fontFamily:"'DM Mono',monospace", fontSize:9, letterSpacing:2, color:C.muted }}>Plateforme Prépa Informatique · MP · PC · PSI · PT · 2025</span>
         <div style={{ display:"flex", gap:isMobile?16:24, flexWrap:"wrap", justifyContent:"center" }}>
-          {[["Instagram","#"],["LinkedIn","#"],["contact@odex.fr","#"]].map(([l,h]) => (
+          {[["Instagram","#"],["LinkedIn","#"],["help.info.pivot@gmail.com","#"]].map(([l,h]) => (
             <a key={l} href={h} className="footer-link-el">{l}</a>
           ))}
         </div>
@@ -474,7 +459,6 @@ export default function LandingPage() {
         <div style={{ height:1, background:"linear-gradient(90deg,transparent,rgba(255,255,255,0.06),transparent)", maxWidth:1200, margin:"0 auto" }} />
         <Pillars />
         <Programs />
-        <Olympiad />
         <Corridor />
         <CTA />
         <Footer />
