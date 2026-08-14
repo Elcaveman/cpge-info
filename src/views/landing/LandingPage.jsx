@@ -438,7 +438,7 @@ function Footer() {
         </div>
         <span style={{ fontFamily:"'DM Mono',monospace", fontSize:9, letterSpacing:2, color:C.muted }}>Plateforme Prépa Informatique · MP · PC · PSI · PT · 2025</span>
         <div style={{ display:"flex", gap:isMobile?16:24, flexWrap:"wrap", justifyContent:"center" }}>
-          {[["Instagram","#"],["LinkedIn","#"],["contact@odex.fr","#"]].map(([l,h]) => (
+          {[["Instagram","#"],["LinkedIn","#"],["help.info.pivot@gmail.com","#"]].map(([l,h]) => (
             <a key={l} href={h} className="footer-link-el">{l}</a>
           ))}
         </div>

@@ -74,7 +74,7 @@ export default function SujetEditorPage() {
     <div className="sujet-editor-page">
       <header className="sujet-editor-topbar">
         <div className="sujet-editor-topbar__branding">
-          <div className="sujet-editor-topbar__logo">ODEX</div>
+          <div className="sujet-editor-topbar__logo">Pivot</div>
           <div className="sujet-editor-topbar__label">Éditeur de corrections</div>
         </div>
 

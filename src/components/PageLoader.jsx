@@ -22,7 +22,7 @@ export function PageLoader() {
         <p className="page-loader__label">
           Loading..<span className="page-loader__cursor">_</span>
         </p>
-        <p className="page-loader__brand">By ODEX </p>
+        <p className="page-loader__brand">By Pivot</p>
       </div>
     </div>
   );

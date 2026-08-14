@@ -22,7 +22,7 @@ export default function PrepaApp({ page }) {
   const CONTACT_LINKS = {
     github: "https://github.com/Elcaveman/cpge-info",
     group: "/",
-    email: "mailto:odex@mailo.com",
+    email: "mailto:help.info.pivot@gmail.com",
   };
 
   const [checked, setChecked] = useState(() => {

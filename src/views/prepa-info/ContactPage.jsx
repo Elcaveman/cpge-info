@@ -51,7 +51,7 @@ export default function ContactPage({ links = {} }) {
     {
       icon: "🌐",
       name: "Site Groupe",
-      value: isGroupInternal ? "ODEX Tech" : links.group?.replace(/^https?:\/\//, "") || "site du groupe",
+      value: isGroupInternal ? "Pivot" : links.group?.replace(/^https?:\/\//, "") || "site du groupe",
       badge: "GROUPE",
       badgeClass: "contact-badge--blue",
       href: links.group || "/",
@@ -60,10 +60,10 @@ export default function ContactPage({ links = {} }) {
     {
       icon: "📧",
       name: "Email",
-      value: (links.email || "mailto:odex@mailo.com").replace(/^mailto:/, ""),
+      value: (links.email || "mailto:help.info.pivot@gmail.com").replace(/^mailto:/, ""),
       badge: "MAIL",
       badgeClass: "contact-badge--orange",
-      href: links.email || "mailto:odex@mailo.com",
+      href: links.email || "mailto:help.info.pivot@gmail.com",
       isExternal: true,
     },
   ], [ links.email, links.github, links.group]);
@@ -101,7 +101,7 @@ export default function ContactPage({ links = {} }) {
       `De : ${sanitize(form.fname)} ${sanitize(form.lname)}\nEmail : ${sanitize(form.email)}\n\n${sanitize(form.message)}`
     );
 
-    const recipient = (links.email || "odex@mailo.com").replace(/^mailto:/i, "").trim();
+    const recipient = (links.email || "help.info.pivot@gmail.com").replace(/^mailto:/i, "").trim();
     window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
 
     setToast("sent");
