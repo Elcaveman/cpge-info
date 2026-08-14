@@ -1,5 +1,26 @@
 @import './shared-components.css';
 
+.sidebar-home-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  border-top: 1px solid #1a1a2e;
+  color: #475569;
+  font-size: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.15s;
+  box-sizing: border-box;
+}
+
+.sidebar-home-btn:hover {
+  color: #e2e8f0;
+}
+
 .global-contact-dock {
   position: fixed;
   right: 16px;

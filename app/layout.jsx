@@ -1,8 +1,11 @@
 import "../src/css/landing/common.css";
 
 export const metadata = {
-  title: "ODEX",
-  description: "From potential to exceptional.",
+  title: "Pivot | CPGE Info",
+  description: "From potential to exceptional — tout ce qu'il te faut pour exceller en informatique.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({ children }) {

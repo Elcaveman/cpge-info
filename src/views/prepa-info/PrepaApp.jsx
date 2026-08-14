@@ -101,6 +101,10 @@ export default function PrepaApp({ page }) {
               </button>
             ))}
           </nav>
+          <a href="/" className="nav-btn sidebar-home-btn">
+            <span className="nav-btn-icon">←</span>
+            Accueil
+          </a>
           <div className="sidebar-progress">
             <div className="sidebar-progress-label">
               <span>PROGRESSION</span>
@@ -147,6 +151,12 @@ export default function PrepaApp({ page }) {
       </div>
 
       <div className="global-contact-dock" aria-label="Liens de contact rapides">
+        <a className="global-contact-btn" href="/" title="Accueil">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9.5z" />
+            <polyline points="9,21 9,12 15,12 15,21" />
+          </svg>
+        </a>
         <a
           className="global-contact-btn"
           href={CONTACT_LINKS.github}

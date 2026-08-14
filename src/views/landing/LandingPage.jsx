@@ -61,7 +61,10 @@ function Nav() {
         background: scrolled ? "rgba(6,6,14,0.95)" : "rgba(6,6,14,0.6)",
         transition:"background .3s, border-color .3s",
       }}>
-        <span style={{ fontSize:20, fontWeight:800, letterSpacing:"-0.5px" }} className="grad-text">ODEX</span>
+        <div style={{ display:"flex", alignItems:"center", gap:8 }}>
+          <img src="/pivot-icon.svg" alt="Pivot" style={{ width:50, height:50 }} />
+          <span style={{ fontSize:20, fontWeight:800, letterSpacing:"-0.5px" }} className="grad-text">PIVOT</span>
+        </div>
 
         <ul className="nav-links-desktop" style={{ display:"flex", gap:32, listStyle:"none" }}>
           {links.map((link) => (
@@ -189,7 +192,7 @@ function About() {
           </h2>
         </div>
         <div style={{ fontFamily:"'DM Mono',monospace", fontSize:isMobile?12:13, lineHeight:2, color:C.muted, fontWeight:300 }}>
-          <p>ODEX est une plateforme pensée pour les étudiants en classe préparatoire informatique — MP, PC, PSI, PT. Pas de contenu générique : chaque outil, chaque ressource est calé sur le programme officiel 2025.</p>
+          <p>Pivot est une plateforme pensée pour les étudiants en classe préparatoire informatique — MP, PC, PSI, PT. Pas de contenu générique : chaque outil, chaque ressource est calé sur le programme officiel 2025.</p>
           <p style={{ marginTop:16 }}>Checklist interactive du programme, aide mémoire Python et SQL, algorithmes classiques des concours CNC, annales commentées — tout est là, organisé, accessible, et gratuit.</p>
         </div>
       </div>
@@ -366,7 +369,7 @@ function Corridor() {
             Un outil,<br /><span className="grad-text">une progression.</span>
           </h2>
           <p style={{ fontFamily:"'DM Mono',monospace", fontSize:12, lineHeight:1.9, color:C.muted, fontWeight:300 }}>
-            ODEX n'est pas un agrégateur de cours. C'est un outil de travail — pensé pour que chaque minute passée dessus soit utile. Checklist, références, entraînement : tout est là, dans l'ordre.
+            Pivot n'est pas un agrégateur de cours. C'est un outil de travail — pensé pour que chaque minute passée dessus soit utile. Checklist, références, entraînement : tout est là, dans l'ordre.
           </p>
         </div>
         <div ref={refR} className="reveal">
@@ -429,7 +432,10 @@ function Footer() {
         display:"flex", alignItems:"center", justifyContent:"space-between",
         flexDirection:isMobile?"column":"row", gap:isMobile?16:0, textAlign:isMobile?"center":"left",
       }}>
-        <span className="grad-text" style={{ fontSize:16, fontWeight:800 }}>ODEX</span>
+        <div style={{ display:"flex", alignItems:"center", gap:8 }}>
+          <img src="/pivot-icon.svg" alt="Pivot" style={{ width:50, height:50 }} />
+          <span className="grad-text" style={{ fontSize:16, fontWeight:800 }}>PIVOT</span>
+        </div>
         <span style={{ fontFamily:"'DM Mono',monospace", fontSize:9, letterSpacing:2, color:C.muted }}>Plateforme Prépa Informatique · MP · PC · PSI · PT · 2025</span>
         <div style={{ display:"flex", gap:isMobile?16:24, flexWrap:"wrap", justifyContent:"center" }}>
           {[["Instagram","#"],["LinkedIn","#"],["contact@odex.fr","#"]].map(([l,h]) => (
