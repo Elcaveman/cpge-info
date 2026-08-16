@@ -2,23 +2,23 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 const rawSiteUrl = (process.env.SITE_URL || "").trim();
-const siteUrl = (rawSiteUrl || "https://odextech.uk").replace(/\/$/, "");
+const siteUrl = (rawSiteUrl || "https://prepainfo.com").replace(/\/$/, "");
 
 if (!rawSiteUrl) {
-  console.warn("[seo] SITE_URL is not set. Falling back to https://odextech.uk. Set SITE_URL before building for production SEO.");
+  console.warn("[seo] SITE_URL is not set. Falling back to https://prepainfo.com. Set SITE_URL before building for production SEO.");
 }
 
 const routes = [
   "/",
-  "/prepa-info/",
-  "/prepa-info/resources",
-  "/prepa-info/stats",
-  "/prepa-info/sql",
-  "/prepa-info/python",
-  "/prepa-info/cnc",
-  "/prepa-info/concours",
-  "/prepa-info/sujet-editor",
-  "/prepa-info/contact",
+  "/cpge/",
+  "/cpge/resources",
+  "/cpge/stats",
+  "/cpge/sql",
+  "/cpge/python",
+  "/cpge/cnc",
+  "/cpge/concours",
+  "/cpge/sujet-editor",
+  "/cpge/contact",
 ];
 
 const now = new Date().toISOString();
